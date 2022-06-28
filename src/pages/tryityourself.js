@@ -1,5 +1,5 @@
 import * as React from "react";
-import Button from "../components/button";
+import Button from "../components/Button";
 function TryItYourself() {
   return (
     <div>

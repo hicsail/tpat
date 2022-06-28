@@ -1,5 +1,7 @@
 import "../components/styles.css";
+import React, { useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
+import CountDownTimer from "../components/Timer";
 import {
   RecordWebcam,
   useRecordWebcam,
@@ -18,11 +20,17 @@ export default function WebCam() {
     const blob = await recordWebcam.getRecording();
     console.log({ blob });
   };
-
+  const hoursMinSecs = { minutes: 14 };
+  const [isRecord, setRecord] = useState(false);
   return (
     <div>
       <h1>Title of the props</h1>
       <p>Camera status: {recordWebcam.status}</p>
+      {isRecord ? (
+        <CountDownTimer hoursMinSecs={hoursMinSecs} />
+      ) : (
+        <p>Time Limit: 15:00</p>
+      )}
       <div>
         <button
           disabled={
@@ -49,13 +57,19 @@ export default function WebCam() {
             recordWebcam.status === CAMERA_STATUS.RECORDING ||
             recordWebcam.status === CAMERA_STATUS.PREVIEW
           }
-          onClick={recordWebcam.start}
+          onClick={() => {
+            recordWebcam.start();
+            setRecord(!isRecord);
+          }}
         >
           Start recording
         </button>
         <button
           disabled={recordWebcam.status !== CAMERA_STATUS.RECORDING}
-          onClick={recordWebcam.stop}
+          onClick={() => {
+            recordWebcam.stop();
+            setRecord(!isRecord);
+          }}
         >
           Stop recording
         </button>
