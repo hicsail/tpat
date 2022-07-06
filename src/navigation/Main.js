@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home";
 import TryItYourself from "../pages/tryityourself";
 import About from "../pages/about";
+import Task from "../pages/task";
 
 import WebCam from "../pages/webcam";
 
@@ -15,6 +16,7 @@ export const Main = () => {
         <Route path="/about" element={<About />} />
         <Route path="/try-it-yourself" element={<TryItYourself />} />
         <Route path="/webcam" element={<WebCam />} />
+        <Route path="/task" element={<Task />} />
       </Routes>
     </div>
   );

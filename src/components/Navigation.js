@@ -18,13 +18,13 @@ function Navigation() {
             TPAT
           </a>
           <li>
-            <a href="webcam">Webcam Page</a>
+            <a href="/webcam">Webcam Page</a>
           </li>
           <li>
-            <a href="try-it-yourself">Try It Yourself</a>
+            <a href="/try-it-yourself">Try It Yourself</a>
           </li>
           <li>
-            <a href="about">About</a>
+            <a href="/about">About</a>
           </li>
           <li>
             <a href="/">Home</a>

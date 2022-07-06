@@ -8,8 +8,9 @@ import {
   CAMERA_STATUS,
 } from "react-record-webcam";
 const OPTIONS = {
-  filename: "test-filename",
+  filename: "video",
   fileType: "mp4",
+  codec: { audio: "aac" | "opus", video: "av1" | "avc" | "vp8" },
   width: 1920,
   height: 1080,
 };
@@ -20,7 +21,7 @@ export default function WebCam() {
     const blob = await recordWebcam.getRecording();
     console.log({ blob });
   };
-  const hoursMinSecs = { minutes: 14 };
+  const hoursMinSecs = { minutes: 6 };
   const [isRecord, setRecord] = useState(false);
   return (
     <div>
@@ -29,7 +30,7 @@ export default function WebCam() {
       {isRecord ? (
         <CountDownTimer hoursMinSecs={hoursMinSecs} />
       ) : (
-        <p>Time Limit: 15:00</p>
+        <p>Time Limit: 7:00</p>
       )}
       <div>
         <button

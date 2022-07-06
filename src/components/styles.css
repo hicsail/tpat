@@ -23,6 +23,7 @@ div {
 .siteName {
     font-size: 30px;
     text-decoration: none;
+    color: black;
 }
 
 .siteName:visited {
@@ -55,6 +56,25 @@ li a {
     font-size: 20px;
     display: none;
     cursor: pointer;
+}
+
+.btn {
+    padding: 1%;
+    color: #57d655;
+    border-radius: 10%;
+    border-width: 3px;
+    border-color: #57d655;
+}
+
+.rectangle {
+    height: 70px;
+    background-color: white;
+}
+
+.img {
+    height: 20px;
+    padding-right: 1%;
+    background-color: transparent;
 }
 
 @media all and (max-width: 768px) {
