@@ -47,7 +47,7 @@ function TryItYourself() {
         </p>
       </div>
 
-      <hr></hr>
+      <hr style={{ marginRight: "5%", marginLeft: "5%" }}></hr>
       {data.map((taskDetail, index) => {
         return (
           <Card

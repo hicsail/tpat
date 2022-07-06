@@ -77,6 +77,26 @@ li a {
     background-color: transparent;
 }
 
+.footer {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 5%;
+}
+
+.footerContainer {
+    position: relative;
+    left: 3%;
+    bottom: 5%;
+    margin-right: 5%;
+}
+
+.footerRight {
+    padding-left: 1%;
+    padding-top: 1%;
+    font-size: 12px;
+    padding-bottom: 2%;
+}
+
 @media all and (max-width: 768px) {
     .header {
         display: inline-flex;
