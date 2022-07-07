@@ -13,7 +13,7 @@ const Card = (props) => {
       <div
         style={{
           display: "flex",
-          backgroundColor: "#F6F6F6",
+          backgroundColor: "white",
           justifyContent: "flex-start",
           width: "80%",
           marginTop: "15px",
@@ -27,20 +27,25 @@ const Card = (props) => {
             display: "flex",
             width: "18%",
             textAlign: "center",
-            backgroundColor: "gray",
             borderRadius: "10px 0px 0px 10px",
           }}
-        ></div>
+        >
+          <img
+            style={{ width: "100%", borderRadius: "10px 0px 0px 10px" }}
+            src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
+          />
+        </div>
         <div
           style={{
             paddingTop: "2%",
             paddingLeft: "2%",
-            backgroundColor: "#F6F6F6",
+            backgroundColor: "white",
             width: "80%",
           }}
         >
           <h4 style={{ backgroundColor: "transparent" }}>{props.title}</h4>
           <p style={{ backgroundColor: "transparent" }}>{props.description}</p>
+          <div></div>
           <div
             style={{
               display: "flex",
@@ -61,11 +66,7 @@ const Card = (props) => {
             >
               {props.time}
             </p>
-            <Button
-              style={{ backgroundColor: "transparent" }}
-              id={props.id}
-              name="Start"
-            />
+            <Button id={props.id - 1} name="Start" />
           </div>
         </div>
       </div>

@@ -1,23 +1,27 @@
 [{
-        "id": "1",
+        "id": "2",
+        "category": "math",
         "title": "Task 1",
         "description": "This is task 1",
         "time": "7 mins"
     },
     {
-        "id": "2",
+        "id": "3",
+        "category": "english",
         "title": "Task 2",
         "description": "This is task 2",
         "time": "5 mins"
     },
     {
-        "id": "3",
+        "id": "4",
+        "category": "math",
         "title": "Task 3",
         "description": "This is task 3",
         "time": "6 mins"
     },
     {
-        "id": "4",
+        "id": "5",
+        "category": "english",
         "title": "Task 4",
         "description": "This is task 4",
         "time": "7 mins"

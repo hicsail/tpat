@@ -15,7 +15,7 @@ function Footer() {
             <a href="/try-it-yourself">Try It Yourself</a>
           </li>
           <li>
-            <a href="/webcam">Contact Us</a>
+            <a href="/contact">Contact Us</a>
           </li>
           <li>
             <a href="/about">About</a>

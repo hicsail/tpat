@@ -2,6 +2,8 @@ import "../components/styles.css";
 import React, { useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import CountDownTimer from "../components/Timer";
+import data from "../data.json";
+import { useParams } from "react-router-dom";
 import {
   RecordWebcam,
   useRecordWebcam,
@@ -15,8 +17,9 @@ const OPTIONS = {
   height: 1080,
 };
 
-export default function WebCam() {
+export default function WebCam(props) {
   const recordWebcam = useRecordWebcam(OPTIONS);
+  const { id } = useParams();
   const getRecordingFileHooks = async () => {
     const blob = await recordWebcam.getRecording();
     console.log({ blob });
@@ -24,8 +27,10 @@ export default function WebCam() {
   const hoursMinSecs = { minutes: 6 };
   const [isRecord, setRecord] = useState(false);
   return (
-    <div>
-      <h1>Title of the props</h1>
+    <div style={{ marginLeft: "3%", paddingTop: "3%" }}>
+      <h1>{data[id - 1].title}</h1>
+      <p>{data[id - 1].description}</p>
+      <br></br>
       <p>Camera status: {recordWebcam.status}</p>
       {isRecord ? (
         <CountDownTimer hoursMinSecs={hoursMinSecs} />
