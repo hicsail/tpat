@@ -13,11 +13,11 @@ const Card = (props) => {
       <div
         style={{
           display: "flex",
-          backgroundColor: "white",
+          backgroundColor: "#F6F6F6",
           justifyContent: "flex-start",
           width: "80%",
           marginTop: "15px",
-          height: "120px",
+          height: "150px",
           borderRadius: "10px",
         }}
       >
@@ -39,7 +39,7 @@ const Card = (props) => {
           style={{
             paddingTop: "2%",
             paddingLeft: "2%",
-            backgroundColor: "white",
+            backgroundColor: "#F6F6F6",
             width: "80%",
           }}
         >

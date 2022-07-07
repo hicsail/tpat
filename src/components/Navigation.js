@@ -12,7 +12,10 @@ function Navigation() {
       <div className="header">
         <ul
           className="navLinks"
-          style={{ transform: open ? "translateX(0px)" : "" }}
+          style={{
+            transform: open ? "translateX(0px)" : "",
+            backgroundColor: "transparent",
+          }}
         >
           <a className="siteName" href="/">
             TPAT
@@ -23,9 +26,11 @@ function Navigation() {
           <li>
             <a href="/try-it-yourself">Try It Yourself</a>
           </li>
-          <li>
+          {/**
+           * <li>
             <a href="/about">About</a>
-          </li>
+          </li> */}
+
           <li>
             <a href="/">Home</a>
           </li>
