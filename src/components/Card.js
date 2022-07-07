@@ -66,7 +66,7 @@ const Card = (props) => {
             >
               {props.time}
             </p>
-            <Button id={props.id - 1} name="Start" />
+            <Button id={props.id} name="Start" />
           </div>
         </div>
       </div>

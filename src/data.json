@@ -1,29 +1,33 @@
 [{
-        "id": "2",
+        "id": "1",
         "category": "math",
         "title": "Task 1",
         "description": "This is task 1",
-        "time": "7 mins"
+        "time": "7 mins",
+        "imgURL": "#"
     },
     {
-        "id": "3",
+        "id": "2",
         "category": "english",
         "title": "Task 2",
         "description": "This is task 2",
-        "time": "5 mins"
+        "time": "5 mins",
+        "imgURL": "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
     },
     {
-        "id": "4",
+        "id": "3",
         "category": "math",
         "title": "Task 3",
         "description": "This is task 3",
-        "time": "6 mins"
+        "time": "6 mins",
+        "imgURL": "#"
     },
     {
-        "id": "5",
+        "id": "4",
         "category": "english",
         "title": "Task 4",
         "description": "This is task 4",
-        "time": "7 mins"
+        "time": "7 mins",
+        "imgURL": "#"
     }
 ]

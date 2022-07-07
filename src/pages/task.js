@@ -2,6 +2,7 @@ import * as React from "react";
 import data from "../data.json";
 import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
+import style from "../App.css";
 
 function Task() {
   // Get ID from URL
@@ -88,6 +89,9 @@ function Task() {
           {data[id - 1].description}
         </h2>
       </div>
+      {data[id - 1].imgURL !== "#" ? (
+        <img class="task-img" src={data[id - 1].imgURL} />
+      ) : null}
       <div
         style={{
           display: "flex",
