@@ -95,6 +95,42 @@ li a {
     padding-bottom: 2%;
 }
 
+
+/*Card styles*/
+
+.card-container {
+    display: flex;
+    background-color: #f6f6f6;
+    justify-content: flex-start;
+    width: 80%;
+    margin-top: 15px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.img-container {
+    justify-content: flex-start;
+    display: flex;
+    width: 18%;
+    text-align: center;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.task-container {
+    width: 80%;
+    padding-top: 2%;
+    padding-left: 2%;
+    background-color: #f6f6f6;
+}
+
+.time-container {
+    display: flex;
+    justify-content: inline;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 3%;
+}
+
 @media all and (max-width: 768px) {
     .header {
         display: inline-flex;

@@ -10,52 +10,18 @@ const Card = (props) => {
         justifyContent: "center",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          backgroundColor: "#F6F6F6",
-          justifyContent: "flex-start",
-          width: "80%",
-          marginTop: "15px",
-          height: "150px",
-          borderRadius: "10px",
-        }}
-      >
-        <div
-          style={{
-            justifyContent: "flex-start",
-            display: "flex",
-            width: "18%",
-            textAlign: "center",
-            borderRadius: "10px 0px 0px 10px",
-          }}
-        >
+      <div class="card-container">
+        <div class="img-container">
           <img
             style={{ width: "100%", borderRadius: "10px 0px 0px 10px" }}
             src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
           />
         </div>
-        <div
-          style={{
-            paddingTop: "2%",
-            paddingLeft: "2%",
-            backgroundColor: "#F6F6F6",
-            width: "80%",
-          }}
-        >
+        <div class="task-container">
           <h4 style={{ backgroundColor: "transparent" }}>{props.title}</h4>
           <p style={{ backgroundColor: "transparent" }}>{props.description}</p>
           <div></div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "inline",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              paddingTop: "2%",
-              backgroundColor: "transparent",
-            }}
-          >
+          <div class="time-container">
             <img src={require("../images/Clock.png")} class="img" />
             <p
               style={{

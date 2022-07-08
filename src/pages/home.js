@@ -27,45 +27,16 @@ function Home() {
           </div>
         </div>
       </div>
-      <h2
-        style={{ display: "flex", justifyContent: "center", paddingTop: "5%" }}
-      >
-        Service that TPAT provide/categories
-      </h2>
+      <h2 class="subtitle">Service that TPAT provide/categories</h2>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-            width: "90%",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              //backgroundColor: "red",
-              paddingTop: "3%",
-              width: "80%",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-
-                //backgroundColor: "green",
-              }}
-            >
+        <div class="secondContainer">
+          <div class="row">
+            <div class="column">
               <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" />
 
               <h1 style={{ paddingTop: "5%" }}>Category 1</h1>
@@ -75,25 +46,8 @@ function Home() {
               </p>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              //backgroundColor: "red",
-              paddingTop: "3%",
-              width: "80%",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-
-                //backgroundColor: "green",
-              }}
-            >
+          <div class="row">
+            <div class="column">
               <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" />
 
               <h1 style={{ paddingTop: "5%" }}>Category 2</h1>
