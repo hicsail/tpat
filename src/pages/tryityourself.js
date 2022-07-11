@@ -6,38 +6,39 @@ import data from "../data.json";
 function TryItYourself() {
   return (
     <div>
-      <h1
+      <div
         style={{
-          fontWeight: "normal",
-          fontSize: "20px",
-          paddingTop: "50px",
-          justifyContent: "center",
+          padding: "30px",
           display: "flex",
           width: "100%",
         }}
       >
-        Introductory Title / Text, or some inspiration starter text
-      </h1>
-      <h1
-        style={{
-          fontWeight: "normal",
-          fontSize: "20px",
-          paddingTop: "10px",
-          justifyContent: "center",
-          display: "flex",
-          width: "100%",
-        }}
-      >
-        some inspiration starter text
-      </h1>
-      <div style={{ padding: "30px", display: "flex" }}>
+        <h1
+          style={{
+            fontWeight: "normal",
+            fontSize: "20px",
+            paddingTop: "50px",
+            justifyContent: "center",
+            display: "flex",
+            width: "35%",
+            textAlign: "center",
+            lineHeight: "2.5rem",
+          }}
+        >
+          Introductory Title / Text, or some inspiration starter text some
+          inspiration starter text
+        </h1>
+      </div>
+
+      <div style={{ padding: "10px", display: "flex" }}>
         <p
           style={{
             justifyContent: "center",
             display: "flex",
             fontSize: "15px",
-            width: "40%",
+            width: "45%",
             textAlign: "center",
+            lineHeight: "1.75rem",
           }}
         >
           It is a long established fact that a reader will be distracted by the
@@ -47,7 +48,9 @@ function TryItYourself() {
         </p>
       </div>
 
-      <hr style={{ marginRight: "5%", marginLeft: "5%" }}></hr>
+      <hr
+        style={{ marginRight: "5%", marginLeft: "5%", marginBottom: "1.5%" }}
+      ></hr>
       {data.map((taskDetail, index) => {
         return (
           <Card

@@ -90,8 +90,21 @@ function Task() {
         </h2>
       </div>
       {data[id - 1].imgURL !== "#" ? (
-        <img class="task-img" src={data[id - 1].imgURL} />
+        <img
+          style={{ height: "400px", paddingLeft: "7%" }}
+          src={data[id - 1].imgURL}
+        />
       ) : null}
+      <div style={{ paddingLeft: "7%" }}>
+        {data[id - 1].video !== "#" ? (
+          <iframe
+            src={data[id - 1].video}
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            title="video"
+          />
+        ) : null}
+      </div>
       <div
         style={{
           display: "flex",

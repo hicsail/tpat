@@ -27,9 +27,22 @@ export default function WebCam(props) {
   const hoursMinSecs = { minutes: 6 };
   const [isRecord, setRecord] = useState(false);
   return (
-    <div style={{ marginLeft: "3%", paddingTop: "3%" }}>
+    <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
       <h1>{data[id - 1].title}</h1>
       <p>{data[id - 1].description}</p>
+      {data[id - 1].imgURL !== "#" ? (
+        <img class="task-img" src={data[id - 1].imgURL} />
+      ) : null}
+      <div>
+        {data[id - 1].video !== "#" ? (
+          <iframe
+            src={data[id - 1].video}
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            title="video"
+          />
+        ) : null}
+      </div>
       <br></br>
       <p>Camera status: {recordWebcam.status}</p>
       {isRecord ? (
