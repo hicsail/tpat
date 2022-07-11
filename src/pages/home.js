@@ -15,12 +15,12 @@ function Home() {
             <a
               style={{
                 border: "2px solid #57d655",
-                padding: "2%",
+                padding: "2.5%",
                 color: "#57d655",
                 borderRadius: "20%",
                 textDecoration: "none",
               }}
-              href="./try-it-yourself"
+              href="try-it-yourself"
             >
               Try It Yourself
             </a>

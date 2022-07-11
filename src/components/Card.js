@@ -32,7 +32,21 @@ const Card = (props) => {
             >
               {props.time}
             </p>
-            <Button id={props.id} name="Start" />
+            <a
+              href={`/task/${props.id}`}
+              style={{
+                border: "2px solid #57d655",
+                padding: "1%",
+                color: "#57d655",
+                borderRadius: "20%",
+                textDecoration: "none",
+                marginBottom: "2%",
+              }}
+              id={props.id}
+              name="Start"
+            >
+              Start
+            </a>
           </div>
         </div>
       </div>
