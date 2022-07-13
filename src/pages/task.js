@@ -1,13 +1,22 @@
-import * as React from "react";
 import data from "../data.json";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
+import { useNavigate } from "react-router-dom";
 import style from "../App.css";
 
 function Task() {
   // Get ID from URL
   const { id } = useParams();
-  const hoursMinSecs = { minutes: 6 };
+  const hoursMinSecs = { minutes: 0, seconds: 3 };
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate("/webcam");
+      //1 second = 1000 millisecond
+    }, 3000);
+  }, []);
 
   //<div>Task {id}</div>
   return (
@@ -79,15 +88,17 @@ function Task() {
         >
           {data[id - 1].title}
         </h2>
-        <h2
-          style={{
-            paddingBottom: "1%",
-            fontWeight: "normal",
-            paddingLeft: "2%",
-          }}
-        >
-          {data[id - 1].description}
-        </h2>
+        {hoursMinSecs ? (
+          <h2
+            style={{
+              paddingBottom: "1%",
+              fontWeight: "normal",
+              paddingLeft: "2%",
+            }}
+          >
+            {data[id - 1].description}
+          </h2>
+        ) : null}
       </div>
       {data[id - 1].imgURL !== "#" ? (
         <img
@@ -95,16 +106,7 @@ function Task() {
           src={data[id - 1].imgURL}
         />
       ) : null}
-      <div style={{ paddingLeft: "7%" }}>
-        {data[id - 1].video !== "#" ? (
-          <iframe
-            src={data[id - 1].video}
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            title="video"
-          />
-        ) : null}
-      </div>
+
       <div
         style={{
           display: "flex",
@@ -121,9 +123,9 @@ function Task() {
             borderRadius: "15%",
             textDecoration: "none",
           }}
-          href={`/webcam/${id}`}
+          href="/webcam"
         >
-          Next
+          Start Recording
         </a>
       </div>
     </div>
