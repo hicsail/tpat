@@ -14,9 +14,9 @@ function Home() {
           <div style={{ paddingTop: "5%" }}>
             <a
               style={{
-                border: "2px solid #57d655",
+                border: "2px solid #E26C40",
                 padding: "2.5%",
-                color: "#57d655",
+                color: "#E26C40",
                 borderRadius: "15%",
                 textDecoration: "none",
               }}

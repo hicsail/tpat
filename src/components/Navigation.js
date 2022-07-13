@@ -10,13 +10,7 @@ function Navigation() {
   return (
     <div>
       <div className="header">
-        <ul
-          className="navLinks"
-          style={{
-            transform: open ? "translateX(0px)" : "",
-            backgroundColor: "transparent",
-          }}
-        >
+        <ul className="navLinks">
           <a className="siteName" href="/">
             TPAT
           </a>

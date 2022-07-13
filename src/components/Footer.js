@@ -10,14 +10,14 @@ function Footer() {
   return (
     <div className="footerContainer">
       <div className="footer">
-        <ul className="footerLinks">
+        <ul class="footerLinks">
           <li>
             <a href="/try-it-yourself">Try It Yourself</a>
           </li>
           <li>
             <a href="/contact">Contact Us</a>
           </li>
-         {/*
+          {/*
           <li>
             <a href="/about">About</a>
           </li>
@@ -27,7 +27,14 @@ function Footer() {
           </li>
         </ul>
       </div>
-      <hr style={{ marginTop: "1%", marginBottom: "1%" }}></hr>
+      <hr
+        style={{
+          marginTop: "1%",
+          marginBottom: "1%",
+          color: "white",
+          marginRight: "3%",
+        }}
+      ></hr>
       <p class="footerRight">@2022 TPAT All Right Reserved</p>
     </div>
   );

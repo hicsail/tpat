@@ -18,19 +18,32 @@ div {
 .siteName {
     font-size: 30px;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .siteName:visited {
-    color: black;
+    color: white;
 }
 
 .header {
-    padding-top: 3%;
+    padding-top: 1.5%;
     justify-content: center;
     padding-right: 5%;
     padding-left: 5%;
-    background-color: transparent;
+    background-color: #193948;
+    padding-bottom: 2%;
+}
+
+.navLinks a {
+    color: white;
+}
+
+.navLinks a:hover {
+    color: #fcdc73;
+}
+
+.footerLinks a:hover {
+    color: #fcdc73;
 }
 
 ul {
@@ -78,18 +91,28 @@ li a {
 .footer {
     display: flex;
     justify-content: flex-start;
-    padding-top: 5%;
+    margin-top: 8%;
+    padding-top: 2%;
+    color: white;
+}
+
+.footer a {
+    color: white;
 }
 
 .footerContainer {
     position: relative;
-    left: 3%;
+    left: 0%;
+    padding-left: 5%;
     bottom: 5%;
     margin-right: 5%;
+    background-color: #193948;
+    width: 100%;
+    color: white;
 }
 
 .footerRight {
-    padding-left: 1%;
+    margin-left: 1%;
     padding-top: 1%;
     font-size: 12px;
     padding-bottom: 2%;
@@ -165,7 +188,7 @@ p {
         width: 50%;
         transform: translateX(-500px);
         transition: 0.5s ease-in-out;
-        background-color: transparent;
+        background-color: #193948;
     }
     nav .navLinks li {
         padding: 25px;
