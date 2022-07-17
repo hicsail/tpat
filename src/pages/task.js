@@ -117,9 +117,9 @@ function Task() {
       >
         <a
           style={{
-            border: "2px solid #57d655",
+            border: "2px solid #e26c40",
             padding: "1%",
-            color: "#57d655",
+            color: "#e26c40",
             borderRadius: "15%",
             textDecoration: "none",
           }}

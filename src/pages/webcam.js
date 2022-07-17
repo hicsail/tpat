@@ -1,9 +1,6 @@
 import "../components/styles.css";
 import React, { useState, useEffect } from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
 import CountDownTimer from "../components/Timer";
-import data from "../data.json";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   RecordWebcam,
