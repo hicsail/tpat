@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../components/Btn";
 
 const Card = (props) => {
   return (
@@ -15,6 +14,7 @@ const Card = (props) => {
           <img
             style={{ width: "100%", borderRadius: "10px 0px 0px 10px" }}
             src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
+            alt="task visualization"
           />
         </div>
         <div class="task-container">
@@ -22,7 +22,11 @@ const Card = (props) => {
           <p style={{ backgroundColor: "transparent" }}>{props.description}</p>
           <div></div>
           <div class="time-container">
-            <img src={require("../images/Clock.png")} class="img" />
+            <img
+              src={require("../images/Clock.png")}
+              class="img"
+              alt="clock icon"
+            />
             <p
               style={{
                 fontSize: "13px",
@@ -33,7 +37,7 @@ const Card = (props) => {
               {props.time}
             </p>
             <a
-              href={`/task/${props.id}`}
+              href={`/instruction/${props.id}`}
               style={{
                 border: "2px solid #e26c40",
                 padding: "1%",

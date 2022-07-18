@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
-import style from "../App.css";
 
 function Task() {
   // Get ID from URL
@@ -16,7 +15,7 @@ function Task() {
       navigate("/webcam");
       //1 second = 1000 millisecond
     }, 3000);
-  }, []);
+  });
 
   //<div>Task {id}</div>
   return (
@@ -42,6 +41,7 @@ function Task() {
               style={{ paddingLeft: "0.5%" }}
               src={require("../images/Arrow.png")}
               class="img"
+              alt="arrow icon"
             />
             <a
               style={{
@@ -68,6 +68,7 @@ function Task() {
               style={{ paddingLeft: "0.5%" }}
               src={require("../images/Clock.png")}
               class="img"
+              alt="clock icon"
             />
           </div>
         </div>
@@ -89,7 +90,7 @@ function Task() {
           {data[id - 1].title}
         </h2>
         {hoursMinSecs ? (
-          <h2
+          <h3
             style={{
               paddingBottom: "1%",
               fontWeight: "normal",
@@ -97,13 +98,14 @@ function Task() {
             }}
           >
             {data[id - 1].description}
-          </h2>
+          </h3>
         ) : null}
       </div>
       {data[id - 1].imgURL !== "#" ? (
         <img
           style={{ height: "400px", paddingLeft: "7%" }}
           src={data[id - 1].imgURL}
+          alt="task visualization"
         />
       ) : null}
 

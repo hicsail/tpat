@@ -2,11 +2,7 @@ import "../components/styles.css";
 import React, { useState, useEffect } from "react";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
-import {
-  RecordWebcam,
-  useRecordWebcam,
-  CAMERA_STATUS,
-} from "react-record-webcam";
+import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 const OPTIONS = {
   filename: "video",
   fileType: "web3",
@@ -18,10 +14,7 @@ const OPTIONS = {
 export default function WebCam(props) {
   const navigate = useNavigate();
   const recordWebcam = useRecordWebcam(OPTIONS);
-  const getRecordingFileHooks = async () => {
-    const blob = await recordWebcam.getRecording();
-    console.log({ blob });
-  };
+
   const hoursMinSecs = { minutes: 7, seconds: 30 };
   const [isRecord, setRecord] = useState(false);
   useEffect(() => {
@@ -29,7 +22,7 @@ export default function WebCam(props) {
       navigate("/");
       //1 second = 1000 millisecond
     }, 450000);
-  }, []);
+  });
 
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>

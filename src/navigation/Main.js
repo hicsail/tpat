@@ -8,6 +8,7 @@ import Task from "../pages/task";
 
 import WebCam from "../pages/webcam";
 import Contact from "../pages/contact";
+import Instruction from "../pages/instruction";
 
 export const Main = () => {
   return (
@@ -19,6 +20,7 @@ export const Main = () => {
         <Route path="/webcam" element={<WebCam />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/task/:id" element={<Task />} />
+        <Route path="/instruction/:id" element={<Instruction />} />
       </Routes>
     </div>
   );
