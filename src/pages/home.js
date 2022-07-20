@@ -1,4 +1,5 @@
 import * as React from "react";
+import "../App.css";
 
 function Home() {
   return (
@@ -37,7 +38,10 @@ function Home() {
         <div class="secondContainer">
           <div class="row">
             <div class="column">
-              <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" />
+              <img
+                src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
+                alt="promotional 1"
+              />
 
               <h1 style={{ paddingTop: "5%" }}>Category 1</h1>
               <p style={{ paddingTop: "5%" }}>
@@ -48,7 +52,10 @@ function Home() {
           </div>
           <div class="row">
             <div class="column">
-              <img src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png" />
+              <img
+                src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
+                alt="promotional 2"
+              />
 
               <h1 style={{ paddingTop: "5%" }}>Category 2</h1>
               <p style={{ paddingTop: "5%" }}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 //import {Link} from 'react-router-dom';
 import "./styles.css";
 
@@ -6,7 +6,7 @@ import "./styles.css";
 //</nav>{{transform: open ? 'translateX (0px)' : ''}}>
 
 function Footer() {
-  const [open, setOpen] = useState(false);
+  //const [open, setOpen] = useState(false);
   return (
     <div className="footerContainer">
       <div className="footer">
@@ -15,7 +15,7 @@ function Footer() {
             <a href="/try-it-yourself">Try It Yourself</a>
           </li>
           <li>
-            <a href="/contact">Contact Us</a>
+            <a href="mailto: abc@example.com">Contact Us</a>
           </li>
           {/*
           <li>
