@@ -22,7 +22,7 @@ export default function WebCam(props) {
       setTimeout(() => {
         navigate("/");
         //1 second = 1000 millisecond
-      }, 422000);
+      }, 425000);
     }
 
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {

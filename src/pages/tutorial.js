@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-//import Modal from "react-modal";
+import Modal from "react-modal";
 //import Modal from "../components/Modal";
 
 function Tutorial() {
   const hoursMinSecs = { minutes: 7, seconds: 0 };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
 
   return (
     <div
@@ -59,11 +65,63 @@ function Tutorial() {
             />
           </div>
         </div>
-
+        <div style={{ marginTop: "3%", paddingLeft: "2%" }}>
+          <button class="instructionBtn" onClick={toggleModal}>
+            Click to see Insrtuctions
+          </button>
+          <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+            className="mymodal"
+            overlayClassName="myoverlay"
+            closeTimeoutMS={500}
+          >
+            <div class="tutorial">
+              <h2>Timer</h2>
+              <p>
+                Timer on the right top corner will start the count down when you
+                first navigate onto the screen. After the timer runs out, it
+                will automatically take you to the next screen
+              </p>
+              <br />
+              <h2>Category</h2>
+              <p>
+                This text box will show the subject or the category of the task
+                that you are going to be looking at
+              </p>
+              <br />
+              <h2>Task TItle</h2>
+              <p>
+                In this text box, you will see the task title of the task that
+                you are about to do
+              </p>
+              <br />
+              <h2>Description</h2>
+              <p>
+                In this text box, you will see the description of the task that
+                you are going to perform on the next page. Remember to read
+                carefully as it will not appear again in the next page
+              </p>
+              <br />
+              <h2>Next Button</h2>
+              <p>
+                When you finish reading the prompts, and are ready to move on,
+                click on the next button at the bottom left corner. On the
+                actual assignment page, it is worded "start recording" but don't
+                worry, it won't automatically start recording when you click on
+                it to the next page
+              </p>
+            </div>
+            <button class="closerBtn" onClick={toggleModal}>
+              Close modal
+            </button>
+          </Modal>
+        </div>
         <p
           style={{
             paddingBottom: "1%",
-            paddingTop: "1%",
+
             paddingLeft: "2%",
             color: "#B3B3B3",
           }}
@@ -107,7 +165,7 @@ function Tutorial() {
           }}
           href="/tutorial2"
         >
-          Start Recording
+          Next
         </a>
       </div>
     </div>

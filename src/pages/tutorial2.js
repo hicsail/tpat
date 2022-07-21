@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CountDownTimer from "../components/Timer";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
-import { useNavigate } from "react-router-dom";
-import Alert from "../components/Alert";
+
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -19,7 +18,7 @@ function Tutorial2() {
   const hoursMinSecs = { minutes: 7, seconds: 2 };
   const [isRecord, setRecord] = useState(false);
   const recordWebcam = useRecordWebcam(OPTIONS);
-  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
@@ -42,7 +41,7 @@ function Tutorial2() {
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
       <button class="instructionBtn" onClick={toggleModal}>
-        Click to see Insrtuctions{" "}
+        Click to see Insrtuctions
       </button>
       <Modal
         isOpen={isOpen}
@@ -52,7 +51,24 @@ function Tutorial2() {
         overlayClassName="myoverlay"
         closeTimeoutMS={500}
       >
-        <div>My modal dialog.</div>
+        <div>
+          <h2>Timer on the page</h2>
+          <p>
+            There is a timer on the page itself. The timer ONLY starts when you
+            open your camera, and when you camera status is "OPEN". So once you
+            checked your camera, and your camera status is opened, please click
+            on start recording as soon as possible as once the timer ran out, it
+            will automatically take you back to the main page.
+          </p>
+          <br />
+          <h2>Timer on the task</h2>
+          <p>
+            There is also a timer on the task itself. When you start recording,
+            the timer on the screen will start counting down. Once the timer ran
+            out, the video will automatically stop recording, and download the
+            file accordingly.
+          </p>
+        </div>
         <button class="closerBtn" onClick={toggleModal}>
           Close modal
         </button>
