@@ -30,7 +30,7 @@ export default function WebCam(props) {
         recordWebcam.stop();
         //recordWebcam.getRecording();
         //1 second = 1000 millisecond
-      }, 420000);
+      }, 421000);
     }
     if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
       recordWebcam.download();
