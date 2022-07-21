@@ -1,5 +1,5 @@
 import * as React from "react";
-import Button from "../components/Btn";
+
 import Card from "../components/Card";
 import data from "../data.json";
 

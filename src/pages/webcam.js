@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 const OPTIONS = {
   filename: "video",
-  fileType: "web3",
+  fileType: "webm",
   codec: { audio: "aac" | "opus", video: "av1" | "avc" | "vp8" },
   width: 1920,
   height: 1080,
@@ -15,19 +15,37 @@ export default function WebCam(props) {
   const navigate = useNavigate();
   const recordWebcam = useRecordWebcam(OPTIONS);
 
-  const hoursMinSecs = { minutes: 7, seconds: 30 };
+  const hoursMinSecs = { minutes: 7, seconds: 2 };
   const [isRecord, setRecord] = useState(false);
   useEffect(() => {
-    setTimeout(() => {
-      navigate("/");
-      //1 second = 1000 millisecond
-    }, 450000);
+    if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
+      setTimeout(() => {
+        navigate("/");
+        //1 second = 1000 millisecond
+      }, 422000);
+    }
+
+    if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
+      setTimeout(() => {
+        recordWebcam.stop();
+        //recordWebcam.getRecording();
+        //1 second = 1000 millisecond
+      }, 420000);
+    }
+    if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
+      recordWebcam.download();
+    }
   });
 
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
       <p>Camera status: {recordWebcam.status}</p>
-      <CountDownTimer hoursMinSecs={hoursMinSecs} />
+      {recordWebcam.status === CAMERA_STATUS.RECORDING ? (
+        <CountDownTimer hoursMinSecs={hoursMinSecs} />
+      ) : (
+        <p>Time Limit: 7 minutes</p>
+      )}
+
       <div class="webcam">
         <button
           disabled={
@@ -41,7 +59,6 @@ export default function WebCam(props) {
         </button>
         <button
           disabled={
-            recordWebcam.status === CAMERA_STATUS.OPEN ||
             recordWebcam.status === CAMERA_STATUS.CLOSED ||
             recordWebcam.status === CAMERA_STATUS.RECORDING ||
             recordWebcam.status === CAMERA_STATUS.PREVIEW
@@ -61,12 +78,6 @@ export default function WebCam(props) {
           }}
         >
           Stop recording
-        </button>
-        <button
-          disabled={recordWebcam.status !== CAMERA_STATUS.PREVIEW}
-          onClick={recordWebcam.download}
-        >
-          Download
         </button>
       </div>
       <video

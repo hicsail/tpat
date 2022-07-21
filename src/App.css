@@ -70,6 +70,74 @@
     text-align: center;
 }
 
+
+/*Tutorial Modals*/
+
+.tutorial .tutor-btn[tabindex]:focus {
+    color: green;
+}
+
+.tutorial .tutor-btn {
+    color: red;
+    cursor: pointer;
+    border: 0;
+}
+
+.tutorial .tutor-task-btn {
+    color: red;
+    cursor: pointer;
+    border: 0;
+    font-size: 20px;
+}
+
+.tutorial .tutor-time-btn {
+    color: red;
+    cursor: pointer;
+    border: 0;
+    font-size: 15px;
+}
+
+.tutorial .tutor-description-btn {
+    color: red;
+    cursor: pointer;
+    border: 0;
+    font-size: 30px;
+}
+
+.tutorial .tutor-btn:vistied {
+    color: green;
+}
+
+.tutorial button.active {
+    color: green;
+}
+
+.tutorial button:active {
+    color: green;
+}
+
+.mymodal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+}
+
+.myoverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
 @media only screen and (min-width: 1800px) {
     .body {
         min-height: 800px;

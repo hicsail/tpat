@@ -36,21 +36,40 @@ const Card = (props) => {
             >
               {props.time}
             </p>
-            <a
-              href={`/instruction/${props.id}`}
-              style={{
-                border: "2px solid #e26c40",
-                padding: "1%",
-                color: "#e26c40",
-                borderRadius: "20%",
-                textDecoration: "none",
-                marginBottom: "2%",
-              }}
-              id={props.id}
-              name="Start"
-            >
-              Start
-            </a>
+            {props.id === "0" ? (
+              <a
+                href="./tutorial"
+                style={{
+                  border: "2px solid #e26c40",
+                  padding: "1%",
+                  color: "#e26c40",
+                  borderRadius: "20%",
+                  textDecoration: "none",
+                  marginBottom: "2%",
+                }}
+                id={props.id}
+                name="Start"
+              >
+                Start
+              </a>
+            ) : (
+              <a
+                //href={`/instruction/${props.id}`}
+                href={`/task/${props.id}`}
+                style={{
+                  border: "2px solid #e26c40",
+                  padding: "1%",
+                  color: "#e26c40",
+                  borderRadius: "20%",
+                  textDecoration: "none",
+                  marginBottom: "2%",
+                }}
+                id={props.id}
+                name="Start"
+              >
+                Start
+              </a>
+            )}
           </div>
         </div>
       </div>

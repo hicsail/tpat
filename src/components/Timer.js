@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+//import { useNavigate } from "react-router-dom";
 
 const CountDownTimer = ({ hoursMinSecs }) => {
   const { minutes = 0, seconds = 0 } = hoursMinSecs;
   const [[mins, secs], setTime] = React.useState([minutes, seconds]);
-  const navigate = useNavigate();
-
-
+  //const navigate = useNavigate();
 
   const tick = () => {
     if (mins === 0 && secs === 0) {
@@ -18,7 +16,7 @@ const CountDownTimer = ({ hoursMinSecs }) => {
     }
   };
 
-  const reset = () => setTime([parseInt(minutes), parseInt(seconds)]);
+  //const reset = () => setTime([parseInt(minutes), parseInt(seconds)]);
 
   React.useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);

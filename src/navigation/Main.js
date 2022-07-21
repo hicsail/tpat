@@ -9,6 +9,8 @@ import Task from "../pages/task";
 import WebCam from "../pages/webcam";
 import Contact from "../pages/contact";
 import Instruction from "../pages/instruction";
+import Tutorial from "../pages/tutorial";
+import Tutorial2 from "../pages/tutorial2";
 
 export const Main = () => {
   return (
@@ -18,6 +20,8 @@ export const Main = () => {
         <Route path="/about" element={<About />} />
         <Route path="/try-it-yourself" element={<TryItYourself />} />
         <Route path="/webcam" element={<WebCam />} />
+        <Route path="/tutorial" element={<Tutorial />} />
+        <Route path="/tutorial2" element={<Tutorial2 />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/task/:id" element={<Task />} />
         <Route path="/instruction/:id" element={<Instruction />} />

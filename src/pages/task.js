@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 function Task() {
   // Get ID from URL
   const { id } = useParams();
-  const hoursMinSecs = { minutes: 0, seconds: 3 };
+  const hoursMinSecs = { minutes: 7, seconds: 0 };
   const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
       navigate("/webcam");
       //1 second = 1000 millisecond
-    }, 3000);
+    }, 420000);
   });
 
   //<div>Task {id}</div>
@@ -81,13 +81,13 @@ function Task() {
             color: "#B3B3B3",
           }}
         >
-          {data[id - 1].category}
+          {data[id].category}
         </p>
 
         <h2
           style={{ paddingBottom: "1%", fontWeight: "bold", paddingLeft: "2%" }}
         >
-          {data[id - 1].title}
+          {data[id].title}
         </h2>
         {hoursMinSecs ? (
           <h3
