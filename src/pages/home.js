@@ -18,7 +18,7 @@ function Home() {
                 border: "2px solid #E26C40",
                 padding: "2.5%",
                 color: "#E26C40",
-                borderRadius: "15%",
+                borderRadius: "10px",
                 textDecoration: "none",
               }}
               href="try-it-yourself"

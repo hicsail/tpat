@@ -43,7 +43,7 @@ const Card = (props) => {
                   border: "2px solid #e26c40",
                   padding: "1%",
                   color: "#e26c40",
-                  borderRadius: "20%",
+                  borderRadius: "5px",
                   textDecoration: "none",
                   marginBottom: "2%",
                 }}
@@ -60,7 +60,7 @@ const Card = (props) => {
                   border: "2px solid #e26c40",
                   padding: "1%",
                   color: "#e26c40",
-                  borderRadius: "20%",
+                  borderRadius: "5px ",
                   textDecoration: "none",
                   marginBottom: "2%",
                 }}

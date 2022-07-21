@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
+//import Modal from "react-modal";
 //import Modal from "../components/Modal";
-
-Modal.setAppElement("#root");
 
 function Tutorial() {
   const hoursMinSecs = { minutes: 7, seconds: 0 };
+
   return (
     <div
       style={{
@@ -103,7 +102,7 @@ function Tutorial() {
             border: "2px solid #e26c40",
             padding: "1%",
             color: "#e26c40",
-            borderRadius: "15%",
+            borderRadius: "10px",
             textDecoration: "none",
           }}
           href="/tutorial2"

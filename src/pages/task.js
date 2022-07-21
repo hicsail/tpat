@@ -122,7 +122,7 @@ function Task() {
             border: "2px solid #e26c40",
             padding: "1%",
             color: "#e26c40",
-            borderRadius: "15%",
+            borderRadius: "10px",
             textDecoration: "none",
           }}
           href="/webcam"

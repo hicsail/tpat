@@ -18,15 +18,16 @@
 }
 
 .webcam button {
-    border: 2px solid #e26c40;
+    border: 1.5px solid #e26c40;
     color: #e26c40;
     padding: 4px;
-    border-radius: 15%;
+    border-radius: 5px;
     margin-right: 0.5%;
 }
 
 .webcam button:disabled {
     border: 2px solid gray;
+    color: gray;
     padding: 2px;
     padding: 4px;
 }
@@ -114,6 +115,26 @@
 
 .tutorial button:active {
     color: green;
+}
+
+.instructionBtn {
+    border: 0;
+    font-size: 15px;
+    background-color: #055160;
+    color: white;
+    border-radius: 10px !important;
+    padding: 1.5%;
+    margin-bottom: 1%;
+}
+
+.closerBtn {
+    border: 0;
+    font-size: 15px;
+    background-color: #055160;
+    color: white;
+    border-radius: 10px !important;
+    padding: 5%;
+    margin-top: 10%;
 }
 
 .mymodal {
