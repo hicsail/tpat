@@ -2,6 +2,8 @@ import "../components/styles.css";
 import React, { useState, useEffect } from "react";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
+import videojs from "video.js";
+import "videojs-watermark";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 const OPTIONS = {
   filename: "video",
@@ -15,7 +17,7 @@ export default function WebCam(props) {
   const navigate = useNavigate();
   const recordWebcam = useRecordWebcam(OPTIONS);
 
-  const hoursMinSecs = { minutes: 7, seconds: 2 };
+  const hoursMinSecs = { minutes: 7, seconds: 1 };
   const [isRecord, setRecord] = useState(false);
   useEffect(() => {
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
@@ -33,7 +35,13 @@ export default function WebCam(props) {
       }, 421000);
     }
     if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
-      recordWebcam.download();
+      setTimeout(() => {
+        navigate("/");
+        //1 second = 1000 millisecond
+      }, 1000);
+      recordWebcam.download().watermark();
+      const player = videojs("video");
+      player.watermark();
     }
   });
 
