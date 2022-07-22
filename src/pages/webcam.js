@@ -20,6 +20,7 @@ export default function WebCam(props) {
   const hoursMinSecs = { minutes: 7, seconds: 1 };
   const [isRecord, setRecord] = useState(false);
   useEffect(() => {
+    // page timer itself, navigate back at 7 mins 5 seconds when camera is recording
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
       setTimeout(() => {
         navigate("/");
@@ -27,6 +28,7 @@ export default function WebCam(props) {
       }, 425000);
     }
 
+    // video timer itself, stops at 7 mins
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
       setTimeout(() => {
         recordWebcam.stop();
