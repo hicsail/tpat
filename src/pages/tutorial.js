@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 //import Modal from "../components/Modal";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 function Tutorial() {
-  const hoursMinSecs = { minutes: 7, seconds: 0 };
-
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
@@ -56,7 +56,27 @@ function Tutorial() {
               paddingBottom: "1%",
             }}
           >
-            7:00
+            <Popup
+              trigger={
+                <button
+                  style={{
+                    border: "0",
+                    fontSize: "16px",
+                    paddingLeft: "2%",
+                    cursor: "pointer",
+                  }}
+                >
+                  7:00
+                </button>
+              }
+              position="left center"
+            >
+              <div>
+                Timer on the right top corner will start the count down when you
+                first navigate onto the screen. After the timer runs out, it
+                will automatically take you to the next screen
+              </div>
+            </Popup>
             <img
               style={{ paddingLeft: "0.5%" }}
               src={require("../images/Clock.png")}
@@ -129,22 +149,50 @@ function Tutorial() {
           Category
         </p>
 
-        <h2
-          style={{ paddingBottom: "1%", fontWeight: "bold", paddingLeft: "2%" }}
+        <Popup
+          trigger={
+            <button
+              style={{
+                border: "0",
+                fontSize: "24px",
+                fontWeight: "600",
+                paddingLeft: "2%",
+                cursor: "pointer",
+              }}
+            >
+              Task Title
+            </button>
+          }
+          position="right center"
         >
-          Task Title
-        </h2>
-        {hoursMinSecs ? (
-          <h3
-            style={{
-              paddingBottom: "1%",
-              fontWeight: "normal",
-              paddingLeft: "2%",
-            }}
-          >
-            Description
-          </h3>
-        ) : null}
+          <div>
+            In this text box, you will see the task title of the task that you
+            are about to do
+          </div>
+        </Popup>
+        <br></br>
+
+        <Popup
+          trigger={
+            <button
+              style={{
+                border: "0",
+                fontSize: "19px",
+                paddingLeft: "2%",
+                cursor: "pointer",
+              }}
+            >
+              Description
+            </button>
+          }
+          position="right center"
+        >
+          <div>
+            In this text box, you will see the description of the task that you
+            are going to perform on the next page. Remember to read carefully as
+            it will not appear again in the next page
+          </div>
+        </Popup>
       </div>
 
       <div
