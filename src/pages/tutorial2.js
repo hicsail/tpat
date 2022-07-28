@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CountDownTimer from "../components/Timer";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
+import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
 
@@ -19,6 +20,8 @@ function Tutorial2() {
   const [isRecord, setRecord] = useState(false);
   const recordWebcam = useRecordWebcam(OPTIONS);
 
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {
@@ -26,14 +29,34 @@ function Tutorial2() {
   }
 
   useEffect(() => {
+    // opening the camera
+    setTimeout(() => {
+      if (recordWebcam.status === CAMERA_STATUS.CLOSED) {
+        recordWebcam.open();
+      }
+      //1 second = 1000 millisecond
+    }, 1000);
+
+    // page timer itself, navigate back at 7 mins 5 seconds when camera is recording
+    setTimeout(() => {
+      navigate("/");
+      //1 second = 1000 millisecond
+    }, 425000);
+
+    // video timer itself, stops at 7 mins
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
       setTimeout(() => {
         recordWebcam.stop();
         //recordWebcam.getRecording();
         //1 second = 1000 millisecond
-      }, 420000);
+      }, 421000);
     }
     if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
+      setTimeout(() => {
+        navigate("/");
+        //1 second = 1000 millisecond
+      }, 1000);
+      recordWebcam.close();
       recordWebcam.download();
     }
   });

@@ -2,8 +2,10 @@ import "../components/styles.css";
 import React, { useState, useEffect } from "react";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
-import videojs from "video.js";
+//import videojs from "video.js";
 import "videojs-watermark";
+//import ReactWaterMark from "react-watermark-component";
+import WaterMark from "watermark-component-for-react";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 const OPTIONS = {
   filename: "video",
@@ -17,16 +19,43 @@ export default function WebCam(props) {
   const navigate = useNavigate();
   const recordWebcam = useRecordWebcam(OPTIONS);
 
+  /**First watermarking method */
+  const ReactWaterMark = require("react-watermark-component");
+
+  const text = `This is a watermarking test`;
+
+  const options = {
+    chunkWidth: 200,
+    chunkHeight: 60,
+    textAlign: "left",
+    textBaseline: "bottom",
+    globalAlpha: 0.17,
+    font: "14px Microsoft Yahei",
+    rotateAngle: -0.26,
+    fillStyle: "#666",
+  };
+
+  /**End of first watermarking method */
+  /**Second watermarking method */
+  const content = "this is a watermarking test";
+  /**End of second watermarking method */
+
   const hoursMinSecs = { minutes: 7, seconds: 1 };
   const [isRecord, setRecord] = useState(false);
   useEffect(() => {
+    // opening the camera
+    setTimeout(() => {
+      if (recordWebcam.status === CAMERA_STATUS.CLOSED) {
+        recordWebcam.open();
+      }
+      //1 second = 1000 millisecond
+    }, 1000);
+
     // page timer itself, navigate back at 7 mins 5 seconds when camera is recording
-    if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
-      setTimeout(() => {
-        navigate("/");
-        //1 second = 1000 millisecond
-      }, 425000);
-    }
+    setTimeout(() => {
+      navigate("/");
+      //1 second = 1000 millisecond
+    }, 425000);
 
     // video timer itself, stops at 7 mins
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
@@ -41,9 +70,8 @@ export default function WebCam(props) {
         navigate("/");
         //1 second = 1000 millisecond
       }, 1000);
-      recordWebcam.download().watermark();
-      const player = videojs("video");
-      player.watermark();
+      recordWebcam.close();
+      recordWebcam.download();
     }
   });
 
@@ -63,7 +91,10 @@ export default function WebCam(props) {
             recordWebcam.status === CAMERA_STATUS.RECORDING ||
             recordWebcam.status === CAMERA_STATUS.PREVIEW
           }
-          onClick={recordWebcam.open}
+          onClick={() => {
+            recordWebcam.start();
+            recordWebcam.open();
+          }}
         >
           Open camera
         </button>
@@ -90,19 +121,21 @@ export default function WebCam(props) {
           Stop recording
         </button>
       </div>
-      <video
-        ref={recordWebcam.webcamRef}
-        style={{
-          display: `${
-            recordWebcam.status === CAMERA_STATUS.OPEN ||
-            recordWebcam.status === CAMERA_STATUS.RECORDING
-              ? "block"
-              : "none"
-          }`,
-        }}
-        autoPlay
-        muted
-      />
+      <WaterMark content={content}>
+        <video
+          ref={recordWebcam.webcamRef}
+          style={{
+            display: `${
+              recordWebcam.status === CAMERA_STATUS.OPEN ||
+              recordWebcam.status === CAMERA_STATUS.RECORDING
+                ? "block"
+                : "none"
+            }`,
+          }}
+          autoPlay
+          muted
+        />
+      </WaterMark>
       <video
         ref={recordWebcam.previewRef}
         style={{
