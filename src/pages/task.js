@@ -90,6 +90,47 @@ function Task() {
           {data[id].title}
         </h2>
         {hoursMinSecs ? (
+          <>
+            <h3
+              style={{
+                paddingBottom: "1%",
+                fontWeight: "normal",
+                paddingLeft: "2%",
+              }}
+            >
+              {data[id].description[0]}
+            </h3>
+            <h3
+              style={{
+                paddingBottom: "1%",
+                fontWeight: "normal",
+                paddingLeft: "2%",
+              }}
+            >
+              {data[id].description[1]}
+            </h3>
+            <h3
+              style={{
+                paddingBottom: "1%",
+                fontWeight: "normal",
+                paddingLeft: "2%",
+              }}
+            >
+              {data[id].description[2]}
+            </h3>
+          </>
+        ) : null}
+        <div>
+          <h3
+            style={{
+              paddingBottom: "1%",
+              fontWeight: "bold",
+              paddingLeft: "2%",
+              paddingTop: "2%",
+            }}
+          >
+            The problem you have chosen is:
+          </h3>
           <h3
             style={{
               paddingBottom: "1%",
@@ -97,10 +138,41 @@ function Task() {
               paddingLeft: "2%",
             }}
           >
-            {data[id - 1].description}
+            {data[id].problem}
           </h3>
-        ) : null}
+        </div>
+
+        <div
+          style={{
+            height: "200px",
+            //backgroundColor: "purple",
+            textAlign: "left",
+          }}
+        >
+          <h3
+            style={{
+              paddingBottom: "1%",
+              fontWeight: "bold",
+              paddingLeft: "2%",
+              paddingTop: "2%",
+            }}
+          >
+            Your task is to do the following:
+          </h3>
+          <div class="task">
+            <ul>
+              <li>{data[id].task[0]}</li>
+              <br></br>
+              <li>{data[id].task[1]}</li>
+              <br></br>
+              <li>{data[id].task[2]}</li>
+              <br></br>
+              <li>{data[id].task[3]}</li>
+            </ul>
+          </div>
+        </div>
       </div>
+
       {data[id - 1].imgURL !== "#" ? (
         <img
           style={{ height: "400px", paddingLeft: "7%" }}

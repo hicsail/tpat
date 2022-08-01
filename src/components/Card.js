@@ -19,7 +19,16 @@ const Card = (props) => {
         </div>
         <div class="task-container">
           <h4 style={{ backgroundColor: "transparent" }}>{props.title}</h4>
-          <p style={{ backgroundColor: "transparent" }}>{props.description}</p>
+          <p
+            style={{
+              backgroundColor: "transparent",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              maxHeight: "100px",
+            }}
+          >
+            {props.description}
+          </p>
           <div></div>
           <div class="time-container">
             <img

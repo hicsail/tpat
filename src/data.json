@@ -10,8 +10,19 @@
     {
         "id": "1",
         "category": "math",
-        "title": "Task 1",
-        "description": "This is task 1. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. ",
+        "title": "Task 1.1",
+        "description": [
+            "The second - grade students you work with solve word problems throughout the school year. Students understand part - part - whole word problem types.",
+            "While many of your students can accurately solve addition and subtraction problems when presented as an equation, the complexity of word problems causes challenges for many students in your class.Providing additional processing time and opportunities to practice emotional self - regulation can help students persist through complex word problems.Additionally, some students will benefit from extra time and support to make a plan for solving and checking their work.",
+            "You plan to provide a think aloud of how you would like your students to think about understanding the context of word problems. You plan to think aloud about your understanding of the context of the problem, the relationship among quantities, and your goals for problem solving and monitoring your progress while problem solving."
+        ],
+        "problem": "Ava's mom is 28 years old.Her grandma is 51. How much older is Ava's grandma than her mom ? ",
+        "task": [
+            "Explain why “thinking about your thinking” is important during problem solving.",
+            "Narrate your thinking about how you approach understanding this problem.",
+            "Demonstrate how you might represent the context of the problem with manipulatives or adiagram.",
+            "Ensure that you are modeling accuracy, clarity, and precision to mathematical language."
+        ],
         "time": "7 mins",
         "imgURL": "#",
         "video": "https://www.youtube.com/watch?v=PV-W5iG6yXQ"
@@ -38,7 +49,7 @@
         "id": "4",
         "category": "english",
         "title": "Task 4",
-        "description": "This is task 4. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. ",
+        "description": "This is task 4, It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. ",
         "time": "7 mins",
         "imgURL": "#",
         "video": "#"
