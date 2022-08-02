@@ -1,4 +1,4 @@
-import data from "../data.json";
+import { data } from "../data";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
@@ -89,37 +89,37 @@ function Task() {
         >
           {data[id].title}
         </h2>
-        {hoursMinSecs ? (
-          <>
-            <h3
-              style={{
-                paddingBottom: "1%",
-                fontWeight: "normal",
-                paddingLeft: "2%",
-              }}
-            >
-              {data[id].description[0]}
-            </h3>
-            <h3
-              style={{
-                paddingBottom: "1%",
-                fontWeight: "normal",
-                paddingLeft: "2%",
-              }}
-            >
-              {data[id].description[1]}
-            </h3>
-            <h3
-              style={{
-                paddingBottom: "1%",
-                fontWeight: "normal",
-                paddingLeft: "2%",
-              }}
-            >
-              {data[id].description[2]}
-            </h3>
-          </>
-        ) : null}
+
+        <>
+          <h3
+            style={{
+              paddingBottom: "1%",
+              fontWeight: "normal",
+              paddingLeft: "2%",
+            }}
+          >
+            {data[id].description[0]}
+          </h3>
+          <h3
+            style={{
+              paddingBottom: "1%",
+              fontWeight: "normal",
+              paddingLeft: "2%",
+            }}
+          >
+            {data[id].description[1]}
+          </h3>
+          <h3
+            style={{
+              paddingBottom: "1%",
+              fontWeight: "normal",
+              paddingLeft: "2%",
+            }}
+          >
+            {data[id].description[2]}
+          </h3>
+        </>
+
         <div>
           <h3
             style={{
@@ -141,6 +141,14 @@ function Task() {
             {data[id].problem}
           </h3>
         </div>
+
+        {data[id].imgURL !== "#" ? (
+          <img
+            style={{ height: "150px", paddingLeft: "2%" }}
+            src={data[id].imgURL}
+            alt="task visualization"
+          />
+        ) : null}
 
         <div
           style={{
@@ -172,14 +180,6 @@ function Task() {
           </div>
         </div>
       </div>
-
-      {data[id - 1].imgURL !== "#" ? (
-        <img
-          style={{ height: "400px", paddingLeft: "7%" }}
-          src={data[id - 1].imgURL}
-          alt="task visualization"
-        />
-      ) : null}
 
       <div
         style={{

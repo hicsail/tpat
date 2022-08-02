@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Card from "../components/Card";
-import data from "../data.json";
+import { data } from "../data";
 
 function TryItYourself() {
   return (
