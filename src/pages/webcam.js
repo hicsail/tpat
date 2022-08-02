@@ -55,7 +55,7 @@ export default function WebCam(props) {
     setTimeout(() => {
       navigate("/");
       //1 second = 1000 millisecond
-    }, 425000);
+    }, 305000);
 
     // video timer itself, stops at 7 mins
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
@@ -63,7 +63,7 @@ export default function WebCam(props) {
         recordWebcam.stop();
         //recordWebcam.getRecording();
         //1 second = 1000 millisecond
-      }, 421000);
+      }, 301000);
     }
     if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
       setTimeout(() => {
