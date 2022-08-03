@@ -51,7 +51,23 @@ export default function WebCam(props) {
       //1 second = 1000 millisecond
     }, 1000);
 
-    
+    // page timer itself, navigate back at x mins 10 seconds when camera is recording
+    // however, timer will start counting down with 5 extra second for user to do it
+    setTimeout(() => {
+      navigate("/");
+      //1 second = 1000 millisecond
+      //5 second = 5000 millisecond
+      //310000
+    }, 20000);
+    if (recordWebcam.status === CAMERA_STATUS.OPEN) {
+      setTimeout(() => {
+        recordWebcam.start();
+        //recordWebcam.getRecording();
+        //1 second = 1000 millisecond
+        //301000
+      }, 0);
+    }
+
     // video timer itself, stops at x mins
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
       setTimeout(() => {
@@ -82,19 +98,6 @@ export default function WebCam(props) {
       )}
 
       <div class="webcam">
-        <button
-          disabled={
-            recordWebcam.status === CAMERA_STATUS.OPEN ||
-            recordWebcam.status === CAMERA_STATUS.RECORDING ||
-            recordWebcam.status === CAMERA_STATUS.PREVIEW
-          }
-          onClick={() => {
-            recordWebcam.start();
-            recordWebcam.open();
-          }}
-        >
-          Open camera
-        </button>
         <button
           disabled={
             recordWebcam.status === CAMERA_STATUS.CLOSED ||
