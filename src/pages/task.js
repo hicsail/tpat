@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Task() {
   // Get ID from URL
   const { id } = useParams();
-  const hoursMinSecs = { minutes: 7, seconds: 0 };
+  const hoursMinSecs = { minutes: 5, seconds: 0 };
   const navigate = useNavigate();
 
   useEffect(() => {

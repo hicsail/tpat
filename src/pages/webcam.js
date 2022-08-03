@@ -40,7 +40,7 @@ export default function WebCam(props) {
   const content = "this is a watermarking test";
   /**End of second watermarking method */
 
-  const hoursMinSecs = { minutes: 7, seconds: 1 };
+  const hoursMinSecs = { minutes: 5, seconds: 5 };
   const [isRecord, setRecord] = useState(false);
   useEffect(() => {
     // opening the camera
@@ -51,13 +51,14 @@ export default function WebCam(props) {
       //1 second = 1000 millisecond
     }, 1000);
 
-    // page timer itself, navigate back at 7 mins 5 seconds when camera is recording
+    // page timer itself, navigate back at x mins 10 seconds when camera is recording
+    // however, timer will start counting down with 5 extra second for user to do it 
     setTimeout(() => {
       navigate("/");
       //1 second = 1000 millisecond
-    }, 305000);
+    }, 310000);
 
-    // video timer itself, stops at 7 mins
+    // video timer itself, stops at x mins
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
       setTimeout(() => {
         recordWebcam.stop();
@@ -78,10 +79,10 @@ export default function WebCam(props) {
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
       <p>Camera status: {recordWebcam.status}</p>
-      {recordWebcam.status === CAMERA_STATUS.RECORDING ? (
+      {recordWebcam.status === CAMERA_STATUS.OPEN ? (
         <CountDownTimer hoursMinSecs={hoursMinSecs} />
       ) : (
-        <p>Time Limit: 7 minutes</p>
+        <p>Time Limit: 5 minutes</p>
       )}
 
       <div class="webcam">
