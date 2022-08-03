@@ -31,7 +31,7 @@ export const data = [
       "Demonstrate how you might represent the context of the problem with manipulatives or adiagram.",
       "Ensure that you are modeling accuracy, clarity, and precision to mathematical language.",
     ],
-    time: "7 mins",
+    time: "5 mins",
     imgURL: "#",
     video: "https://www.youtube.com/watch?v=PV-W5iG6yXQ",
   },

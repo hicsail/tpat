@@ -52,7 +52,7 @@ export default function WebCam(props) {
     }, 1000);
 
     // page timer itself, navigate back at x mins 10 seconds when camera is recording
-    // however, timer will start counting down with 5 extra second for user to do it 
+    // however, timer will start counting down with 5 extra second for user to do it
     setTimeout(() => {
       navigate("/");
       //1 second = 1000 millisecond
@@ -79,7 +79,8 @@ export default function WebCam(props) {
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
       <p>Camera status: {recordWebcam.status}</p>
-      {recordWebcam.status === CAMERA_STATUS.OPEN ? (
+      {recordWebcam.status === CAMERA_STATUS.OPEN ||
+      recordWebcam.status === CAMERA_STATUS.RECORDING ? (
         <CountDownTimer hoursMinSecs={hoursMinSecs} />
       ) : (
         <p>Time Limit: 5 minutes</p>
