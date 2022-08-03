@@ -40,7 +40,7 @@ export default function WebCam(props) {
   const content = "this is a watermarking test";
   /**End of second watermarking method */
 
-  const hoursMinSecs = { minutes: 0, seconds: 15 };
+  const hoursMinSecs = { minutes: 5, seconds: 0 };
   const [isRecord, setRecord] = useState(false);
   useEffect(() => {
     // opening the camera
@@ -55,10 +55,10 @@ export default function WebCam(props) {
     // however, timer will start counting down with 5 extra second for user to do it
     setTimeout(() => {
       navigate("/");
-      //1 second = 1000 millisecond
-      //5 second = 5000 millisecond
       //310000
-    }, 20000);
+    }, 310000);
+
+    // When camera is open, it will immediately start recording
     if (recordWebcam.status === CAMERA_STATUS.OPEN) {
       setTimeout(() => {
         recordWebcam.start();
@@ -72,10 +72,9 @@ export default function WebCam(props) {
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
       setTimeout(() => {
         recordWebcam.stop();
-        //recordWebcam.getRecording();
         //1 second = 1000 millisecond
         //301000
-      }, 10000);
+      }, 301000);
     }
     if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
       setTimeout(() => {
