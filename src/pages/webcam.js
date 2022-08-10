@@ -9,6 +9,7 @@ import "videojs-watermark";
 //import ReactWaterMark from "react-watermark-component";
 import WaterMark from "watermark-component-for-react";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
+
 const OPTIONS = {
   filename: "video",
   fileType: "webm",
@@ -19,26 +20,10 @@ const OPTIONS = {
 
 export default function WebCam(props) {
   const { id } = useParams();
+
   const navigate = useNavigate();
   const recordWebcam = useRecordWebcam(OPTIONS);
 
-  /**First watermarking method */
-  const ReactWaterMark = require("react-watermark-component");
-
-  const text = `This is a watermarking test`;
-
-  const options = {
-    chunkWidth: 200,
-    chunkHeight: 60,
-    textAlign: "left",
-    textBaseline: "bottom",
-    globalAlpha: 0.17,
-    font: "14px Microsoft Yahei",
-    rotateAngle: -0.26,
-    fillStyle: "#666",
-  };
-
-  /**End of first watermarking method */
   /**Second watermarking method */
   const content = "this is a watermarking test";
   /**End of second watermarking method */
@@ -88,6 +73,35 @@ export default function WebCam(props) {
       recordWebcam.download();
     }
   });
+  useEffect(() => {
+    const form = document.querySelector("div");
+    const file = document.querySelector('button[name="upload"]');
+
+    form.addEventListener("webscam", async (e) => {
+      e.preventDefault();
+
+      const { url, fields } = await fetch(
+        "http://localhost:8080/get-signed-url"
+      ).then((response) => response.json());
+
+      const data = {
+        bucket: "tpat",
+        ...fields,
+        "Content-Type": file.files[0].type,
+        file: file.files[0],
+      };
+
+      const formData = new FormData();
+      for (const name in data) {
+        formData.append(name, data[name]);
+      }
+
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+    });
+  }, []);
 
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
@@ -106,6 +120,7 @@ export default function WebCam(props) {
             recordWebcam.stop();
             setRecord(!isRecord);
           }}
+          name="upload"
         >
           Stop recording
         </button>
@@ -168,7 +183,7 @@ export default function WebCam(props) {
             >
               Your task is to do the following:
             </h3>
-            <div class="task">
+            <div className="task">
               <ul>
                 <li>{data[id].task[0]}</li>
                 <br></br>
