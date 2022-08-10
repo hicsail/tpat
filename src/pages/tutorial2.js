@@ -77,19 +77,14 @@ function Tutorial2() {
         <div>
           <h2>Timer on the page</h2>
           <p>
-            There is a timer on the page itself. The timer ONLY starts when you
-            open your camera, and when you camera status is "OPEN". So once you
-            checked your camera, and your camera status is opened, please click
-            on start recording as soon as possible as once the timer ran out, it
-            will automatically take you back to the main page.
-          </p>
-          <br />
-          <h2>Timer on the task</h2>
-          <p>
-            There is also a timer on the task itself. When you start recording,
-            the timer on the screen will start counting down. Once the timer ran
-            out, the video will automatically stop recording, and download the
-            file accordingly.
+            Your camera will automatically start and open when you get onto the
+            page / auto-directed to the page. Once you are on the page, your
+            camera will automatically open, and start recording shortly after.
+            You will also be able to see the timer starting to count down. The
+            video will stop after the task timer/timer runs out, but you are
+            also able to stop recording once you are finished. The video will
+            automatically download to your local computer, and redirect you back
+            to the homepage.
           </p>
         </div>
         <button class="closerBtn" onClick={toggleModal}>
