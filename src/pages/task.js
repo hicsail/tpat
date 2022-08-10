@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
 
-function Task() {
+function Task(props) {
   // Get ID from URL
   const { id } = useParams();
   const hoursMinSecs = { minutes: 5, seconds: 0 };
@@ -197,7 +197,7 @@ function Task() {
             borderRadius: "10px",
             textDecoration: "none",
           }}
-          href="/webcam"
+          href={`/webcam/${id}`}
         >
           Start Recording
         </a>

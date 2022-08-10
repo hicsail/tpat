@@ -1,5 +1,7 @@
 import "../components/styles.css";
 import React, { useState, useEffect } from "react";
+import { data } from "../data";
+import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
 //import videojs from "video.js";
@@ -16,6 +18,7 @@ const OPTIONS = {
 };
 
 export default function WebCam(props) {
+  const { id } = useParams();
   const navigate = useNavigate();
   const recordWebcam = useRecordWebcam(OPTIONS);
 
@@ -98,19 +101,6 @@ export default function WebCam(props) {
 
       <div class="webcam">
         <button
-          disabled={
-            recordWebcam.status === CAMERA_STATUS.CLOSED ||
-            recordWebcam.status === CAMERA_STATUS.RECORDING ||
-            recordWebcam.status === CAMERA_STATUS.PREVIEW
-          }
-          onClick={() => {
-            recordWebcam.start();
-            setRecord(!isRecord);
-          }}
-        >
-          Start recording
-        </button>
-        <button
           disabled={recordWebcam.status !== CAMERA_STATUS.RECORDING}
           onClick={() => {
             recordWebcam.stop();
@@ -120,21 +110,79 @@ export default function WebCam(props) {
           Stop recording
         </button>
       </div>
-      <WaterMark content={content}>
-        <video
-          ref={recordWebcam.webcamRef}
-          style={{
-            display: `${
-              recordWebcam.status === CAMERA_STATUS.OPEN ||
-              recordWebcam.status === CAMERA_STATUS.RECORDING
-                ? "block"
-                : "none"
-            }`,
-          }}
-          autoPlay
-          muted
-        />
-      </WaterMark>
+      <div
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          display: "inline-block",
+          alignContent: "baseline",
+        }}
+      >
+        <WaterMark content={content}>
+          <video
+            ref={recordWebcam.webcamRef}
+            style={{
+              display: `${
+                recordWebcam.status === CAMERA_STATUS.OPEN ||
+                recordWebcam.status === CAMERA_STATUS.RECORDING
+                  ? "block"
+                  : "none"
+              }`,
+              display: "inline-block",
+              width: "50%",
+            }}
+            autoPlay
+            muted
+          />
+          <div
+            style={{
+              display: "inline-block",
+              width: "50%",
+              paddingLeft: "2%",
+
+              overflow: "scroll",
+              paddingBottom: "2%",
+            }}
+          >
+            <h3
+              style={{
+                fontWeight: "bold",
+              }}
+            >
+              The problem you have chosen is:
+            </h3>
+            <h3 style={{ fontWeight: "normal" }}>{data[id].problem}</h3>
+            {data[id].imgURL !== "#" ? (
+              <img
+                style={{ height: "150px", paddingLeft: "2%" }}
+                src={data[id].imgURL}
+                alt="task visualization"
+              />
+            ) : null}
+            <h3
+              style={{
+                paddingTop: "3%",
+                paddingBottom: "1%",
+                fontWeight: "bold",
+              }}
+            >
+              Your task is to do the following:
+            </h3>
+            <div class="task">
+              <ul>
+                <li>{data[id].task[0]}</li>
+                <br></br>
+                <li>{data[id].task[1]}</li>
+                <br></br>
+                <li>{data[id].task[2]}</li>
+                <br></br>
+                <li>{data[id].task[3]}</li>
+              </ul>
+            </div>
+          </div>
+        </WaterMark>
+      </div>
+
       <video
         ref={recordWebcam.previewRef}
         style={{
