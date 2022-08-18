@@ -116,9 +116,17 @@ recordRoutes.route("/task/status/scored").get(function (req, res) {
 recordRoutes.route("/task/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
+    // name: req.body.name,
+    // position: req.body.position,
+    // level: req.body.level,
+    category: req.body.category,
+    title: req.body.title,
+    description: req.body.description,
+    time: req.body.time,
+    imgURL: req.body.imgURL,
+    video: req.body.video,
+    id: req.body.id,
+    status: req.body.status,
   };
   db_connect.collection("tasks").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -132,9 +140,14 @@ recordRoutes.route("/update/:id").post(function (req, response) {
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
     $set: {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+      category: req.body.category,
+      title: req.body.title,
+      description: req.body.description,
+      time: req.body.time,
+      imgURL: req.body.imgURL,
+      video: req.body.video,
+      id: req.body.id,
+      status: req.body.status,
     },
   };
   db_connect
