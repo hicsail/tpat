@@ -12,27 +12,28 @@ declare module 'fs/promises' {
     import { Abortable } from 'node:events';
     import { Stream } from 'node:stream';
     import {
-        Stats,
         BigIntStats,
-        StatOptions,
-        WriteVResult,
-        ReadVResult,
+        BufferEncodingOption,
+        constants as fsConstants,
+        CopyOptions,
+        Dir,
+        Dirent,
+        MakeDirectoryOptions,
+        Mode,
+        ObjectEncodingOptions,
+        OpenDirOptions,
+        OpenMode,
         PathLike,
+        ReadStream,
+        ReadVResult,
         RmDirOptions,
         RmOptions,
-        MakeDirectoryOptions,
-        Dirent,
-        OpenDirOptions,
-        Dir,
-        ObjectEncodingOptions,
-        BufferEncodingOption,
-        OpenMode,
-        Mode,
-        WatchOptions,
+        StatOptions,
+        Stats,
         WatchEventType,
-        CopyOptions,
-        ReadStream,
+        WatchOptions,
         WriteStream,
+        WriteVResult,
     } from 'node:fs';
     interface FileChangeInfo<T extends string | Buffer> {
         eventType: WatchEventType;
@@ -405,6 +406,8 @@ declare module 'fs/promises' {
          */
         close(): Promise<void>;
     }
+
+    const constants: typeof fsConstants;
     /**
      * Tests a user's permissions for the file or directory specified by `path`.
      * The `mode` argument is an optional integer that specifies the accessibility
@@ -1084,7 +1087,7 @@ declare module 'fs/promises' {
      * @param dest destination path to copy to.
      * @return Fulfills with `undefined` upon success.
      */
-    function cp(source: string, destination: string, opts?: CopyOptions): Promise<void>;
+    function cp(source: string | URL, destination: string | URL, opts?: CopyOptions): Promise<void>;
 }
 declare module 'node:fs/promises' {
     export * from 'fs/promises';

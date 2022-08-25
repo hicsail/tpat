@@ -4,6 +4,7 @@ import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
+import { uploadTos3 } from "../utils/videoUploadUtils";
 
 Modal.setAppElement("#root");
 
@@ -57,9 +58,15 @@ function Tutorial2() {
         //1 second = 1000 millisecond
       }, 1000);
       recordWebcam.close();
-      recordWebcam.download();
+      // recordWebcam.download();
+      uploadTask(recordWebcam);
     }
   });
+
+  async function uploadTask(recordWebcam) {
+    const blob = await recordWebcam.getRecording();
+    uploadTos3(blob);
+  }
 
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
