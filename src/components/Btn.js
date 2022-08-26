@@ -4,7 +4,7 @@ const Btn = (props) => {
   return (
     <div>
       <a href={`/task/${props.id}`}>
-        <button class="btn">{props.name}</button>
+        <button className="btn">{props.name}</button>
       </a>
     </div>
   );

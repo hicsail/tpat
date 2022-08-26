@@ -78,7 +78,7 @@ function Tutorial2() {
 
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
-      <button class="instructionBtn" onClick={toggleModal}>
+      <button className="instructionBtn" onClick={toggleModal}>
         Click to see Instructions
       </button>
       <Modal
@@ -102,7 +102,7 @@ function Tutorial2() {
             to the homepage.
           </p>
         </div>
-        <button class="closerBtn" onClick={toggleModal}>
+        <button className="closerBtn" onClick={toggleModal}>
           Close modal
         </button>
       </Modal>
@@ -113,7 +113,7 @@ function Tutorial2() {
         <p>Time Limit: 7 minutes</p>
       )}
 
-      <div class="webcam">
+      <div className="webcam">
         <button
           disabled={
             recordWebcam.status === CAMERA_STATUS.OPEN ||

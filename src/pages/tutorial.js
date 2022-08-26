@@ -34,7 +34,7 @@ function Tutorial() {
             <img
               style={{ paddingLeft: "0.5%" }}
               src={require("../images/Arrow.png")}
-              class="img"
+              className="img"
               alt="arrow icon"
             />
             <a
@@ -81,13 +81,13 @@ function Tutorial() {
             <img
               style={{ paddingLeft: "0.5%" }}
               src={require("../images/Clock.png")}
-              class="img"
+              className="img"
               alt="clock icon"
             />
           </div>
         </div>
         <div style={{ marginTop: "3%", paddingLeft: "2%" }}>
-          <button class="instructionBtn" onClick={toggleModal}>
+          <button className="instructionBtn" onClick={toggleModal}>
             Click to see Instructions
           </button>
           <Modal
@@ -98,7 +98,7 @@ function Tutorial() {
             overlayClassName="myoverlay"
             closeTimeoutMS={500}
           >
-            <div class="tutorial">
+            <div className="tutorial">
               <h2>Timer</h2>
               <p>
                 Timer on the right top corner will start the count down when you
@@ -134,7 +134,7 @@ function Tutorial() {
                 it to the next page
               </p>
             </div>
-            <button class="closerBtn" onClick={toggleModal}>
+            <button className="closerBtn" onClick={toggleModal}>
               Close modal
             </button>
           </Modal>

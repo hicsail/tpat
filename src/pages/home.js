@@ -4,8 +4,8 @@ import "../App.css";
 function Home() {
   return (
     <div>
-      <div class="body">
-        <div class="container">
+      <div className="body">
+        <div className="container">
           <h2 style={{ paddingBottom: "8%" }}>Interesting Tagline of TPAT</h2>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -28,16 +28,16 @@ function Home() {
           </div>
         </div>
       </div>
-      <h2 class="subtitle">Service that TPAT provide/categories</h2>
+      <h2 className="subtitle">Service that TPAT provide/categories</h2>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
         }}
       >
-        <div class="secondContainer">
-          <div class="row">
-            <div class="column">
+        <div className="secondContainer">
+          <div className="row">
+            <div className="column">
               <img
                 src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
                 alt="promotional 1"
@@ -50,8 +50,8 @@ function Home() {
               </p>
             </div>
           </div>
-          <div class="row">
-            <div class="column">
+          <div className="row">
+            <div className="column">
               <img
                 src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
                 alt="promotional 2"

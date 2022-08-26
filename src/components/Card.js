@@ -18,15 +18,15 @@ const Card = (props) => {
         justifyContent: "center",
       }}
     >
-      <div class="card-container">
-        <div class="img-container">
+      <div className="card-container">
+        <div className="img-container">
           <img
             style={{ width: "100%", borderRadius: "10px 0px 0px 10px" }}
             src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
             alt="task visualization"
           />
         </div>
-        <div class="task-container">
+        <div className="task-container">
           <h4 style={{ backgroundColor: "transparent" }}>{props.title}</h4>
           <p
             style={{
@@ -39,10 +39,10 @@ const Card = (props) => {
             {props.description}
           </p>
           <div></div>
-          <div class="time-container">
+          <div className="time-container">
             <img
               src={require("../images/Clock.png")}
-              class="img"
+              className="img"
               alt="clock icon"
             />
             <p

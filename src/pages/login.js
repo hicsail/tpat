@@ -30,11 +30,11 @@ function Login() {
         <>
           <h3>
             Name
-            <small class="text-muted">{user.name}</small>
+            <small className="text-muted">{user.name}</small>
           </h3>
           <h3>
             Email
-            <small class="text-muted">{user.email}</small>
+            <small className="text-muted">{user.email}</small>
           </h3>
         </>
       )}

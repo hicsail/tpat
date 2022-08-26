@@ -41,7 +41,7 @@ function Task(props) {
             <img
               style={{ paddingLeft: "0.5%" }}
               src={require("../images/Arrow.png")}
-              class="img"
+              className="img"
               alt="arrow icon"
             />
             <a
@@ -68,7 +68,7 @@ function Task(props) {
             <img
               style={{ paddingLeft: "0.5%" }}
               src={require("../images/Clock.png")}
-              class="img"
+              className="img"
               alt="clock icon"
             />
           </div>
@@ -168,7 +168,7 @@ function Task(props) {
           >
             Your task is to do the following:
           </h3>
-          <div class="task">
+          <div className="task">
             <ul>
               <li>{data[id].task[0]}</li>
               <br></br>

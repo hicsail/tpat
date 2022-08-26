@@ -113,7 +113,7 @@ export default function WebCam(props) {
         <p>Time Limit: 5 minutes</p>
       )}
 
-      <div class="webcam">
+      <div className="webcam">
         <button
           disabled={recordWebcam.status !== CAMERA_STATUS.RECORDING}
           onClick={() => {
