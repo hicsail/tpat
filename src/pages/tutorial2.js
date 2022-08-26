@@ -65,7 +65,12 @@ function Tutorial2() {
 
   async function uploadTask(recordWebcam) {
     const blob = await recordWebcam.getRecording();
-    uploadTos3(blob);
+    const metadata = {
+      username: "Teacher 1",
+      email: "teacher@gmail.com",
+      taskId: "1.1",
+    };
+    uploadTos3(blob, metadata);
   }
 
   return (

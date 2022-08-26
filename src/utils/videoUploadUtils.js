@@ -1,20 +1,34 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-// Set the parameters
-export const uploadParams = {
-  Bucket: "tpatvideos",
-  // Add the required 'Key' parameter using the 'path' module.
-  Key: "videoKey",
-  // Add the required 'Body' parameter
-  Body: { fileStream: "jlkhlkjhlkh" },
-};
 
-async function uploadTos3(videoBlob) {
+const TPAT_VIDEOS_BUCKET = "tpatvideos";
+
+/**
+ * @param videoBlob 
+ * @param metadata  example metadata =   {
+        username: "Teacher 1",
+        email: "teacher@gmail.com",
+        taskId: "1",
+      },
+ * @returns 
+ */
+async function uploadTos3(videoBlob, metadata) {
   const s3Client = gets3Client();
   try {
-    uploadParams.Body = videoBlob;
+    const uploadParams = {
+      Bucket: TPAT_VIDEOS_BUCKET,
+      Body: videoBlob,
+      //key format : Timestamp + username + taskId. aids sorting in aws
+      Key:
+        Date.now() +
+        metadata.username.replace(/\s/g, "") + //remove whitespace from name
+        "task" +
+        metadata.taskId +
+        ".webm",
+      Metadata: metadata,
+    };
     const data = await s3Client.send(new PutObjectCommand(uploadParams));
     console.log("Success", data);
-    return data; // For unit tests.
+    return data;
   } catch (err) {
     console.log("Error sfsd", err);
   }
