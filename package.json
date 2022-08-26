@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.157.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@material-ui/core": "^4.12.4",
@@ -15,6 +16,7 @@
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "aws-sdk": "^2.1202.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "classname": "^0.0.0",
@@ -43,6 +45,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -68,6 +72,7 @@
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
-    "@types/recordrtc": "^5.6.8"
+    "@types/recordrtc": "^5.6.8",
+    "gh-pages": "^4.0.0"
   }
 }

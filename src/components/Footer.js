@@ -10,7 +10,7 @@ function Footer() {
   return (
     <div className="footerContainer">
       <div className="footer">
-        <ul class="footerLinks">
+        <ul className="footerLinks">
           <li>
             <a href="/try-it-yourself">Try It Yourself</a>
           </li>
@@ -35,7 +35,7 @@ function Footer() {
           marginRight: "3%",
         }}
       ></hr>
-      <p class="footerRight">@2022 TPAT All Right Reserved</p>
+      <p className="footerRight">@2022 TPAT All Right Reserved</p>
     </div>
   );
 }

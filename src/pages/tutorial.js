@@ -3,6 +3,7 @@ import Modal from "react-modal";
 //import Modal from "../components/Modal";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { Link } from "react-router-dom";
 
 function Tutorial() {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +88,7 @@ function Tutorial() {
         </div>
         <div style={{ marginTop: "3%", paddingLeft: "2%" }}>
           <button class="instructionBtn" onClick={toggleModal}>
-            Click to see Insrtuctions
+            Click to see Instructions
           </button>
           <Modal
             isOpen={isOpen}
@@ -203,7 +204,7 @@ function Tutorial() {
           marginBottom: "3%",
         }}
       >
-        <a
+        <Link
           style={{
             border: "2px solid #e26c40",
             padding: "1%",
@@ -211,10 +212,10 @@ function Tutorial() {
             borderRadius: "10px",
             textDecoration: "none",
           }}
-          href="/tutorial2"
+          to="/tutorial2"
         >
           Next
-        </a>
+        </Link>
       </div>
     </div>
   );

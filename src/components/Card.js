@@ -1,6 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = (props) => {
+  const buttonStyle = {
+    border: "2px solid #e26c40",
+    padding: "1%",
+    color: "#e26c40",
+    borderRadius: "5px",
+    textDecoration: "none",
+    marginBottom: "2%",
+  };
   return (
     <div
       style={{
@@ -46,25 +55,16 @@ const Card = (props) => {
               {props.time}
             </p>
             {props.id === "0" ? (
-              <a
-                href="./tutorial"
-                style={{
-                  border: "2px solid #e26c40",
-                  padding: "1%",
-                  color: "#e26c40",
-                  borderRadius: "5px",
-                  textDecoration: "none",
-                  marginBottom: "2%",
-                }}
+              <Link
+                to={"/tutorial"}
+                style={buttonStyle}
                 id={props.id}
                 name="Start"
               >
                 Start
-              </a>
+              </Link>
             ) : (
-              <a
-                //href={`/instruction/${props.id}`}
-                href={`/task/${props.id}`}
+              <Link
                 style={{
                   border: "2px solid #e26c40",
                   padding: "1%",
@@ -75,9 +75,10 @@ const Card = (props) => {
                 }}
                 id={props.id}
                 name="Start"
+                to={`/task/${props.id}`}
               >
                 Start
-              </a>
+              </Link>
             )}
           </div>
         </div>

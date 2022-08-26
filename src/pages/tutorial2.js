@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CountDownTimer from "../components/Timer";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
+import { uploadTos3 } from "../utils/videoUploadUtils";
+import { UserContext } from "../store/UserContext";
 
 Modal.setAppElement("#root");
 
@@ -19,6 +21,7 @@ function Tutorial2() {
   const hoursMinSecs = { minutes: 7, seconds: 2 };
   const [isRecord, setRecord] = useState(false);
   const recordWebcam = useRecordWebcam(OPTIONS);
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -57,14 +60,26 @@ function Tutorial2() {
         //1 second = 1000 millisecond
       }, 1000);
       recordWebcam.close();
-      recordWebcam.download();
+      // recordWebcam.download();
+
+      uploadTask(recordWebcam);
     }
   });
+
+  async function uploadTask(recordWebcam) {
+    const blob = await recordWebcam.getRecording();
+    const metadata = {
+      name: user.name,
+      email: user.email,
+      taskId: "1.1",
+    };
+    uploadTos3(blob, metadata);
+  }
 
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
       <button class="instructionBtn" onClick={toggleModal}>
-        Click to see Insrtuctions
+        Click to see Instructions
       </button>
       <Modal
         isOpen={isOpen}
@@ -75,7 +90,7 @@ function Tutorial2() {
         closeTimeoutMS={500}
       >
         <div>
-          <h2>Timer on the page</h2>
+          <h2>Timer on the task</h2>
           <p>
             Your camera will automatically start and open when you get onto the
             page / auto-directed to the page. Once you are on the page, your

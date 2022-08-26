@@ -54,6 +54,7 @@ function TryItYourself() {
       {data.map((taskDetail, index) => {
         return (
           <Card
+            key={taskDetail.id}
             title={taskDetail.title}
             description={taskDetail.description}
             time={taskDetail.time}
