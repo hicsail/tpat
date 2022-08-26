@@ -20,7 +20,7 @@ async function uploadTos3(videoBlob, metadata) {
       //key format : Timestamp + username + taskId. aids sorting in aws
       Key:
         Date.now() +
-        metadata.username.replace(/\s/g, "") + //remove whitespace from name
+        metadata.name.replace(/\s/g, "") + //remove whitespace from name
         "task" +
         metadata.taskId +
         ".webm",

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Task(props) {
   // Get ID from URL
@@ -189,7 +190,7 @@ function Task(props) {
           marginBottom: "3%",
         }}
       >
-        <a
+        {/* <a
           style={{
             border: "2px solid #e26c40",
             padding: "1%",
@@ -200,7 +201,19 @@ function Task(props) {
           href={`/webcam/${id}`}
         >
           Start Recording
-        </a>
+        </a> */}
+        <Link
+          style={{
+            border: "2px solid #e26c40",
+            padding: "1%",
+            color: "#e26c40",
+            borderRadius: "10px",
+            textDecoration: "none",
+          }}
+          to={`/webcam/${id}`}
+        >
+          Start Recording
+        </Link>
       </div>
     </div>
   );

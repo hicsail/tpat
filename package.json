@@ -45,6 +45,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -70,6 +72,7 @@
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
-    "@types/recordrtc": "^5.6.8"
+    "@types/recordrtc": "^5.6.8",
+    "gh-pages": "^4.0.0"
   }
 }

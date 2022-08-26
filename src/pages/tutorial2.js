@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CountDownTimer from "../components/Timer";
 import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
 import { uploadTos3 } from "../utils/videoUploadUtils";
+import { UserContext } from "../store/UserContext";
 
 Modal.setAppElement("#root");
 
@@ -20,6 +21,7 @@ function Tutorial2() {
   const hoursMinSecs = { minutes: 7, seconds: 2 };
   const [isRecord, setRecord] = useState(false);
   const recordWebcam = useRecordWebcam(OPTIONS);
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -59,6 +61,7 @@ function Tutorial2() {
       }, 1000);
       recordWebcam.close();
       // recordWebcam.download();
+
       uploadTask(recordWebcam);
     }
   });
@@ -66,8 +69,8 @@ function Tutorial2() {
   async function uploadTask(recordWebcam) {
     const blob = await recordWebcam.getRecording();
     const metadata = {
-      username: "Teacher 1",
-      email: "teacher@gmail.com",
+      name: user.name,
+      email: user.email,
       taskId: "1.1",
     };
     uploadTos3(blob, metadata);
@@ -76,7 +79,7 @@ function Tutorial2() {
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
       <button class="instructionBtn" onClick={toggleModal}>
-        Click to see Insrtuctions
+        Click to see Instructions
       </button>
       <Modal
         isOpen={isOpen}
