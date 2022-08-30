@@ -1,5 +1,5 @@
 import React from "react";
-//import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 //className="navLinks" style=
@@ -12,7 +12,7 @@ function Footer() {
       <div className="footer">
         <ul className="footerLinks">
           <li>
-            <a href="/try-it-yourself">Try It Yourself</a>
+            <Link to="/try-it-yourself">Try It Yourself</Link>
           </li>
           <li>
             <a href="mailto: abc@example.com">Contact Us</a>
@@ -23,7 +23,7 @@ function Footer() {
           </li>
   */}
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
         </ul>
       </div>
