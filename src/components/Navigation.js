@@ -8,8 +8,10 @@ function Navigation() {
     <div>
       <div className="header">
         <ul className="navLinks">
-          <a className="siteName" href="/">
-            TPAT
+          <a className="siteName">
+            <Link to="/" style={{ textDecoration: "none" }}>
+              TPAT
+            </Link>
           </a>
           <li>
             <Link to="/login">Enter Credentials</Link>
