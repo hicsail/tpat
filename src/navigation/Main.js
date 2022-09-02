@@ -11,13 +11,13 @@ import Contact from "../pages/contact";
 import Instruction from "../pages/instruction";
 import Tutorial from "../pages/tutorial";
 import Tutorial2 from "../pages/tutorial2";
-import Login from "../pages/login";
+import Login from "../pages/Login";
 
 export const Main = () => {
   return (
     <div>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/try-it-yourself" element={<TryItYourself />} />

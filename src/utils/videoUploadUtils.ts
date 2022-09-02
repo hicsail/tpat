@@ -1,4 +1,9 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import {
+  S3Client,
+  PutObjectCommand,
+  PutObjectCommandInput,
+} from "@aws-sdk/client-s3";
+import { Blob } from "buffer";
 
 const TPAT_VIDEOS_BUCKET = "tpatvideos";
 
@@ -11,7 +16,14 @@ const TPAT_VIDEOS_BUCKET = "tpatvideos";
       },
  * @returns 
  */
-async function uploadTos3(videoBlob, metadata) {
+async function uploadTos3(
+  videoBlob: Blob,
+  metadata: {
+    name: string;
+    email: string;
+    taskId: string;
+  }
+) {
   const s3Client = gets3Client();
   try {
     const uploadParams = {
@@ -26,7 +38,9 @@ async function uploadTos3(videoBlob, metadata) {
         ".webm",
       Metadata: metadata,
     };
-    const data = await s3Client.send(new PutObjectCommand(uploadParams));
+    const data = await s3Client.send(
+      new PutObjectCommand(uploadParams as PutObjectCommandInput)
+    );
     console.log("Success", data);
     return data;
   } catch (err) {
@@ -46,4 +60,4 @@ function gets3Client() {
   return client;
 }
 
-export { gets3Client, uploadTos3 };
+export { uploadTos3 };
