@@ -41,10 +41,10 @@ async function uploadTos3(
     const data = await s3Client.send(
       new PutObjectCommand(uploadParams as PutObjectCommandInput)
     );
-    console.log("Success", data);
+    console.log("Upload succeeded", data);
     return data;
   } catch (err) {
-    console.log("Error sfsd", err);
+    console.log("An error occured during upload. Error", err);
   }
 }
 

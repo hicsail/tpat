@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { Link } from "react-router-dom";
+import { SCREENS } from "../constants/screens";
 
 function Tutorial() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,16 +38,16 @@ function Tutorial() {
               className="img"
               alt="arrow icon"
             />
-            <a
+            <Link
               style={{
                 textDecoration: "none",
                 color: "black",
                 paddingLeft: "10%",
               }}
-              href="/try-it-yourself"
+              to={"/" + SCREENS.TRY_IT_YOURSELF}
             >
               Back
-            </a>
+            </Link>
           </div>
 
           <div
