@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { SCREENS } from "../constants/screens";
 import "./styles.css";
 
 function Navigation() {
@@ -14,7 +15,7 @@ function Navigation() {
             </Link>
           </a>
           <li>
-            <Link to="/login">Enter Credentials</Link>
+            <Link to={SCREENS.LOGIN}>Enter Credentials</Link>
           </li>
           <li>
             <Link to="/try-it-yourself">Try It Yourself</Link>

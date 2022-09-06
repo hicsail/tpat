@@ -1,9 +1,26 @@
 import * as React from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Card from "../components/Card";
+import { SCREENS } from "../constants/screens";
 import { data } from "../data";
+import { UserContext } from "../store/UserContext";
+
+const title =
+  "The mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires. (William Arthur Ward)";
+const subtitle = "Demonstrate your skills through the assigned tasks below.";
 
 function TryItYourself() {
+  const navigate = useNavigate();
+  const { user } = React.useContext(UserContext);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/" + SCREENS.LOGIN);
+    }
+  });
+
   return (
     <div>
       <div
@@ -25,8 +42,7 @@ function TryItYourself() {
             lineHeight: "2.5rem",
           }}
         >
-          Introductory Title / Text, or some inspiration starter text some
-          inspiration starter text
+          {title}
         </h1>
       </div>
 
@@ -41,10 +57,7 @@ function TryItYourself() {
             lineHeight: "1.75rem",
           }}
         >
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less normal distribution of
-          letters.
+          {subtitle}
         </p>
       </div>
 

@@ -1,13 +1,18 @@
 import { data } from "../data";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { UserContext } from "../store/UserContext";
+import { SCREENS } from "../constants/screens";
 
-function Task(props) {
+function Task() {
+  const { user, setUser } = useContext(UserContext);
+
   // Get ID from URL
   const { id } = useParams();
+  const taskIndex = parseInt(id ? id : "0");
   const hoursMinSecs = { minutes: 5, seconds: 0 };
   const navigate = useNavigate();
 
@@ -18,6 +23,15 @@ function Task(props) {
     }, 420000);
   });
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/" + SCREENS.LOGIN);
+    }
+  });
+
+  if (id == undefined) {
+    return null;
+  }
   //<div>Task {id}</div>
   return (
     <div
@@ -82,13 +96,13 @@ function Task(props) {
             color: "#B3B3B3",
           }}
         >
-          {data[id].category}
+          {data[taskIndex].category}
         </p>
 
         <h2
           style={{ paddingBottom: "1%", fontWeight: "bold", paddingLeft: "2%" }}
         >
-          {data[id].title}
+          {data[taskIndex].title}
         </h2>
 
         <>
@@ -99,7 +113,7 @@ function Task(props) {
               paddingLeft: "2%",
             }}
           >
-            {data[id].description[0]}
+            {data[taskIndex].description[0]}
           </h3>
           <h3
             style={{
@@ -108,7 +122,7 @@ function Task(props) {
               paddingLeft: "2%",
             }}
           >
-            {data[id].description[1]}
+            {data[taskIndex].description[1]}
           </h3>
           <h3
             style={{
@@ -117,7 +131,7 @@ function Task(props) {
               paddingLeft: "2%",
             }}
           >
-            {data[id].description[2]}
+            {data[taskIndex].description[2]}
           </h3>
         </>
 
@@ -139,14 +153,14 @@ function Task(props) {
               paddingLeft: "2%",
             }}
           >
-            {data[id].problem}
+            {data[taskIndex].problem}
           </h3>
         </div>
 
-        {data[id].imgURL !== "#" ? (
+        {data[taskIndex].imgURL !== "#" ? (
           <img
             style={{ height: "150px", paddingLeft: "2%" }}
-            src={data[id].imgURL}
+            src={data[taskIndex].imgURL}
             alt="task visualization"
           />
         ) : null}
@@ -170,13 +184,13 @@ function Task(props) {
           </h3>
           <div className="task">
             <ul>
-              <li>{data[id].task[0]}</li>
+              <li>{data[taskIndex].task[0]}</li>
               <br></br>
-              <li>{data[id].task[1]}</li>
+              <li>{data[taskIndex].task[1]}</li>
               <br></br>
-              <li>{data[id].task[2]}</li>
+              <li>{data[taskIndex].task[2]}</li>
               <br></br>
-              <li>{data[id].task[3]}</li>
+              <li>{data[taskIndex].task[3]}</li>
             </ul>
           </div>
         </div>

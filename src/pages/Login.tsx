@@ -1,12 +1,30 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../store/UserContext";
-import { Button, TextField, Container, Stack } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Container,
+  Stack,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+
+const enum UNIVERSITIES {
+  UVA = "UVA",
+  UD = "UD",
+  JMU = "JMU",
+}
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
 
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState(user ? user.email : "");
+  const [name, setName] = useState(user ? user.name : "");
+  const [university, setUniversity] = useState<UNIVERSITIES>(
+    user ? user.university : UNIVERSITIES.UVA
+  );
 
   const handleSubmit = () => {
     console.log("email", email, "name", name);
@@ -15,27 +33,44 @@ function Login() {
     setUser({
       name: name,
       email: email,
+      university: university,
     });
   };
 
   return (
     <Container maxWidth="sm" sx={{ p: 4 }}>
-      {user && (
-        <>
-          <h3>
-            Name
-            <small className="text-muted">{user.name}</small>
-          </h3>
-          <h3>
-            Email
-            <small className="text-muted">{user.email}</small>
-          </h3>
-        </>
-      )}
-
       <Stack spacing={4}>
-        <TextField value={name} id="Name" label="Name" variant="outlined" />
-        <TextField value={email} id="Email" label="Email" variant="outlined" />
+        <TextField
+          value={name}
+          id="Name"
+          label="Name"
+          variant="outlined"
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+        <TextField
+          value={email}
+          id="Email"
+          label="Email"
+          variant="outlined"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">University</InputLabel>
+          <Select
+            id="university-select"
+            value={university}
+            label="University"
+            onChange={(e) => setUniversity(e.target.value as UNIVERSITIES)}
+          >
+            <MenuItem value={UNIVERSITIES.UVA}>UVA</MenuItem>
+            <MenuItem value={UNIVERSITIES.UD}>UD</MenuItem>
+            <MenuItem value={UNIVERSITIES.JMU}>JMU</MenuItem>
+          </Select>
+        </FormControl>
         <Button variant="contained" type="submit" onClick={handleSubmit}>
           {user ? "Re-enter Credentials" : "Submit"}
         </Button>
