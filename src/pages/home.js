@@ -1,5 +1,7 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
+import { SCREENS } from "../constants/screens";
 
 const title = "Try out practices. Assess skills. See growth";
 const subtitle =
@@ -24,7 +26,7 @@ function Home() {
           <h2 style={{ paddingBottom: "8%" }}>{title}</h2>
           <p>{subtitle}</p>
           <div style={{ paddingTop: "5%" }}>
-            <a
+            <Link
               style={{
                 border: "2px solid #E26C40",
                 padding: "2.5%",
@@ -32,10 +34,10 @@ function Home() {
                 borderRadius: "10px",
                 textDecoration: "none",
               }}
-              href="try-it-yourself"
+              to={SCREENS.TRY_IT_YOURSELF}
             >
               Try It Yourself
-            </a>
+            </Link>
           </div>
         </div>
       </div>

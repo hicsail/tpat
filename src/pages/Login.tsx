@@ -10,6 +10,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import { STORAGE_KEYS } from "../constants/storageKeys";
 
 const enum UNIVERSITIES {
   UVA = "UVA",
@@ -28,13 +29,13 @@ function Login() {
 
   const handleSubmit = () => {
     console.log("email", email, "name", name);
-    setEmail(email);
-    setName(name);
-    setUser({
+    const credentials = {
       name: name,
       email: email,
       university: university,
-    });
+    };
+    setUser();
+    localStorage.setItem(STORAGE_KEYS.CREDENTIALS, JSON.stringify(credentials));
   };
 
   return (

@@ -76,6 +76,7 @@ export default function Webcam(props: Props) {
       name: user.name,
       email: user.email,
       taskId: props.id.toString(),
+      university: user.university,
     };
     // signature of getRecording is wrongfully defined as getRecording(): void in RecordWebcamHook
     //so blob has to be cast as any
