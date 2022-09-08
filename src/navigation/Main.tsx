@@ -1,5 +1,4 @@
 import React from "react";
-// import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home";
 import About from "../pages/about";
@@ -19,10 +18,10 @@ export const Main = () => {
       <Routes>
         {/* <Route path={"/"} element={<Home />} />
           <Route path="/about" element={<About />} />
-           <Route path="/instruction/:id" element={<Instruction />} /> */}
+           <Route path="/instruction/:id" element={<Instruction />} /> 
+            <Route path="/try-it-yourself" element={<TryItYourself />} />*/}
 
         <Route path={"/"} element={<TryItYourself />} />
-        <Route path="/try-it-yourself" element={<TryItYourself />} />
         <Route path={SCREENS.LOGIN} element={<Login />} />
         <Route path="/tutorial" element={<Tutorial />} />
         <Route path="/tutorial2" element={<Tutorial2 />} />

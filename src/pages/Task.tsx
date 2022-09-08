@@ -74,7 +74,7 @@ function Task() {
                     color: "black",
                     paddingLeft: "10%",
                   }}
-                  to={"/" + SCREENS.TRY_IT_YOURSELF}
+                  to={"/" + SCREENS.HOME}
                 >
                   Back
                 </Link>

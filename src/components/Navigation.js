@@ -18,9 +18,6 @@ function Navigation() {
             <Link to={SCREENS.LOGIN}>Enter Credentials</Link>
           </li>
           <li>
-            <Link to="/try-it-yourself">Try It Yourself</Link>
-          </li>
-          <li>
             <Link to="/">Home</Link>
           </li>
         </ul>

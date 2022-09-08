@@ -10,16 +10,18 @@ import { UserContext } from "../store/UserContext";
 const title =
   "The mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires. (William Arthur Ward)";
 const subtitle = "Demonstrate your skills through the assigned tasks below.";
+const TAG = "TryItYourself.tsx ";
 
 function TryItYourself() {
   const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
 
+  console.log(TAG, "user", user);
   useEffect(() => {
     if (!user) {
       navigate("/" + SCREENS.LOGIN);
     }
-  });
+  }, [user]);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../store/UserContext";
 import {
   Button,
@@ -11,6 +11,9 @@ import {
   Select,
 } from "@mui/material";
 import { STORAGE_KEYS } from "../constants/storageKeys";
+import { useNavigate } from "react-router-dom";
+import { SCREENS } from "../constants/screens";
+const TAG = "Login.tsx ";
 
 const enum UNIVERSITIES {
   UVA = "UVA",
@@ -20,12 +23,15 @@ const enum UNIVERSITIES {
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
+  console.log(TAG, "user", user);
 
   const [email, setEmail] = useState(user ? user.email : "");
   const [name, setName] = useState(user ? user.name : "");
   const [university, setUniversity] = useState<UNIVERSITIES>(
     user ? user.university : UNIVERSITIES.UVA
   );
+
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     console.log("email", email, "name", name);
@@ -34,8 +40,9 @@ function Login() {
       email: email,
       university: university,
     };
-    setUser();
+    setUser(credentials);
     localStorage.setItem(STORAGE_KEYS.CREDENTIALS, JSON.stringify(credentials));
+    navigate(SCREENS.HOME);
   };
 
   return (

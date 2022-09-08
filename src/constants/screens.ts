@@ -1,5 +1,5 @@
 export enum SCREENS {
-  HOME = "/tpat",
+  HOME = "/",
   LOGIN = "login",
   TRY_IT_YOURSELF = "try-it-yourself",
 }
