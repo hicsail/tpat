@@ -46,7 +46,7 @@ function Login() {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ p: 4 }}>
+    <Container maxWidth="sm" sx={{ p: 4, flexGrow: 1 }}>
       <Stack spacing={4}>
         <TextField
           value={name}
@@ -79,7 +79,7 @@ function Login() {
             <MenuItem value={UNIVERSITIES.JMU}>JMU</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" type="submit" onClick={handleSubmit}>
+        <Button variant="contained" onClick={handleSubmit}>
           {user ? "Re-enter Credentials" : "Submit"}
         </Button>
       </Stack>

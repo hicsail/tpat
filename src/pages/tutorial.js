@@ -6,12 +6,30 @@ import "reactjs-popup/dist/index.css";
 import { Link } from "react-router-dom";
 import { SCREENS } from "../constants/screens";
 
-function Tutorial() {
-  const [isOpen, setIsOpen] = useState(false);
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Stack } from "@mui/material";
+import { RECORDING_TIME_LIMIT } from "../config/config";
 
-  function toggleModal() {
-    setIsOpen(!isOpen);
-  }
+function Tutorial() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const hoursMinSecs = {
+    minutes: Math.floor(RECORDING_TIME_LIMIT / 60),
+    seconds: RECORDING_TIME_LIMIT % 60,
+  };
 
   return (
     <div
@@ -68,7 +86,7 @@ function Tutorial() {
                     cursor: "pointer",
                   }}
                 >
-                  7:00
+                  {hoursMinSecs.minutes}:{hoursMinSecs.seconds}
                 </button>
               }
               position="left center"
@@ -88,57 +106,60 @@ function Tutorial() {
           </div>
         </div>
         <div style={{ marginTop: "3%", paddingLeft: "2%" }}>
-          <button className="instructionBtn" onClick={toggleModal}>
+          <Button variant="outlined" onClick={handleClickOpen}>
             Click to see Instructions
-          </button>
-          <Modal
-            isOpen={isOpen}
-            onRequestClose={toggleModal}
-            contentLabel="My dialog"
-            className="mymodal"
-            overlayClassName="myoverlay"
-            closeTimeoutMS={500}
+          </Button>
+          <Dialog
+            open={isModalOpen}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
           >
-            <div className="tutorial">
-              <h2>Timer</h2>
-              <p>
-                Timer on the right top corner will start the count down when you
-                first navigate onto the screen. After the timer runs out, it
-                will automatically take you to the next screen
-              </p>
-              <br />
-              <h2>Category</h2>
-              <p>
-                This text box will show the subject or the category of the task
-                that you are going to be looking at
-              </p>
-              <br />
-              <h2>Task TItle</h2>
-              <p>
-                In this text box, you will see the task title of the task that
-                you are about to do
-              </p>
-              <br />
-              <h2>Description</h2>
-              <p>
-                In this text box, you will see the description of the task that
-                you are going to perform on the next page. Remember to read
-                carefully as it will not appear again in the next page
-              </p>
-              <br />
-              <h2>Next Button</h2>
-              <p>
-                When you finish reading the prompts, and are ready to move on,
-                click on the next button at the bottom left corner. On the
-                actual assignment page, it is worded "start recording" but don't
-                worry, it won't automatically start recording when you click on
-                it to the next page
-              </p>
-            </div>
-            <button className="closerBtn" onClick={toggleModal}>
-              Close modal
-            </button>
-          </Modal>
+            <DialogTitle id="alert-dialog-title">{"Instructions"}</DialogTitle>
+            <DialogContent>
+              <div className="tutorial">
+                <h2>Timer</h2>
+                <p>
+                  Timer on the right top corner will start the count down when
+                  you first navigate onto the screen. After the timer runs out,
+                  it will automatically take you to the next screen
+                </p>
+                <br />
+                <h2>Category</h2>
+                <p>
+                  This text box will show the subject or the category of the
+                  task that you are going to be looking at
+                </p>
+                <br />
+                <h2>Task TItle</h2>
+                <p>
+                  In this text box, you will see the task title of the task that
+                  you are about to do
+                </p>
+                <br />
+                <h2>Description</h2>
+                <p>
+                  In this text box, you will see the description of the task
+                  that you are going to perform on the next page. Remember to
+                  read carefully as it will not appear again in the next page
+                </p>
+                <br />
+                <h2>Next Button</h2>
+                <p>
+                  When you finish reading the prompts, and are ready to move on,
+                  click on the next button at the bottom left corner. On the
+                  actual assignment page, it is worded "start recording" but
+                  don't worry, it won't automatically start recording when you
+                  click on it to the next page
+                </p>
+              </div>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} autoFocus>
+                Ok
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
         <p
           style={{

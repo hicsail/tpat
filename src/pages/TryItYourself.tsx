@@ -1,3 +1,5 @@
+import Box from "@material-ui/core/Box";
+import { Container, Typography } from "@mui/material";
 import * as React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,44 +27,14 @@ function TryItYourself() {
 
   return (
     <div>
-      <div
-        style={{
-          padding: "30px",
-          display: "flex",
-          width: "100%",
-        }}
-      >
-        <h1
-          style={{
-            fontWeight: "normal",
-            fontSize: "20px",
-            paddingTop: "50px",
-            justifyContent: "center",
-            display: "flex",
-            width: "35%",
-            textAlign: "center",
-            lineHeight: "2.5rem",
-          }}
-        >
+      <Container maxWidth="md">
+        <Typography variant="h3" textAlign="center">
           {title}
-        </h1>
-      </div>
-
-      <div style={{ padding: "10px", display: "flex" }}>
-        <p
-          style={{
-            justifyContent: "center",
-            display: "flex",
-            fontSize: "15px",
-            width: "45%",
-            textAlign: "center",
-            lineHeight: "1.75rem",
-          }}
-        >
+        </Typography>
+        <Typography variant="h6" textAlign="center" mt={10}>
           {subtitle}
-        </p>
-      </div>
-
+        </Typography>
+      </Container>
       <hr
         style={{ marginRight: "5%", marginLeft: "5%", marginBottom: "1.5%" }}
       ></hr>

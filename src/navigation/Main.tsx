@@ -16,11 +16,6 @@ export const Main = () => {
   return (
     <div>
       <Routes>
-        {/* <Route path={"/"} element={<Home />} />
-          <Route path="/about" element={<About />} />
-           <Route path="/instruction/:id" element={<Instruction />} /> 
-            <Route path="/try-it-yourself" element={<TryItYourself />} />*/}
-
         <Route path={"/"} element={<TryItYourself />} />
         <Route path={SCREENS.LOGIN} element={<Login />} />
         <Route path="/tutorial" element={<Tutorial />} />

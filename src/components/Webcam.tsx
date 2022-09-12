@@ -11,6 +11,9 @@ import {
 } from "react-record-webcam";
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
+import { Button } from "@mui/material";
+import { RECORDING_TIME_LIMIT } from "../config/config";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const OPTIONS = {
   filename: "video",
@@ -20,8 +23,15 @@ const OPTIONS = {
   height: 1080,
 } as RecordWebcamOptions;
 
+// enum for where webcam is being used.
+export enum WEBCAM_CONTEXT {
+  TUTORIAL,
+  TASK,
+}
+
 export interface Props {
   id: number;
+  context?: WEBCAM_CONTEXT; // where webcam is being used. Video upload procedure of this component depends on the context (tutorial or task).
 }
 
 export default function Webcam(props: Props) {
@@ -31,8 +41,12 @@ export default function Webcam(props: Props) {
   const navigate = useNavigate();
   const recordWebcam = useRecordWebcam(OPTIONS);
 
-  const hoursMinSecs = { minutes: 5, seconds: 0 };
+  const hoursMinSecs = {
+    minutes: Math.floor(RECORDING_TIME_LIMIT / 60),
+    seconds: RECORDING_TIME_LIMIT % 60,
+  };
   const [isRecord, setRecord] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     // opening the camera
@@ -41,13 +55,6 @@ export default function Webcam(props: Props) {
         recordWebcam.open();
       }
     }, 1000);
-
-    // page timer itself, navigate back at x mins 10 seconds when camera is recording
-    // however, timer will start counting down with 5 extra second for user to do it
-    setTimeout(() => {
-      navigate("/");
-      //310000
-    }, 310000);
 
     // When camera is open, it will immediately start recording
     if (recordWebcam.status === CAMERA_STATUS.OPEN) {
@@ -60,17 +67,23 @@ export default function Webcam(props: Props) {
     if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
       setTimeout(() => {
         recordWebcam.stop();
-      }, 301000);
+      }, RECORDING_TIME_LIMIT * 1000);
     }
 
     if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
       recordWebcam.close();
-      recordWebcam.download();
-      uploadTask(recordWebcam);
+
+      if (props.context == WEBCAM_CONTEXT.TUTORIAL) {
+        recordWebcam.download();
+        navigate("/");
+      } else {
+        uploadTask(recordWebcam);
+      }
     }
   });
 
   async function uploadTask(recordWebcam: RecordWebcamHook) {
+    setUploading(true);
     const blob = await recordWebcam.getRecording();
     const metadata = {
       name: user.name,
@@ -81,7 +94,7 @@ export default function Webcam(props: Props) {
     // signature of getRecording is wrongfully defined as getRecording(): void in RecordWebcamHook
     //so blob has to be cast as any
     await uploadTos3(blob as any, metadata);
-    //TODO show upload success message
+    setUploading(false);
     navigate("/");
   }
 
@@ -92,20 +105,24 @@ export default function Webcam(props: Props) {
       recordWebcam.status === CAMERA_STATUS.RECORDING ? (
         <CountDownTimer hoursMinSecs={hoursMinSecs} />
       ) : (
-        <p>Time Limit: 5 minutes</p>
+        <p>
+          {"Time Limit: " + Math.floor(RECORDING_TIME_LIMIT / 60) + "minutes"}
+        </p>
       )}
 
       <div className="webcam">
-        <button
+        <Button
+          variant="contained"
           disabled={recordWebcam.status !== CAMERA_STATUS.RECORDING}
           onClick={() => {
             recordWebcam.stop();
             setRecord(!isRecord);
           }}
           name="upload"
+          style={{ margin: 10 }}
         >
-          Stop recording
-        </button>
+          Submit recording
+        </Button>
       </div>
       <div
         style={{
@@ -115,15 +132,19 @@ export default function Webcam(props: Props) {
           alignContent: "baseline",
         }}
       >
-        <video
-          ref={recordWebcam.webcamRef}
-          style={{
-            display: "inline-block",
-            width: "50%",
-          }}
-          autoPlay
-          muted
-        />
+        {uploading ? (
+          <CircularProgress />
+        ) : (
+          <video
+            ref={recordWebcam.webcamRef}
+            style={{
+              display: "inline-block",
+              width: "50%",
+            }}
+            autoPlay
+            muted
+          />
+        )}
         <div
           style={{
             display: "inline-block",
@@ -171,16 +192,6 @@ export default function Webcam(props: Props) {
           </div>
         </div>
       </div>
-
-      <video
-        ref={recordWebcam.previewRef}
-        style={{
-          display: `${
-            recordWebcam.status === CAMERA_STATUS.PREVIEW ? "block" : "none"
-          }`,
-        }}
-        controls
-      />
     </div>
   );
 }

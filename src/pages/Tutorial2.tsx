@@ -1,45 +1,39 @@
-import React, { useState, useEffect, useContext } from "react";
-import CountDownTimer from "../components/Timer";
-import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
-import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
+import React from "react";
 
-import { uploadTos3 } from "../utils/videoUploadUtils";
-import { UserContext } from "../store/UserContext";
-import Webcam from "../components/Webcam";
-// import Modal from "@mui/material/Modal";
-
-Modal.setAppElement("#root");
+import Webcam, { WEBCAM_CONTEXT } from "../components/Webcam";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function Tutorial2() {
-  const hoursMinSecs = { minutes: 7, seconds: 2 };
-  const [isRecord, setRecord] = useState(false);
-  const { user } = useContext(UserContext);
-  // const [mode, setMode] = useState<"preparing" | "recording">("preparing");
   const taskIndex = 0;
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const handleClickOpen = () => {
+    setIsModalOpen(true);
+  };
 
-  function toggleModal() {
-    setIsOpen(!isOpen);
-  }
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
-      <button className="instructionBtn" onClick={toggleModal}>
+      <Button variant="outlined" onClick={handleClickOpen}>
         Click to see Instructions
-      </button>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
+      </Button>
+      <Dialog
+        open={isModalOpen}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <div>
-          <h2>Timer on the task</h2>
-          <p>
+        <DialogTitle id="alert-dialog-title">{"Timer on the task"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
             Your camera will automatically start and open when you get onto the
             page / auto-directed to the page. Once you are on the page, your
             camera will automatically open, and start recording shortly after.
@@ -48,13 +42,15 @@ function Tutorial2() {
             also able to stop recording once you are finished. The video will
             automatically download to your local computer, and redirect you back
             to the homepage.
-          </p>
-        </div>
-        <button className="closerBtn" onClick={toggleModal}>
-          Close modal
-        </button>
-      </Modal>
-      <Webcam id={taskIndex} />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Webcam id={taskIndex} context={WEBCAM_CONTEXT.TUTORIAL} />
     </div>
   );
 }
