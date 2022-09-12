@@ -84,6 +84,14 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
+ * A better abstraction over CSS.
+ *
+ * @copyright Oleg Isonen (Slobodskoi) / Isonen 2014-present
+ * @website https://github.com/cssinjs/jss
+ * @license MIT
+ */
+
+/**
  * CanvasRecorder is a standalone class used by {@link RecordRTC} to bring HTML5-Canvas recording into video WebM. It uses HTML2Canvas library and runs top over {@link Whammy}.
  * @summary HTML2Canvas recording into video WebM.
  * @license {@link https://github.com/muaz-khan/RecordRTC/blob/master/LICENSE|MIT}
