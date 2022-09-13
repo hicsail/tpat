@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../store/UserContext";
 import { SCREENS } from "../constants/screens";
 import Webcam from "../components/Webcam";
-import { Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
 
 function Task() {
@@ -45,14 +45,9 @@ function Task() {
   const task = data[taskIndex];
 
   return (
-    <>
+    <Box margin={5}>
       {mode == "preparing" ? (
-        <Stack
-          padding={5}
-          margin={5}
-          border="1px solid #808080"
-          borderRadius={2}
-        >
+        <Stack padding={5} border="1px solid #808080" borderRadius={2}>
           <Stack
             direction="row"
             alignItems="center"
@@ -124,7 +119,7 @@ function Task() {
       ) : (
         <Webcam task={task} />
       )}
-    </>
+    </Box>
   );
 }
 

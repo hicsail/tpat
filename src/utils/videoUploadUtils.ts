@@ -8,7 +8,8 @@ import { Blob } from "buffer";
 const TPAT_VIDEOS_BUCKET = "tpat"; //tpat
 
 function getFileName(metadata: {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   taskId: string;
   university: string;
@@ -24,7 +25,8 @@ function getFileName(metadata: {
     "_" +
     metadata.email.split("@")[0] +
     "_" + //get first part of email
-    metadata.name.replace(/\s/g, "") +
+    metadata.firstName.replace(/\s/g, "") +
+    metadata.lastName.replace(/\s/g, "") +
     "_" + //remove whitespace from name
     "Task" +
     metadata.taskId +
@@ -32,19 +34,15 @@ function getFileName(metadata: {
   );
 }
 /**
- * @param videoBlob 
- * @param metadata  example metadata =   {
-        username: "Teacher 1",
-        email: "teacher@gmail.com",
-        taskId: "1",
-        university: "UVA";
-      },
- * @returns 
+ * @param videoBlob
+ * @param metadata
+ * @returns
  */
 async function uploadTos3(
   videoBlob: Blob,
   metadata: {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     taskId: string;
     university: string;
@@ -55,7 +53,6 @@ async function uploadTos3(
     const uploadParams = {
       Bucket: TPAT_VIDEOS_BUCKET,
       Body: videoBlob,
-
       Key: getFileName(metadata),
       Metadata: metadata,
     };

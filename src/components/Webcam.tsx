@@ -11,7 +11,14 @@ import {
 } from "react-record-webcam";
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
-import { Button, Chip, Grid, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Chip,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { RECORDING_TIME_LIMIT } from "../config/config";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { styled } from "@mui/material/styles";
@@ -90,7 +97,8 @@ export default function Webcam(props: Props) {
     setUploading(true);
     const blob = await recordWebcam.getRecording();
     const metadata = {
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       taskId: task.id.toString(),
       university: user.university,
@@ -101,21 +109,19 @@ export default function Webcam(props: Props) {
     setUploading(false);
     navigate("/");
   }
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
 
   return (
-    <Box sx={{ margin: 5, marginBottom: 0 }}>
+    <Box>
       <Grid container spacing={3} flex={1}>
-        <Grid item xs={12} md={6}>
-          <Box flex={1}>
+        <Grid container xs={12} md={6}>
+          <Container>
             {uploading ? (
-              <CircularProgress />
+              <Box>
+                <CircularProgress />
+                <Typography variant="h6" marginRight={2}>
+                  Uploading...
+                </Typography>
+              </Box>
             ) : (
               <video
                 ref={recordWebcam.webcamRef}
@@ -126,7 +132,7 @@ export default function Webcam(props: Props) {
                 muted
               />
             )}
-          </Box>
+          </Container>
         </Grid>
         <Grid item xs={12} md={6}>
           <Stack>

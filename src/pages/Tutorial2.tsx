@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { data } from "../data";
+import { Box, Stack } from "@mui/material";
 
 function Tutorial2() {
   const task = data[0];
@@ -22,10 +23,17 @@ function Tutorial2() {
   };
 
   return (
-    <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Click to see Instructions
-      </Button>
+    <Box margin={5}>
+      <Stack>
+        <Webcam task={task} context={WEBCAM_CONTEXT.TUTORIAL} />
+        <Button
+          variant="outlined"
+          onClick={handleClickOpen}
+          style={{ marginTop: 10 }}
+        >
+          Click to see Instructions
+        </Button>
+      </Stack>
       <Dialog
         open={isModalOpen}
         onClose={handleClose}
@@ -51,8 +59,7 @@ function Tutorial2() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Webcam task={task} context={WEBCAM_CONTEXT.TUTORIAL} />
-    </div>
+    </Box>
   );
 }
 
