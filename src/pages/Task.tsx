@@ -43,6 +43,7 @@ function Task() {
   }
 
   const task = data[taskIndex];
+
   return (
     <>
       {mode == "preparing" ? (
@@ -121,7 +122,7 @@ function Task() {
           </Stack>
         </Stack>
       ) : (
-        <Webcam id={taskIndex} />
+        <Webcam task={task} />
       )}
     </>
   );

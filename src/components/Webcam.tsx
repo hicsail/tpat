@@ -11,9 +11,12 @@ import {
 } from "react-record-webcam";
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
-import { Button } from "@mui/material";
+import { Button, Chip, Grid, Stack, Typography } from "@mui/material";
 import { RECORDING_TIME_LIMIT } from "../config/config";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 
 const OPTIONS = {
   filename: "video",
@@ -30,12 +33,12 @@ export enum WEBCAM_CONTEXT {
 }
 
 export interface Props {
-  id: number;
+  task: typeof data[0]; //TODO define task interface
   context?: WEBCAM_CONTEXT; // where webcam is being used. Video upload procedure of this component depends on the context (tutorial or task).
 }
 
 export default function Webcam(props: Props) {
-  const id = props.id;
+  // const id = props.id;
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -47,6 +50,7 @@ export default function Webcam(props: Props) {
   };
   const [isRecord, setRecord] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const task = props.task;
 
   useEffect(() => {
     // opening the camera
@@ -88,7 +92,7 @@ export default function Webcam(props: Props) {
     const metadata = {
       name: user.name,
       email: user.email,
-      taskId: props.id.toString(),
+      taskId: task.id.toString(),
       university: user.university,
     };
     // signature of getRecording is wrongfully defined as getRecording(): void in RecordWebcamHook
@@ -97,20 +101,87 @@ export default function Webcam(props: Props) {
     setUploading(false);
     navigate("/");
   }
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
 
   return (
-    <div style={{ marginLeft: "5%", paddingTop: "3%", marginRight: "5%" }}>
-      <p>Camera status: {recordWebcam.status}</p>
-      {recordWebcam.status === CAMERA_STATUS.OPEN ||
-      recordWebcam.status === CAMERA_STATUS.RECORDING ? (
-        <CountDownTimer hoursMinSecs={hoursMinSecs} />
-      ) : (
-        <p>
-          {"Time Limit: " + Math.floor(RECORDING_TIME_LIMIT / 60) + "minutes"}
-        </p>
-      )}
+    <Box sx={{ margin: 5, marginBottom: 0 }}>
+      <Grid container spacing={3} flex={1}>
+        <Grid item xs={12} md={6}>
+          <Box flex={1}>
+            {uploading ? (
+              <CircularProgress />
+            ) : (
+              <video
+                ref={recordWebcam.webcamRef}
+                style={{
+                  width: "100%",
+                }}
+                autoPlay
+                muted
+              />
+            )}
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Stack>
+            <Stack direction={"row"} justifyContent={"space-around"}>
+              <Stack direction={"row"} alignItems="center">
+                <Typography variant="body1" marginRight={2}>
+                  Camera status:
+                </Typography>
+                <Chip
+                  label={recordWebcam.status}
+                  color={
+                    recordWebcam.status === CAMERA_STATUS.RECORDING
+                      ? "success"
+                      : "default"
+                  }
+                />
+              </Stack>
 
-      <div className="webcam">
+              {recordWebcam.status === CAMERA_STATUS.OPEN ||
+              recordWebcam.status === CAMERA_STATUS.RECORDING ? (
+                <Stack direction={"row"} alignItems="center">
+                  <Typography variant="body1" marginRight={2}>
+                    Time left:
+                  </Typography>
+                  <CountDownTimer hoursMinSecs={hoursMinSecs} />
+                </Stack>
+              ) : (
+                <Typography variant="h6">
+                  {"Time Limit: " +
+                    Math.floor(RECORDING_TIME_LIMIT / 60) +
+                    "minutes"}
+                </Typography>
+              )}
+            </Stack>
+            <Stack spacing={10} mt={5}>
+              <Stack>
+                <Typography variant="h6">
+                  The problem you have chosen is:
+                </Typography>
+                <Typography variant="body1">{task.problem}</Typography>
+              </Stack>
+              <Stack>
+                <Typography variant="h6">
+                  Your task is to do the following:
+                </Typography>
+                {task.task.map((t) => (
+                  <Typography variant="body1">{" >    " + t}</Typography>
+                ))}
+              </Stack>
+            </Stack>
+          </Stack>
+        </Grid>
+      </Grid>
+
+      <Stack mt={5}>
         <Button
           variant="contained"
           disabled={recordWebcam.status !== CAMERA_STATUS.RECORDING}
@@ -119,79 +190,10 @@ export default function Webcam(props: Props) {
             setRecord(!isRecord);
           }}
           name="upload"
-          style={{ margin: 10 }}
         >
           Submit recording
         </Button>
-      </div>
-      <div
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          display: "inline-block",
-          alignContent: "baseline",
-        }}
-      >
-        {uploading ? (
-          <CircularProgress />
-        ) : (
-          <video
-            ref={recordWebcam.webcamRef}
-            style={{
-              display: "inline-block",
-              width: "50%",
-            }}
-            autoPlay
-            muted
-          />
-        )}
-        <div
-          style={{
-            display: "inline-block",
-            width: "50%",
-            paddingLeft: "2%",
-
-            overflow: "scroll",
-            paddingBottom: "2%",
-          }}
-        >
-          <h3
-            style={{
-              fontWeight: "bold",
-            }}
-          >
-            The problem you have chosen is:
-          </h3>
-          <h3 style={{ fontWeight: "normal" }}>{data[id].problem}</h3>
-          {data[id].imgURL !== "#" ? (
-            <img
-              style={{ height: "150px", paddingLeft: "2%" }}
-              src={data[id].imgURL}
-              alt="task visualization"
-            />
-          ) : null}
-          <h3
-            style={{
-              paddingTop: "3%",
-              paddingBottom: "1%",
-              fontWeight: "bold",
-            }}
-          >
-            Your task is to do the following:
-          </h3>
-          <div className="task">
-            <ul>
-              <li>{data[id].task[0]}</li>
-              <br></br>
-              <li>{data[id].task[1]}</li>
-              <br></br>
-              <li>{data[id].task[2]}</li>
-              <br></br>
-              <li>{data[id].task[3]}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+      </Stack>
+    </Box>
   );
 }

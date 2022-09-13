@@ -7,9 +7,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { data } from "../data";
 
 function Tutorial2() {
-  const taskIndex = 0;
+  const task = data[0];
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -50,7 +51,7 @@ function Tutorial2() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Webcam id={taskIndex} context={WEBCAM_CONTEXT.TUTORIAL} />
+      <Webcam task={task} context={WEBCAM_CONTEXT.TUTORIAL} />
     </div>
   );
 }
