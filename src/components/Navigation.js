@@ -11,7 +11,7 @@ function Navigation() {
         <ul className="navLinks">
           <a className="siteName">
             <Link to="/" style={{ textDecoration: "none" }}>
-              TPAT
+              Teacher Tasks
             </Link>
           </a>
           <li>

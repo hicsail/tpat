@@ -108,7 +108,9 @@ function Task() {
               <Typography variant="h6">
                 Your task is to do the following:
               </Typography>
-              {task.task.map((t) => (
+              <Typography variant="body1">{task.task}</Typography>
+              <Typography variant="h6">Remember to:</Typography>
+              {task.prompts.map((t) => (
                 <Typography variant="body1">{" >    " + t}</Typography>
               ))}
             </Stack>

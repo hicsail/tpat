@@ -55,7 +55,7 @@ function Login() {
           Welcome to the Performance Task Site!
         </Typography>
         <Typography variant="body1" mt={3}>
-          This performance task assignment is expected to take 45 minutes,
+          This performance task assignment is expected to take 40 minutes,
           including a tutorial to the performance task recording tool. Please
           note that you will only be able to access and complete the tasks a
           single time.
@@ -71,7 +71,7 @@ function Login() {
           <TextField
             value={firstName}
             id="Name"
-            label="Name"
+            label="First name"
             variant="outlined"
             onChange={(e) => {
               setFirstName(e.target.value);

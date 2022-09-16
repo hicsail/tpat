@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import React from "react";
 //import { useNavigate } from "react-router-dom";
 
@@ -25,9 +26,9 @@ const CountDownTimer = ({ hoursMinSecs }) => {
 
   return (
     <div>
-      <p>{`${mins.toString().padStart(2, "0")}:${secs
+      <Typography variant="h6">{`${mins.toString().padStart(2, "0")}:${secs
         .toString()
-        .padStart(2, "0")}`}</p>
+        .padStart(2, "0")}`}</Typography>
     </div>
   );
 };

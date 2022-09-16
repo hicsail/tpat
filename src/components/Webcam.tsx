@@ -23,14 +23,6 @@ import { RECORDING_TIME_LIMIT } from "../config/config";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@mui/material/Box";
 
-const OPTIONS = {
-  filename: "video",
-  fileType: "webm",
-  codec: { audio: "aac", video: "av1" },
-  width: 1920,
-  height: 1080,
-} as RecordWebcamOptions;
-
 // enum for where webcam is being used.
 export enum WEBCAM_CONTEXT {
   TUTORIAL,
@@ -139,40 +131,52 @@ export default function WebcamExperimental2(props: Props) {
                 render={(props: WebcamRenderProps) => {
                   return (
                     <div>
-                      <Stack direction={"row"} alignItems="center">
-                        <Typography variant="body1" marginRight={2}>
-                          Camera status:
-                        </Typography>
-                        <Chip
-                          label={props.status}
-                          color={
-                            props.status === CAMERA_STATUS.RECORDING
-                              ? "success"
-                              : "default"
-                          }
-                        />
-                      </Stack>
-                      {props.status === CAMERA_STATUS.OPEN ||
-                      props.status === CAMERA_STATUS.RECORDING ? (
-                        <>
-                          {recording && (
-                            <Stack direction={"row"} alignItems="center">
-                              <Typography variant="body1" marginRight={2}>
-                                Time left:
-                              </Typography>
+                      <Stack
+                        direction={"row"}
+                        alignItems="center"
+                        justifyContent={"space-between"}
+                        mb={3}
+                      >
+                        <Stack direction={"row"} alignItems="center">
+                          <Typography variant="body1" marginRight={2}>
+                            Camera status:
+                          </Typography>
+                          <Chip
+                            label={props.status}
+                            color={
+                              props.status === CAMERA_STATUS.RECORDING
+                                ? "success"
+                                : "default"
+                            }
+                          />
+                        </Stack>
+                        {props.status === CAMERA_STATUS.OPEN ||
+                        props.status === CAMERA_STATUS.RECORDING ? (
+                          <>
+                            {recording && (
+                              <Stack direction={"row"} alignItems="center">
+                                <Typography variant="body1" marginRight={2}>
+                                  Time left:
+                                </Typography>
 
-                              <CountDownTimer hoursMinSecs={hoursMinSecs} />
-                            </Stack>
-                          )}
-                        </>
-                      ) : (
-                        <Typography variant="h6">
-                          {"Time Limit: " +
-                            Math.floor(RECORDING_TIME_LIMIT / 60) +
-                            "minutes"}
-                        </Typography>
-                      )}
-                      <div>
+                                <CountDownTimer hoursMinSecs={hoursMinSecs} />
+                              </Stack>
+                            )}
+                          </>
+                        ) : (
+                          <Typography variant="h6">
+                            {"Time Limit: " +
+                              Math.floor(RECORDING_TIME_LIMIT / 60) +
+                              "minutes"}
+                          </Typography>
+                        )}
+                      </Stack>
+                      <Stack
+                        direction={"row"}
+                        alignItems="center"
+                        justifyContent={"space-between"}
+                        mb={3}
+                      >
                         <Button
                           ref={openButtonRef}
                           variant="contained"
@@ -206,7 +210,7 @@ export default function WebcamExperimental2(props: Props) {
                         >
                           Submit recording
                         </Button>
-                      </div>
+                      </Stack>
                     </div>
                   );
                 }}
@@ -228,7 +232,9 @@ export default function WebcamExperimental2(props: Props) {
                 <Typography variant="h6">
                   Your task is to do the following:
                 </Typography>
-                {task.task.map((t) => (
+                <Typography variant="body1">{task.task}</Typography>
+                <Typography variant="h6">Remember to:</Typography>
+                {task.prompts.map((t) => (
                   <Typography variant="body1">{" >    " + t}</Typography>
                 ))}
               </Stack>

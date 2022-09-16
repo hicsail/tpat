@@ -23,7 +23,7 @@ const Card = (props) => {
         <div className="img-container">
           <img
             style={{ width: "100%", borderRadius: "10px 0px 0px 10px" }}
-            src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
+            src={props.previewImage}
             alt="task visualization"
           />
         </div>
@@ -37,7 +37,7 @@ const Card = (props) => {
               maxHeight: "100px",
             }}
           >
-            {props.description}
+            {props.preview}
           </p>
           <div></div>
           <div className="time-container">

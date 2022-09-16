@@ -26,9 +26,6 @@ function TryItYourself() {
   return (
     <div>
       <Container maxWidth="md">
-        <Typography variant="h3" textAlign="center" mt={3}>
-          {title}
-        </Typography>
         <Typography variant="h6" textAlign="center" mt={10}>
           {subtitle}
         </Typography>
@@ -41,7 +38,8 @@ function TryItYourself() {
           <Card
             key={taskDetail.id}
             title={taskDetail.title}
-            description={taskDetail.description}
+            preview={taskDetail.preview}
+            previewImage={taskDetail.previewImage}
             time={taskDetail.time}
             id={taskDetail.id}
           />
