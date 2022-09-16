@@ -17,8 +17,6 @@ const TAG = "TryItYourself.tsx ";
 function TryItYourself() {
   const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
-
-  console.log(TAG, "user", user);
   useEffect(() => {
     if (!user) {
       navigate("/" + SCREENS.LOGIN);

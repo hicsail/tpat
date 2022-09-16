@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { APP_VERSION } from "../config/config";
 import { SCREENS } from "../constants/screens";
 import "./styles.css";
 
@@ -24,7 +25,9 @@ function Footer() {
           marginRight: "3%",
         }}
       ></hr>
-      <p className="footerRight">@2022 TPAT All Right Reserved</p>
+      <p className="footerRight">
+        @2022 TPAT All Right Reserved v{APP_VERSION}
+      </p>
     </div>
   );
 }

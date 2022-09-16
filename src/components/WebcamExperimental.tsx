@@ -8,7 +8,6 @@ import {
   CAMERA_STATUS,
   RecordWebcamOptions,
   RecordWebcamHook,
-  RecordWebcam,
 } from "react-record-webcam";
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
@@ -44,8 +43,7 @@ export interface Props {
 }
 const TAG = "Webcam.tsx ";
 
-export default function Webcam(props: Props) {
-  // const id = props.id;
+export default function WebcamExperimental(props: Props) {
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -56,37 +54,67 @@ export default function Webcam(props: Props) {
     seconds: RECORDING_TIME_LIMIT % 60,
   };
   const [uploading, setUploading] = useState(false);
+
   const task = props.task;
+  const [postRecordingProcessStarted, setPostRecordingProcessStarted] =
+    useState(false);
+
+  const openCam = async () => {
+    console.log(
+      "recordWebcam",
+      recordWebcam,
+      "recordWebcam==undefined",
+      recordWebcam == undefined
+    );
+    await recordWebcam.open();
+  };
+
+  const startCam = async () => {
+    await recordWebcam.start();
+    // setRecording(true);
+  };
+
+  const stopCam = async () => {
+    return await recordWebcam.stop();
+  };
 
   useEffect(() => {
-    console.log("recordWebcam.status", recordWebcam.status);
+    console.log("opening cam");
+    //return to gracefully deal with async side effect
+    return () => {
+      openCam();
+    };
+  }, []);
 
-    // opening the camera
-    setTimeout(() => {
-      if (recordWebcam.status === CAMERA_STATUS.CLOSED) {
-        recordWebcam.open();
-      }
-    }, 1000);
+  //   useEffect(() => {
+  //     const recordingLimitTimer = setTimeout(() => {
+  //       console.log("executing recordingLimitTimer");
+  //       recordWebcam.stop();
+  //     }, RECORDING_TIME_LIMIT * 1000);
+  //     return () => clearTimeout(recordingLimitTimer);
+  //   }, []);
 
-    // When camera is open, it will immediately start recording
+  useEffect(() => {
+    return () => {
+      recordWebcam.close();
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("rerunning cam ue recordWebcam.status ", recordWebcam.status);
+
     if (recordWebcam.status === CAMERA_STATUS.OPEN) {
-      setTimeout(() => {
-        recordWebcam.start();
-      }, 0);
+      startCam();
     }
 
-    // video timer itself, stops at x mins
-    if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
-      setTimeout(() => {
-        recordWebcam.stop();
-      }, RECORDING_TIME_LIMIT * 1000);
-    }
-
-    if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
+    if (
+      recordWebcam.status === CAMERA_STATUS.PREVIEW &&
+      !postRecordingProcessStarted
+    ) {
+      setPostRecordingProcessStarted(true);
       console.log(
         "running recordWebcam.status === CAMERA_STATUS.PREVIEW logic"
       );
-
       recordWebcam.close();
       if (props.context == WEBCAM_CONTEXT.TUTORIAL) {
         recordWebcam.download();
@@ -116,14 +144,8 @@ export default function Webcam(props: Props) {
 
   const onSubmit = async () => {
     console.log("submit clicked. recordWebcam.status:", recordWebcam.status);
-    await recordWebcam.stop();
+    await stopCam();
     console.log(" recordWebcam.stop(); executed", recordWebcam.status);
-    // setTimeout(() => {
-    //   console.log(
-    //     " recordWebcam.stop(); executed",
-    //     recordWebcam.status
-    //   );
-    // }, 5000);
   };
 
   return (
@@ -147,7 +169,6 @@ export default function Webcam(props: Props) {
                 autoPlay
                 muted
               />
-              // <RecordWebcam />
             )}
           </Container>
         </Grid>
@@ -203,7 +224,6 @@ export default function Webcam(props: Props) {
           </Stack>
         </Grid>
       </Grid>
-
       <Stack mt={5}>
         <Button
           variant="contained"

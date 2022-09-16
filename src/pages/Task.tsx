@@ -9,6 +9,7 @@ import { SCREENS } from "../constants/screens";
 import Webcam from "../components/Webcam";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
+import WebcamExperimental2 from "../components/WebcamExperimental2";
 
 function Task() {
   const { user } = useContext(UserContext);
@@ -33,9 +34,12 @@ function Task() {
 
   //start recording automatically after PREP_TIME_LIMIT
   useEffect(() => {
-    setTimeout(() => {
+    const prepTimer = setTimeout(() => {
       setMode("recording");
     }, PREP_TIME_LIMIT * 1000);
+    return () => {
+      clearTimeout(prepTimer);
+    };
   });
 
   if (id == undefined) {
@@ -117,7 +121,7 @@ function Task() {
           </Stack>
         </Stack>
       ) : (
-        <Webcam task={task} />
+        <WebcamExperimental2 task={task} />
       )}
     </Box>
   );

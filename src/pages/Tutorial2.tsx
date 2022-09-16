@@ -9,6 +9,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { data } from "../data";
 import { Box, Stack } from "@mui/material";
+import WebcamExperimental from "../components/WebcamExperimental";
+import WebcamExperimental2 from "../components/WebcamExperimental2";
+import WebcamExperimental1 from "../components/WebcamExperimental1";
 
 function Tutorial2() {
   const task = data[0];
@@ -25,7 +28,7 @@ function Tutorial2() {
   return (
     <Box margin={5}>
       <Stack>
-        <Webcam task={task} context={WEBCAM_CONTEXT.TUTORIAL} />
+        <WebcamExperimental2 task={task} context={WEBCAM_CONTEXT.TUTORIAL} />
         <Button
           variant="outlined"
           onClick={handleClickOpen}

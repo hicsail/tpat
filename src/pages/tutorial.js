@@ -59,7 +59,7 @@ function Tutorial() {
 
           <Stack direction="row" alignItems="center">
             <div>
-              {hoursMinSecs.minutes}:{hoursMinSecs.seconds}0
+              {hoursMinSecs.minutes}:{hoursMinSecs.seconds}
             </div>
             <img
               style={{ paddingLeft: "0.5%" }}
