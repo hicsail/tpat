@@ -1,14 +1,13 @@
 import "../components/styles.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { data } from "../data";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
 import {
-  useRecordWebcam,
   CAMERA_STATUS,
   RecordWebcamOptions,
-  RecordWebcamHook,
   RecordWebcam,
+  WebcamRenderProps,
 } from "react-record-webcam";
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
@@ -44,62 +43,45 @@ export interface Props {
 }
 const TAG = "Webcam.tsx ";
 
-export default function Webcam(props: Props) {
-  // const id = props.id;
+export default function WebcamExperimental2(props: Props) {
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
-  const recordWebcam = useRecordWebcam(OPTIONS);
 
+  useState<WebcamRenderProps | null>(null);
   const hoursMinSecs = {
     minutes: Math.floor(RECORDING_TIME_LIMIT / 60),
     seconds: RECORDING_TIME_LIMIT % 60,
   };
   const [uploading, setUploading] = useState(false);
+  const [recording, setRecording] = useState(false);
+
   const task = props.task;
 
+  const startButtonRef = useRef<HTMLButtonElement | null>(null);
+  const openButtonRef = useRef<HTMLButtonElement | null>(null);
+  const stopButtonRef = useRef<HTMLButtonElement | null>(null);
+
   useEffect(() => {
-    console.log("recordWebcam.status", recordWebcam.status);
+    console.log("opening cam");
+    //opens camera and shows camera view
+    openButtonRef.current?.click();
+  }, []);
 
-    // opening the camera
-    setTimeout(() => {
-      if (recordWebcam.status === CAMERA_STATUS.CLOSED) {
-        recordWebcam.open();
-      }
-    }, 1000);
-
-    // When camera is open, it will immediately start recording
-    if (recordWebcam.status === CAMERA_STATUS.OPEN) {
-      setTimeout(() => {
-        recordWebcam.start();
-      }, 0);
+  const onWebcamStatusChange = (status: string) => {
+    console.log("status", status);
+    if (!recording && status === CAMERA_STATUS.OPEN) {
+      //starts webcam recording
+      startButtonRef.current?.click();
+      setRecording(true);
+    } else if (status === CAMERA_STATUS.PREVIEW) {
+      //stops recording and submits video
+      stopButtonRef.current?.click();
     }
+  };
 
-    // video timer itself, stops at x mins
-    if (recordWebcam.status === CAMERA_STATUS.RECORDING) {
-      setTimeout(() => {
-        recordWebcam.stop();
-      }, RECORDING_TIME_LIMIT * 1000);
-    }
-
-    if (recordWebcam.status === CAMERA_STATUS.PREVIEW) {
-      console.log(
-        "running recordWebcam.status === CAMERA_STATUS.PREVIEW logic"
-      );
-
-      recordWebcam.close();
-      if (props.context == WEBCAM_CONTEXT.TUTORIAL) {
-        recordWebcam.download();
-        navigate("/");
-      } else {
-        uploadTask(recordWebcam);
-      }
-    }
-  });
-
-  async function uploadTask(recordWebcam: RecordWebcamHook) {
+  const uploadTask = async (videoBlob: Blob) => {
     setUploading(true);
-    const blob = await recordWebcam.getRecording();
     const metadata = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -107,23 +89,35 @@ export default function Webcam(props: Props) {
       taskId: task.id.toString(),
       university: user.university,
     };
-    // signature of getRecording is wrongfully defined as getRecording(): void in RecordWebcamHook
-    //so blob has to be cast as any
-    await uploadTos3(blob as any, metadata);
+    await uploadTos3(videoBlob, metadata);
     setUploading(false);
-    navigate("/");
-  }
+  };
 
-  const onSubmit = async () => {
-    console.log("submit clicked. recordWebcam.status:", recordWebcam.status);
-    await recordWebcam.stop();
-    console.log(" recordWebcam.stop(); executed", recordWebcam.status);
-    // setTimeout(() => {
-    //   console.log(
-    //     " recordWebcam.stop(); executed",
-    //     recordWebcam.status
-    //   );
-    // }, 5000);
+  /* 
+  steps in endRecordingSession
+    1. stop recording
+    2. get recording
+       a. if tutorial, download video
+       b. if task, upload video to s3, 
+    3. navigate  home
+    */
+  const endRecordingSession = async (webcamRenderProps: WebcamRenderProps) => {
+    if (webcamRenderProps.status === CAMERA_STATUS.RECORDING) {
+      await webcamRenderProps.stop();
+    }
+
+    if (props.context == WEBCAM_CONTEXT.TUTORIAL) {
+      webcamRenderProps.download();
+    } else {
+      const blob = await webcamRenderProps.getRecording();
+      if (blob) {
+        await uploadTask(blob);
+      } else {
+        console.log("could not get recording. Blob:", blob);
+      }
+      console.log("blob", blob, "blob==undefined", blob == undefined);
+    }
+    navigate("/");
   };
 
   return (
@@ -139,51 +133,90 @@ export default function Webcam(props: Props) {
                 </Typography>
               </Box>
             ) : (
-              <video
-                ref={recordWebcam.webcamRef}
-                style={{
-                  width: "100%",
+              <RecordWebcam
+                getStatus={onWebcamStatusChange}
+                options={{ recordingLength: RECORDING_TIME_LIMIT }}
+                render={(props: WebcamRenderProps) => {
+                  return (
+                    <div>
+                      <Stack direction={"row"} alignItems="center">
+                        <Typography variant="body1" marginRight={2}>
+                          Camera status:
+                        </Typography>
+                        <Chip
+                          label={props.status}
+                          color={
+                            props.status === CAMERA_STATUS.RECORDING
+                              ? "success"
+                              : "default"
+                          }
+                        />
+                      </Stack>
+                      {props.status === CAMERA_STATUS.OPEN ||
+                      props.status === CAMERA_STATUS.RECORDING ? (
+                        <>
+                          {recording && (
+                            <Stack direction={"row"} alignItems="center">
+                              <Typography variant="body1" marginRight={2}>
+                                Time left:
+                              </Typography>
+
+                              <CountDownTimer hoursMinSecs={hoursMinSecs} />
+                            </Stack>
+                          )}
+                        </>
+                      ) : (
+                        <Typography variant="h6">
+                          {"Time Limit: " +
+                            Math.floor(RECORDING_TIME_LIMIT / 60) +
+                            "minutes"}
+                        </Typography>
+                      )}
+                      <div>
+                        <Button
+                          ref={openButtonRef}
+                          variant="contained"
+                          disabled={props.status !== CAMERA_STATUS.CLOSED}
+                          onClick={props.openCamera}
+                        >
+                          Open camera
+                        </Button>
+                        <Button
+                          ref={startButtonRef}
+                          variant="contained"
+                          disabled={props.status !== CAMERA_STATUS.OPEN}
+                          onClick={() => {
+                            props.start();
+                            setRecording(true);
+                          }}
+                        >
+                          Start recording
+                        </Button>
+
+                        <Button
+                          ref={stopButtonRef}
+                          variant="contained"
+                          disabled={
+                            props.status !== CAMERA_STATUS.RECORDING &&
+                            props.status !== CAMERA_STATUS.PREVIEW
+                          }
+                          onClick={() => {
+                            endRecordingSession(props);
+                          }}
+                        >
+                          Submit recording
+                        </Button>
+                      </div>
+                    </div>
+                  );
                 }}
-                autoPlay
-                muted
               />
-              // <RecordWebcam />
             )}
           </Container>
         </Grid>
         <Grid item xs={12} md={6}>
           <Stack>
-            <Stack direction={"row"} justifyContent={"space-around"}>
-              <Stack direction={"row"} alignItems="center">
-                <Typography variant="body1" marginRight={2}>
-                  Camera status:
-                </Typography>
-                <Chip
-                  label={recordWebcam.status}
-                  color={
-                    recordWebcam.status === CAMERA_STATUS.RECORDING
-                      ? "success"
-                      : "default"
-                  }
-                />
-              </Stack>
-
-              {recordWebcam.status === CAMERA_STATUS.OPEN ||
-              recordWebcam.status === CAMERA_STATUS.RECORDING ? (
-                <Stack direction={"row"} alignItems="center">
-                  <Typography variant="body1" marginRight={2}>
-                    Time left:
-                  </Typography>
-                  <CountDownTimer hoursMinSecs={hoursMinSecs} />
-                </Stack>
-              ) : (
-                <Typography variant="h6">
-                  {"Time Limit: " +
-                    Math.floor(RECORDING_TIME_LIMIT / 60) +
-                    "minutes"}
-                </Typography>
-              )}
-            </Stack>
+            <Stack direction={"row"} justifyContent={"space-around"}></Stack>
             <Stack spacing={10} mt={5}>
               <Stack>
                 <Typography variant="h6">
@@ -203,17 +236,6 @@ export default function Webcam(props: Props) {
           </Stack>
         </Grid>
       </Grid>
-
-      <Stack mt={5}>
-        <Button
-          variant="contained"
-          disabled={recordWebcam.status !== CAMERA_STATUS.RECORDING}
-          onClick={onSubmit}
-          name="upload"
-        >
-          Submit recording
-        </Button>
-      </Stack>
     </Box>
   );
 }

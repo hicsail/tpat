@@ -15,7 +15,7 @@ function getFileName(metadata: {
   university: string;
 }) {
   //name format :
-  //Timestamp_Unviersity_Email_FirstLast_Task 1-1 ---> 1662564392732_UVA_lhmclean_LindseyMcLean_Task 1-1
+  //Timestamp_Unviersity_Email_FirstLast_Task 1-1.mp4 ---> 1662564392732_UVA_lhmclean_LindseyMcLean_Task 1-1
   return (
     metadata.university + // university folder
     "/" +
@@ -30,7 +30,7 @@ function getFileName(metadata: {
     "_" + //remove whitespace from name
     "Task" +
     metadata.taskId +
-    ".webm"
+    ".mp4"
   );
 }
 /**

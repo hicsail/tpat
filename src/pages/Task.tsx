@@ -1,5 +1,5 @@
 import { data } from "../data";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import { SCREENS } from "../constants/screens";
 import Webcam from "../components/Webcam";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
-import WebcamExperimental2 from "../components/WebcamExperimental2";
 
 function Task() {
   const { user } = useContext(UserContext);
@@ -121,7 +120,7 @@ function Task() {
           </Stack>
         </Stack>
       ) : (
-        <WebcamExperimental2 task={task} />
+        <Webcam task={task} />
       )}
     </Box>
   );
