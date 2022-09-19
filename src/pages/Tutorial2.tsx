@@ -40,7 +40,7 @@ function Tutorial2() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Timer on the task"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Tutorial"}</DialogTitle>
         <DialogContent>
           <Typography style={{ whiteSpace: "pre-line" }}>
             {

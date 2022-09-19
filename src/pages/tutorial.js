@@ -173,19 +173,17 @@ function Tutorial() {
             >
               <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
                 {
-                  "The blue button on your screen will say one of the two options below: \
+                  "Important Information about the Buttons \
  \n \n \
-“Start Recording” - This will progress you to the next page where you are expected to enact the task. The camera records automatically and a countdown timer begins to show you your remaining time. You cannot go back once you’ve selected “Start Recording” or your incomplete video will be automatically uploaded to our secure server. \
+ When you are in an actual task you will click a blue bar at the bottom of your screen to “Start Recording” when you want to progress to the recording page. You will automatically progress there as soon as the timer runs out as well. You cannot go back once you’ve selected “Start Recording. The camera records automatically and a countdown timer begins to show you your remaining time. \
 \n \n \
-“Submit Recording” - The blue button on the task enactment page will stop recording your video and upload it automatically to the secure server. Only click this button once you are done with your task. \
-\n \n \
-Note:  If you do not click the blue Submit Recording button, your video will be uploaded once the recording stops at the end of the countdown timer. \
-                "
+“On the top of the next page you will see a “Submit Recording” button. This will stop recording your video and upload it automatically to the secure server. Only click this button once you are done with your task. The video will automatically submit once the timer runs out. \
+"
                 }
               </Typography>
             </Popup>
           </Stack>
-          <Button variant="contained" onClick={handleClickOpen}>
+          <Button variant="outlined" onClick={handleClickOpen}>
             Click to see instructions
           </Button>
         </Stack>
@@ -201,16 +199,16 @@ Note:  If you do not click the blue Submit Recording button, your video will be 
           <div className="tutorial">
             <Typography style={{ whiteSpace: "pre-line" }}>
               {
-                "This is the directions page. Notice the on this page. You have a limited amount of time to view the directions before you are asked to enact the task. \
+                "1. This is the directions page. Notice the timer on this page. You have a limited amount of time to view the directions before you are asked to enact the task. \
                  \n \n \
-                 When the timer runs out or when you click the blue bar titled “Start Recording,” you are sent to a page to enact your task and a recording of your camera will begin. The directions will be viewable on the recording page as well, on the right side of the screen.  \
+                 2. When the timer runs out or when you click the blue bar titled “Start Recording,” you are sent to a page to enact your task and a recording of your camera will begin. The directions will be viewable on the recording page as well, on the right side of the screen.  \
                  \nReminder: During task the blue bar will advance you to the recording screen, only click it when you are ready to record. You cannot go back.\
                  \n \n \
-                 On the next screen you will have to give permission to use your camera microphone. \
+                 3. On the next screen you will have to give permission to use your camera microphone. \
                  \n \n \
-                 When you have finished your task (and have clicked “Submit Recording”) or when the timer runs out, the video will automatically upload to a secure server (when completing an actual task.)  \
+                 4. When you have finished your task (and have clicked “Submit Recording”) or when the timer runs out, the video will automatically upload to a secure server (when completing an actual task.)  \
                  \n \n \
-                 For the purpose of the tutorial, your video will download to your computer instead of uploading to the secure server. This is for you to check the quality of your video prior to beginning an actual task. Reach out to teachsimlab@gmail.com if you have any issues you cannot resolve with your tutorial task video.\
+                 5. For the purpose of the tutorial, your video will download to your computer instead of uploading to the secure server. This is for you to check the quality of your video prior to beginning an actual task. Reach out to teachsimlab@gmail.com if you have any issues you cannot resolve with your tutorial task video.\
                  "
               }
             </Typography>

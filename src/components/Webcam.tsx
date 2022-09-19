@@ -35,7 +35,7 @@ export interface Props {
 }
 const TAG = "Webcam.tsx ";
 
-export default function WebcamExperimental2(props: Props) {
+export default function Webcam(props: Props) {
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -55,9 +55,21 @@ export default function WebcamExperimental2(props: Props) {
   const stopButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
+    window.addEventListener("popstate", () => {
+      console.log("popstate called");
+    });
+  });
+
+  useEffect(() => {
     console.log("opening cam");
     //opens camera and shows camera view
     openButtonRef.current?.click();
+
+    //stop camera when component unmounts
+    return () => {
+      console.log("running cleanup");
+      stopButtonRef.current?.click();
+    };
   }, []);
 
   const onWebcamStatusChange = (status: string) => {
@@ -233,7 +245,9 @@ export default function WebcamExperimental2(props: Props) {
                   Your task is to do the following:
                 </Typography>
                 <Typography variant="body1">{task.task}</Typography>
-                <Typography variant="h6">Remember to:</Typography>
+                <Typography variant="h6" mt={2}>
+                  Remember to:
+                </Typography>
                 {task.prompts.map((t) => (
                   <Typography variant="body1">{" >    " + t}</Typography>
                 ))}

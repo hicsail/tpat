@@ -9,8 +9,6 @@ import { SCREENS } from "../constants/screens";
 import { data } from "../data";
 import { UserContext } from "../store/UserContext";
 
-const title =
-  "The mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires. (William Arthur Ward)";
 const subtitle = "Demonstrate your skills through the assigned tasks below.";
 const TAG = "TryItYourself.tsx ";
 
@@ -28,6 +26,11 @@ function TryItYourself() {
       <Container maxWidth="md">
         <Typography variant="h6" textAlign="center" mt={10}>
           {subtitle}
+        </Typography>
+        <Typography variant="body1" textAlign="center" mt={2}>
+          Note: Your camera and audio will be recording for the tutorial and
+          tasks. We suggest you are in a quiet room where you can give attention
+          to and have few distractions from the tasks.
         </Typography>
       </Container>
       <hr

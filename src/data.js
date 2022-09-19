@@ -12,14 +12,14 @@ export const data = [
     previewImage: TutorialPreviewImage,
     description: [
       "You are introducing models of fractions for your 3rd grade class. You have modeled one-half, now you are moving to fourths.",
-      "You are going to model one-fourth; to your class with this shape: &#x25AD ☐",
+      "You are going to model one-fourth; to your class with this shape: \u25AD",
     ],
     problem: [
-      "You are going to model one-fourth; to your class with this shape:  ",
+      "You are going to model one-fourth; to your class with this shape: \u25AD ",
     ],
     task: [
       "Model how to represent one-fourth with this rectangular shape.",
-      "Use concise and precise mathematical language.",
+      " Use concise and precise mathematical language.",
     ],
     prompts: [
       "Model how to represent one-fourth with this rectangular shape.",
