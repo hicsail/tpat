@@ -9,9 +9,7 @@ function Footer() {
   const [disableLinks, setDisableLinks] = useState(false);
 
   useEffect(() => {
-    console.log("location changed", location);
     if (location.pathname.includes(SCREENS.TASK)) {
-      console.log("setDisableLinks");
       setDisableLinks(true);
     }
   }, [location]);

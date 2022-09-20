@@ -46,9 +46,9 @@ async function uploadTos3(
     email: string;
     taskId: string;
     university: string;
-
     attempts: string;
     firstViewed: string;
+    netPrepTimeInHours: string;
   }
 ) {
   const s3Client = gets3Client();

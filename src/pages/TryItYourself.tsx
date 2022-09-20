@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import Card from "../components/Card";
 import { SCREENS } from "../constants/screens";
+import { STORAGE_KEYS } from "../constants/storageKeys";
 import { data } from "../data";
 import { UserContext } from "../store/UserContext";
 
@@ -20,7 +21,9 @@ function TryItYourself() {
       navigate("/" + SCREENS.LOGIN);
     }
   }, [user]);
-
+  // const taskHistoryString = localStorage.removeItem(
+  //   STORAGE_KEYS.TASK_ATTEMPT_HISTORY
+  // );
   return (
     <div>
       <Container maxWidth="md">

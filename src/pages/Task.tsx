@@ -6,14 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { UserContext } from "../store/UserContext";
 import { SCREENS } from "../constants/screens";
-import Webcam from "../components/Webcam";
+import Webcam, { TaskHistory } from "../components/Webcam";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
 import { STORAGE_KEYS } from "../constants/storageKeys";
-
-export interface TaskHistory {
-  [key: string]: { attempts: number; firstViewed: string };
-}
 
 function Task() {
   const { user } = useContext(UserContext);
@@ -49,6 +45,7 @@ function Task() {
     };
   }, []);
 
+  //  record firstViewed (in  attempt history )
   useEffect(() => {
     const taskHistoryString = localStorage.getItem(
       STORAGE_KEYS.TASK_ATTEMPT_HISTORY
@@ -58,19 +55,10 @@ function Task() {
       taskHistory = JSON.parse(taskHistoryString);
       if (taskHistory) {
         console.log(TAG, "retrieved task history from storage:", taskHistory);
-        //increment attempt number
-        if (taskHistory[taskId]) {
-          taskHistory[taskId].attempts = taskHistory[taskId].attempts + 1;
-        } else {
-          taskHistory[taskId] = {
-            attempts: 1,
-            firstViewed: new Date().toString(),
-          };
-        }
       }
     } else {
       taskHistory = {
-        [taskId]: { attempts: 1, firstViewed: new Date().toLocaleString() },
+        [taskId]: { attempts: 0, firstViewed: new Date().toLocaleString() },
       };
     }
     console.log(TAG, "taskHistory:", taskHistory);
@@ -80,6 +68,26 @@ function Task() {
     );
     setTaskHistory(taskHistory);
   }, []);
+
+  useEffect(() => {
+    if (mode == "recording") {
+      //  update attempt history
+      const updatedHistoryForCurrentTask = {
+        ...taskHistory[taskId],
+        attempts: taskHistory[taskId].attempts + 1,
+      };
+      const updatedTaskHistory = {
+        ...taskHistory,
+        [taskId]: updatedHistoryForCurrentTask,
+      };
+      setTaskHistory(updatedTaskHistory);
+      console.log(TAG, "updatedTaskHistory:", updatedTaskHistory);
+      localStorage.setItem(
+        STORAGE_KEYS.TASK_ATTEMPT_HISTORY,
+        JSON.stringify(updatedTaskHistory)
+      );
+    }
+  }, [mode]);
 
   if (id == undefined) {
     return null;

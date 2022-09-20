@@ -11,9 +11,7 @@ function Navigation() {
 
   //TODO extract intro a separate useIsOnTaskScreen hook
   useEffect(() => {
-    console.log("location changed", location);
     if (location.pathname.includes(SCREENS.TASK)) {
-      console.log("setDisableLinks");
       setDisableLinks(true);
     }
   }, [location]);

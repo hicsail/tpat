@@ -22,11 +22,15 @@ import {
 import { RECORDING_TIME_LIMIT } from "../config/config";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@mui/material/Box";
+import { STORAGE_KEYS } from "../constants/storageKeys";
 
 // enum for where webcam is being used.
 export enum WEBCAM_CONTEXT {
   TUTORIAL,
   TASK,
+}
+export interface TaskHistory {
+  [key: string]: { attempts: number; firstViewed: string };
 }
 
 export interface Props {
@@ -50,19 +54,17 @@ export default function Webcam(props: Props) {
   const [recording, setRecording] = useState(false);
 
   const task = props.task;
-
+  const taskId = task.id;
   const startButtonRef = useRef<HTMLButtonElement | null>(null);
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const stopButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    console.log("opening cam");
     //opens camera and shows camera view
     openButtonRef.current?.click();
 
     //stop camera when component unmounts
     return () => {
-      console.log("running cleanup");
       stopButtonRef.current?.click();
     };
   }, []);
@@ -81,6 +83,12 @@ export default function Webcam(props: Props) {
 
   const uploadTask = async (videoBlob: Blob) => {
     setUploading(true);
+
+    const netPrepTimeInMilliseconds =
+      new Date().getTime() - new Date(props.taskHistory.firstViewed).getTime();
+    const netPrepTimeInHours = netPrepTimeInMilliseconds / 3600000;
+    console.log("netPrepTimeInHours", netPrepTimeInHours);
+
     const metadata = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -89,6 +97,7 @@ export default function Webcam(props: Props) {
       university: user.university,
       attempts: props.taskHistory.attempts.toString(),
       firstViewed: props.taskHistory.firstViewed,
+      netPrepTimeInHours: netPrepTimeInHours.toString(),
     };
     await uploadTos3(videoBlob, metadata);
     setUploading(false);
