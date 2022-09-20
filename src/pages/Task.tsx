@@ -45,7 +45,7 @@ function Task() {
     };
   }, []);
 
-  //  record firstViewed (in  attempt history )
+  //  record firstViewed (in  attempt history ). TODO extract into a hook
   useEffect(() => {
     const taskHistoryString = localStorage.getItem(
       STORAGE_KEYS.TASK_ATTEMPT_HISTORY
@@ -55,6 +55,12 @@ function Task() {
       taskHistory = JSON.parse(taskHistoryString);
       if (taskHistory) {
         console.log(TAG, "retrieved task history from storage:", taskHistory);
+        if (!taskHistory[taskId]) {
+          taskHistory[taskId] = {
+            attempts: 0,
+            firstViewed: new Date().toLocaleString(),
+          };
+        }
       }
     } else {
       taskHistory = {
