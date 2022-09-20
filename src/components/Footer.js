@@ -1,20 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { APP_VERSION } from "../config/config";
 import { SCREENS } from "../constants/screens";
 import "./styles.css";
 
 function Footer() {
+  let location = useLocation();
+  const [disableLinks, setDisableLinks] = useState(false);
+
+  useEffect(() => {
+    console.log("location changed", location);
+    if (location.pathname.includes(SCREENS.TASK)) {
+      console.log("setDisableLinks");
+      setDisableLinks(true);
+    }
+  }, [location]);
   return (
     <div className="footerContainer">
       <div className="footer">
         <ul className="footerLinks">
-          <li>
-            <Link to={SCREENS.LOGIN}>Enter Credentials</Link>
-          </li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+          {!disableLinks && (
+            <>
+              <li>
+                <Link to={SCREENS.LOGIN}>Enter Credentials</Link>
+              </li>
+              <li>
+                <Link to="/">Home</Link>
+              </li>{" "}
+            </>
+          )}
         </ul>
       </div>
       <hr

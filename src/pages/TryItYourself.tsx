@@ -24,7 +24,7 @@ function TryItYourself() {
   return (
     <div>
       <Container maxWidth="md">
-        <Typography variant="h6" textAlign="center" mt={10}>
+        <Typography variant="h6" textAlign="center" mt={10} fontWeight={800}>
           {subtitle}
         </Typography>
         <Typography variant="body1" textAlign="center" mt={2}>

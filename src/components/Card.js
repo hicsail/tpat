@@ -76,6 +76,7 @@ const Card = (props) => {
                 }}
                 id={props.id}
                 name="Start"
+                target={"_blank"}
                 to={`/task/${props.id}`}
               >
                 Start

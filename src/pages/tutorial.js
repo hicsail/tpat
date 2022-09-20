@@ -123,7 +123,7 @@ function Tutorial() {
             </Stack>
           </Stack>
           <Stack>
-            <Typography variant="h6">
+            <Typography variant="h6" fontWeight={800}>
               Your task is to do the following:
             </Typography>
             {task.task.map((t) => (
@@ -131,7 +131,9 @@ function Tutorial() {
             ))}
           </Stack>
           <Stack>
-            <Typography variant="h6">Note:</Typography>
+            <Typography variant="h6" fontWeight={800}>
+              Note:
+            </Typography>
             <Typography variant="body1">
               -You are speaking to your class the entire time.
             </Typography>
@@ -196,23 +198,42 @@ function Tutorial() {
       >
         <DialogTitle id="alert-dialog-title">{"Tutorial"}</DialogTitle>
         <DialogContent>
-          <div className="tutorial">
-            <Typography style={{ whiteSpace: "pre-line" }}>
-              {
-                "1. This is the directions page. Notice the timer on this page. You have a limited amount of time to view the directions before you are asked to enact the task. \
-                 \n \n \
-                 2. When the timer runs out or when you click the blue bar titled “Start Recording,” you are sent to a page to enact your task and a recording of your camera will begin. The directions will be viewable on the recording page as well, on the right side of the screen.  \
-                 \nReminder: During task the blue bar will advance you to the recording screen, only click it when you are ready to record. You cannot go back.\
-                 \n \n \
-                 3. On the next screen you will have to give permission to use your camera microphone. \
-                 \n \n \
-                 4. When you have finished your task (and have clicked “Submit Recording”) or when the timer runs out, the video will automatically upload to a secure server (when completing an actual task.)  \
-                 \n \n \
-                 5. For the purpose of the tutorial, your video will download to your computer instead of uploading to the secure server. This is for you to check the quality of your video prior to beginning an actual task. Reach out to teachsimlab@gmail.com if you have any issues you cannot resolve with your tutorial task video.\
-                 "
-              }
-            </Typography>
-          </div>
+          <p style={{ marginBottom: 10 }}>
+            1. This is the directions page. Notice
+            <span style={{ fontWeight: "bold" }}> the timer</span> on this page.
+            You have a limited amount of time to view the directions before you
+            are asked to enact the task.
+          </p>
+          <p style={{ marginBottom: 10 }}>
+            2. When the timer runs out or when When you have finished your task
+            (and have clicked “Submit Recording”) or when the timer runs out,
+            the video will on this page.
+            <span style={{ fontWeight: "bold" }}>
+              Reminder: During task the blue bar will advance you to the
+              recording screen, only click it when you are ready to record. You
+              cannot go back.
+            </span>
+          </p>
+          <p style={{ marginBottom: 10 }}>
+            3. On the next screen you will have to give
+            <span style={{ fontWeight: "bold" }}>
+              {" "}
+              permission to use your camera microphone.
+            </span>
+          </p>
+          <p style={{ marginBottom: 10 }}>
+            4. When you have finished your task (and have clicked “Submit
+            Recording”) or when the timer runs out, the video will
+            <span style={{ fontWeight: "bold" }}> automatically upload </span>to
+            a secure server (when completing an actual task.)
+          </p>
+          <p style={{ fontStyle: "italic" }}>
+            5. For the purpose of the tutorial, your video will download to your
+            computer instead of uploading to the secure server. This is for you
+            to check the quality of your video prior to beginning an actual
+            task. Reach out to teachsimlab@gmail.com if you have any issues you
+            cannot resolve with your tutorial task video.
+          </p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} autoFocus>

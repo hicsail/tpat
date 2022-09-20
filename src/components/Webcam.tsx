@@ -31,6 +31,7 @@ export enum WEBCAM_CONTEXT {
 
 export interface Props {
   task: typeof data[0]; //TODO define task interface
+  taskHistory: { attempts: number; firstViewed: string };
   context?: WEBCAM_CONTEXT; // where webcam is being used. Video upload procedure of this component depends on the context (tutorial or task).
 }
 const TAG = "Webcam.tsx ";
@@ -53,12 +54,6 @@ export default function Webcam(props: Props) {
   const startButtonRef = useRef<HTMLButtonElement | null>(null);
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const stopButtonRef = useRef<HTMLButtonElement | null>(null);
-
-  useEffect(() => {
-    window.addEventListener("popstate", () => {
-      console.log("popstate called");
-    });
-  });
 
   useEffect(() => {
     console.log("opening cam");
@@ -92,6 +87,8 @@ export default function Webcam(props: Props) {
       email: user.email,
       taskId: task.id.toString(),
       university: user.university,
+      attempts: props.taskHistory.attempts.toString(),
+      firstViewed: props.taskHistory.firstViewed,
     };
     await uploadTos3(videoBlob, metadata);
     setUploading(false);
@@ -244,8 +241,10 @@ export default function Webcam(props: Props) {
                 <Typography variant="h6">
                   Your task is to do the following:
                 </Typography>
-                <Typography variant="body1">{task.task}</Typography>
-                <Typography variant="h6" mt={2}>
+                <Typography variant="body1" fontWeight={800}>
+                  {task.task}
+                </Typography>
+                <Typography variant="h6" mt={2} fontWeight={800}>
                   Remember to:
                 </Typography>
                 {task.prompts.map((t) => (
