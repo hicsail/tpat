@@ -11,7 +11,6 @@ import {
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
 import {
-  Alert,
   Button,
   Chip,
   Container,
@@ -22,7 +21,6 @@ import {
 import { RECORDING_TIME_LIMIT } from "../config/config";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@mui/material/Box";
-import { STORAGE_KEYS } from "../constants/storageKeys";
 import PositionedSnackbar from "./PositionedSnackbar";
 
 // enum for where webcam is being used.
