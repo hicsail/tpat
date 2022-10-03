@@ -35,6 +35,11 @@ function TryItYourself() {
           tasks. We suggest you are in a quiet room where you can give attention
           to and have few distractions from the tasks.
         </Typography>
+        <Typography variant="body1" textAlign="center" mt={2}>
+          For videos to save correctly, you must use your desktop and we
+          recommend the Google Chrome browser. Using a mobile device or other
+          browsers may cause errors or data loss
+        </Typography>
       </Container>
       <hr
         style={{ marginRight: "5%", marginLeft: "5%", marginBottom: "1.5%" }}

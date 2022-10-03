@@ -126,8 +126,10 @@ function Tutorial() {
             <Typography variant="h6" fontWeight={800}>
               Your task is to do the following:
             </Typography>
-            {task.task.map((t) => (
-              <Typography variant="body1">{" >    " + t}</Typography>
+            {task.task.map((t, index) => (
+              <Typography key={index.toString()} variant="body1">
+                {" >    " + t}
+              </Typography>
             ))}
           </Stack>
           <Stack>

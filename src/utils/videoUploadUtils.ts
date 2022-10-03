@@ -63,9 +63,14 @@ async function uploadTos3(
       new PutObjectCommand(uploadParams as PutObjectCommandInput)
     );
     console.log("Upload succeeded", data);
-    return data;
+    //if video is less than 10 bytes, assume upload failed
+    if (videoBlob.size < 10) {
+      return false;
+    }
+    return true;
   } catch (err) {
     console.log("An error occured during upload. Error", err);
+    return false;
   }
 }
 

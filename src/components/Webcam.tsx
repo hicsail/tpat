@@ -5,13 +5,13 @@ import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
 import {
   CAMERA_STATUS,
-  RecordWebcamOptions,
   RecordWebcam,
   WebcamRenderProps,
 } from "react-record-webcam";
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
 import {
+  Alert,
   Button,
   Chip,
   Container,
@@ -23,6 +23,7 @@ import { RECORDING_TIME_LIMIT } from "../config/config";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@mui/material/Box";
 import { STORAGE_KEYS } from "../constants/storageKeys";
+import PositionedSnackbar from "./PositionedSnackbar";
 
 // enum for where webcam is being used.
 export enum WEBCAM_CONTEXT {
@@ -39,6 +40,9 @@ export interface Props {
   context?: WEBCAM_CONTEXT; // where webcam is being used. Video upload procedure of this component depends on the context (tutorial or task).
 }
 const TAG = "Webcam.tsx ";
+const successfulUploadMessage = "Your recording was uploaded successfully";
+const failedUploadMessage =
+  "Your recording failed to upload. Please record again.";
 
 export default function Webcam(props: Props) {
   const { user } = useContext(UserContext);
@@ -52,6 +56,7 @@ export default function Webcam(props: Props) {
   };
   const [uploading, setUploading] = useState(false);
   const [recording, setRecording] = useState(false);
+  const [uploadResultsMessage, setUploadResultsMessage] = useState("");
 
   const task = props.task;
   const taskId = task.id;
@@ -99,8 +104,11 @@ export default function Webcam(props: Props) {
       firstViewed: props.taskHistory.firstViewed,
       netPrepTimeInHours: netPrepTimeInHours.toString(),
     };
-    await uploadTos3(videoBlob, metadata);
+    const uploadResults = await uploadTos3(videoBlob, metadata);
     setUploading(false);
+    setUploadResultsMessage(
+      uploadResults ? successfulUploadMessage : failedUploadMessage
+    );
   };
 
   /* 
@@ -109,8 +117,7 @@ export default function Webcam(props: Props) {
     2. get recording
        a. if tutorial, download video
        b. if task, upload video to s3, 
-    3. navigate  home
-    */
+  */
   const endRecordingSession = async (webcamRenderProps: WebcamRenderProps) => {
     if (webcamRenderProps.status === CAMERA_STATUS.RECORDING) {
       await webcamRenderProps.stop();
@@ -118,22 +125,29 @@ export default function Webcam(props: Props) {
 
     if (props.context == WEBCAM_CONTEXT.TUTORIAL) {
       webcamRenderProps.download();
+      setUploadResultsMessage(successfulUploadMessage);
     } else {
+      //TODO prompt a re-recording here if blob is faulty
       const blob = await webcamRenderProps.getRecording();
       if (blob) {
+        console.log(TAG, "size of video recording:", blob.size);
         await uploadTask(blob);
       } else {
         console.log("could not get recording. Blob:", blob);
+        setUploadResultsMessage(failedUploadMessage);
       }
-      console.log("blob", blob, "blob==undefined", blob == undefined);
     }
+  };
+
+  const onDismissSnackbar = () => {
+    console.log(TAG, "navigating back");
     navigate("/");
   };
 
   return (
     <Box>
       <Grid container spacing={3} flex={1}>
-        <Grid container xs={12} md={6}>
+        <Grid container xs={12} md={6} key="1">
           <Container>
             {uploading ? (
               <Box>
@@ -145,7 +159,11 @@ export default function Webcam(props: Props) {
             ) : (
               <RecordWebcam
                 getStatus={onWebcamStatusChange}
-                options={{ recordingLength: RECORDING_TIME_LIMIT }}
+                options={{
+                  codec: { audio: "aac", video: "av1" },
+                  recordingLength: RECORDING_TIME_LIMIT,
+                }}
+                //TODO change codec audio to aac
                 render={(props: WebcamRenderProps) => {
                   return (
                     <div>
@@ -198,7 +216,11 @@ export default function Webcam(props: Props) {
                         <Button
                           ref={openButtonRef}
                           variant="contained"
-                          disabled={props.status !== CAMERA_STATUS.CLOSED}
+                          //uploadResultsMessage is set after an upload. prevent user's from starting camera again after an upload
+                          disabled={
+                            props.status !== CAMERA_STATUS.CLOSED ||
+                            uploadResultsMessage !== ""
+                          }
                           onClick={props.openCamera}
                         >
                           Open camera
@@ -236,7 +258,7 @@ export default function Webcam(props: Props) {
             )}
           </Container>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} key="2">
           <Stack>
             <Stack direction={"row"} justifyContent={"space-around"}></Stack>
             <Stack spacing={10} mt={5}>
@@ -245,6 +267,18 @@ export default function Webcam(props: Props) {
                   The problem you have chosen is:
                 </Typography>
                 <Typography variant="body1">{task.problem}</Typography>
+                {task.imgURL && (
+                  <div className="img-container">
+                    <img
+                      style={{
+                        width: "250%",
+                        borderRadius: "10px 0px 0px 10px",
+                      }}
+                      src={task.imgURL}
+                      alt="task visualization"
+                    />
+                  </div>
+                )}
               </Stack>
               <Stack>
                 <Typography variant="h6">
@@ -264,6 +298,11 @@ export default function Webcam(props: Props) {
           </Stack>
         </Grid>
       </Grid>
+      <PositionedSnackbar
+        open={uploadResultsMessage != ""}
+        message={uploadResultsMessage}
+        onDismiss={onDismissSnackbar}
+      />
     </Box>
   );
 }

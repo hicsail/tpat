@@ -1,4 +1,4 @@
-import Table1 from "../src/images/table1.3.png";
+import Table1 from "../src/images/task3Table.png";
 import TutorialPreviewImage from "../src/images/TutorialPreviewImage.png";
 import TaskPreviewImage from "../src/images/TaskPreviewImage.png";
 
@@ -12,17 +12,15 @@ export const data = [
     previewImage: TutorialPreviewImage,
     description: [
       "You are introducing models of fractions for your 3rd grade class. You have modeled one-half, now you are moving to fourths.",
-      "You are going to model one-fourth; to your class with a rectangle",
+      "You are going to model one-fourth with a rectangle",
     ],
-    problem: [
-      "You are going to model one-fourth to your class with a rectangle",
-    ],
+    problem: ["You are going to model one-fourth with a rectangle"],
     task: [
       "Model how to represent one-fourth with this rectangular shape.",
       " Use concise and precise mathematical language.",
     ],
     prompts: [
-      "Model how to represent one-fourth with this rectangular shape.",
+      "Model how to represent one-fourth with a rectangle.",
       "Use concise and precise mathematical language.",
     ],
     time: "5 mins",

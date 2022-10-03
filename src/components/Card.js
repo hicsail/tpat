@@ -60,7 +60,7 @@ const Card = (props) => {
                 to={"/tutorial"}
                 style={buttonStyle}
                 id={props.id}
-                target={"_blank"}
+                // target={"_blank"}
                 name="Start"
               >
                 Start

@@ -55,10 +55,9 @@ function Login() {
           Welcome to the Performance Task Site!
         </Typography>
         <Typography variant="body1" mt={3}>
-          This performance task assignment is expected to take 40 minutes,
-          including a tutorial to the performance task recording tool. Please
-          note that you will only be able to access and complete the tasks a
-          single time.
+          The performance task assignment is expected to take 30 minutes, with
+          an additional brief tutorial included. Please note that you will only
+          be able to access and complete the tasks a single time.
           <Typography fontWeight={800}>
             Do not log into the site until you are ready to begin your three
             performance tasks.
