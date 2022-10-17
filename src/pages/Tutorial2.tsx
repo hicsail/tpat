@@ -8,7 +8,6 @@ import DialogContent from "@mui/material/DialogContent";
 import { data } from "../data";
 import { Box, Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import Webcam2 from "../components/Webcam2";
 
 function Tutorial2() {
   const task = data[0];
@@ -28,7 +27,7 @@ function Tutorial2() {
     <>
       <Box margin={5}>
         <Stack>
-          <Webcam2
+          <Webcam
             task={task}
             context={WEBCAM_CONTEXT.TUTORIAL}
             taskHistory={{ attempts: 1, firstViewed: "some date" }}
