@@ -49,6 +49,7 @@ async function uploadTos3(
     attempts: string;
     firstViewed: string;
     netPrepTimeInHours: string;
+    userAgent: string;
   }
 ) {
   const s3Client = gets3Client();

@@ -192,6 +192,7 @@ export default function Webcam(props: Props) {
       attempts: props.taskHistory.attempts.toString(),
       firstViewed: props.taskHistory.firstViewed,
       netPrepTimeInHours: netPrepTimeInHours.toString(),
+      userAgent: window.navigator.userAgent,
     };
     const uploadResults = await uploadTos3(videoBlob, metadata);
     setUploadResultsMessage(
