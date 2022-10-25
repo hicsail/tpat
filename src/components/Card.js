@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SCREENS } from "../constants/screens";
 
 const Card = (props) => {
   const buttonStyle = {
@@ -9,6 +10,17 @@ const Card = (props) => {
     textDecoration: "none",
     marginBottom: "2%",
   };
+
+  var destination = "/" + SCREENS.TASK;
+  switch (props.id) {
+    case "-1":
+      destination = "/" + SCREENS.CAM_MIC_CHECK;
+      break;
+
+    default:
+      break;
+  }
+
   return (
     <div
       style={{
@@ -53,9 +65,19 @@ const Card = (props) => {
             >
               {props.time}
             </p>
-            {props.id === "0" ? (
+            {/* go to mic/check if id == -1 */}
+            <Link
+              to={destination}
+              style={buttonStyle}
+              id={props.id}
+              target={"_blank"}
+              name="Start"
+            >
+              Start
+            </Link>
+            {/* {props.id === "0" ? (
               <Link
-                to={"/tutorial"}
+                to={destination}
                 style={buttonStyle}
                 id={props.id}
                 target={"_blank"}
@@ -80,7 +102,7 @@ const Card = (props) => {
               >
                 Start
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </div>

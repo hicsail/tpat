@@ -254,6 +254,9 @@ export default function Webcam(props: Props) {
             {mode === "recording" && (
               <ReactMediaRecorder
                 video
+                mediaRecorderOptions={{
+                  mimeType: "video/x-matroska;codecs=avc1",
+                }}
                 onStop={(mediaBlobUrl, blob) => {
                   console.log(
                     "On stop called. mediaBlobUrl",
@@ -378,3 +381,14 @@ export default function Webcam(props: Props) {
     </Box>
   );
 }
+
+/**
+ *
+ * Mic & check
+ * open webcam
+ * check upload size
+ * check audio value
+ * show success video
+ *
+ *
+ */

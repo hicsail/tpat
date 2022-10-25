@@ -1,7 +1,7 @@
 import Box from "@material-ui/core/Box";
 import { Container, Typography } from "@mui/material";
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Card from "../components/Card";
@@ -16,14 +16,15 @@ const TAG = "TryItYourself.tsx ";
 function TryItYourself() {
   const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
+
   useEffect(() => {
     if (!user) {
       navigate("/" + SCREENS.LOGIN);
     }
   }, [user]);
-  // const taskHistoryString = localStorage.removeItem(
-  //   STORAGE_KEYS.TASK_ATTEMPT_HISTORY
-  // );
+
+  const [camMicCheckCompleted, setCamMicCheckCompleted] = useState(false);
+
   return (
     <div>
       <Container maxWidth="md">
@@ -44,18 +45,31 @@ function TryItYourself() {
       <hr
         style={{ marginRight: "5%", marginLeft: "5%", marginBottom: "1.5%" }}
       ></hr>
-      {data.map((taskDetail, index) => {
-        return (
-          <Card
-            key={taskDetail.id}
-            title={taskDetail.title}
-            preview={taskDetail.preview}
-            previewImage={taskDetail.previewImage}
-            time={taskDetail.time}
-            id={taskDetail.id}
-          />
-        );
-      })}
+      {camMicCheckCompleted ? (
+        <div></div>
+      ) : (
+        //   data.map((taskDetail, index) => {
+        //   return (
+        //     <Card
+        //       key={taskDetail.id}
+        //       title={taskDetail.title}
+        //       preview={taskDetail.preview}
+        //       previewImage={taskDetail.previewImage}
+        //       time={taskDetail.time}
+        //       id={taskDetail.id}
+        //     />
+        //   );
+        // })
+
+        <Card
+          key={data[1].id}
+          title={data[1].title}
+          preview={data[1].preview}
+          previewImage={data[1].previewImage}
+          time={"5s"}
+          id={"-1"}
+        />
+      )}
     </div>
   );
 }
