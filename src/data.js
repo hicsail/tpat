@@ -1,7 +1,18 @@
 import Table1 from "../src/images/task3Table.png";
 import TutorialPreviewImage from "../src/images/TutorialPreviewImage.png";
 import TaskPreviewImage from "../src/images/TaskPreviewImage.png";
+export const camMicCheckTask = {
+  id: "-1",
+  category: "",
+  title: "Camera and Mic Check",
+  preview:
+    "Record a 5 sec video and confirm that your camera and mic are working properly.",
+  previewImage: TutorialPreviewImage,
 
+  time: "5s",
+  imgURL: "",
+  video: "#",
+};
 export const data = [
   {
     id: "0",

@@ -9,6 +9,7 @@ import Webcam, { TaskHistory } from "../components/Webcam";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
 import { STORAGE_KEYS } from "../constants/storageKeys";
+import { useTaskHistory } from "../hooks/useTaskHistory";
 
 function Task() {
   const { user } = useContext(UserContext);
@@ -25,6 +26,8 @@ function Task() {
 
   const [mode, setMode] = useState<"preparing" | "recording">("preparing");
   const [taskHistory, setTaskHistory] = useState<TaskHistory>({});
+  // const [taskHistory, setTaskHistory] = useTaskHistory(-1);
+
   const TAG = "Task.tsx ";
   // localStorage.removeItem(STORAGE_KEYS.TASK_ATTEMPT_HISTORY);
   //go to login page if user hasn't entered credentials yet

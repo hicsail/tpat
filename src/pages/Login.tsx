@@ -38,6 +38,7 @@ function Login() {
 
   const handleSubmit = () => {
     const credentials = {
+      ...user,
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -108,7 +109,7 @@ function Login() {
             </Select>
           </FormControl>
           <Button variant="contained" onClick={handleSubmit}>
-            {user ? "Re-enter Credentials" : "Submit"}
+            {user ? "Update credentials" : "Submit"}
           </Button>
         </Stack>
         <Typography variant="body1">

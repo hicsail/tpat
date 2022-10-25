@@ -1,4 +1,3 @@
-import Box from "@material-ui/core/Box";
 import { Container, Typography } from "@mui/material";
 import * as React from "react";
 import { useEffect, useState } from "react";
@@ -6,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 import Card from "../components/Card";
 import { SCREENS } from "../constants/screens";
-import { STORAGE_KEYS } from "../constants/storageKeys";
-import { data } from "../data";
+import { camMicCheckTask, data } from "../data";
 import { UserContext } from "../store/UserContext";
 
 const subtitle = "Demonstrate your skills through the assigned tasks below.";
+
 const TAG = "TryItYourself.tsx ";
 
 function TryItYourself() {
@@ -22,8 +21,6 @@ function TryItYourself() {
       navigate("/" + SCREENS.LOGIN);
     }
   }, [user]);
-
-  const [camMicCheckCompleted, setCamMicCheckCompleted] = useState(false);
 
   return (
     <div>
@@ -45,29 +42,29 @@ function TryItYourself() {
       <hr
         style={{ marginRight: "5%", marginLeft: "5%", marginBottom: "1.5%" }}
       ></hr>
-      {camMicCheckCompleted ? (
-        <div></div>
+      {user && user.camMicCheckComplete ? (
+        <div>
+          {data.map((taskDetail, _) => {
+            return (
+              <Card
+                key={taskDetail.id}
+                title={taskDetail.title}
+                preview={taskDetail.preview}
+                previewImage={taskDetail.previewImage}
+                time={taskDetail.time}
+                id={taskDetail.id}
+              />
+            );
+          })}
+        </div>
       ) : (
-        //   data.map((taskDetail, index) => {
-        //   return (
-        //     <Card
-        //       key={taskDetail.id}
-        //       title={taskDetail.title}
-        //       preview={taskDetail.preview}
-        //       previewImage={taskDetail.previewImage}
-        //       time={taskDetail.time}
-        //       id={taskDetail.id}
-        //     />
-        //   );
-        // })
-
         <Card
-          key={data[1].id}
-          title={data[1].title}
-          preview={data[1].preview}
-          previewImage={data[1].previewImage}
-          time={"5s"}
-          id={"-1"}
+          key={camMicCheckTask.id}
+          title={camMicCheckTask.title}
+          preview={camMicCheckTask.preview}
+          previewImage={camMicCheckTask.previewImage}
+          time={camMicCheckTask.time}
+          id={camMicCheckTask.id}
         />
       )}
     </div>

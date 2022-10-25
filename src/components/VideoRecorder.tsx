@@ -29,6 +29,8 @@ const successfulUploadMessage = "Your recording was uploaded successfully";
 const failedUploadMessage =
   "Your recording failed to upload. Please record again.";
 
+const videoStyle = { width: "100%", height: "100%", transform: "scale(-1, 1)" };
+
 const LiveVideoView = ({
   stream,
   audioStream,
@@ -57,11 +59,9 @@ const LiveVideoView = ({
   }
 
   return (
-    <>
-      <Stack style={{ width: "100%", height: "100%" }}>
-        <video ref={videoRef} autoPlay controls={false} />
-      </Stack>
-    </>
+    <Stack style={videoStyle}>
+      <video ref={videoRef} autoPlay controls={false} />
+    </Stack>
   );
 };
 
@@ -71,7 +71,7 @@ const VideoReplayView = ({
   mediaBlobUrl: string | undefined;
 }) => {
   return (
-    <Stack style={{ width: "100%", height: "100%" }}>
+    <Stack style={videoStyle}>
       <video src={mediaBlobUrl} autoPlay loop controls={false} />
     </Stack>
   );
@@ -140,8 +140,9 @@ export default function VideoRecorder(props: Props) {
     };
   }, []);
 
+  //TODO download as webm
   const downloadRecording = (mediaBlobUrl: string) => {
-    const pathName = "teachertaskTutorial";
+    const pathName = "teachertaskTutorial.webm";
     try {
       // TODO test in safari
       // for Chrome

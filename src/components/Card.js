@@ -16,8 +16,12 @@ const Card = (props) => {
     case "-1":
       destination = "/" + SCREENS.CAM_MIC_CHECK;
       break;
+    case "0":
+      destination = "/" + SCREENS.TUTORIAL;
+      break;
 
     default:
+      destination = "/" + SCREENS.TASK + "/" + props.id;
       break;
   }
 
