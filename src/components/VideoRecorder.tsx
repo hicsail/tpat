@@ -159,18 +159,10 @@ export default function VideoRecorder(props: Props) {
     setMode("completed");
   };
 
-  /* 
-  steps in endRecordingSession
-    1. stop recording
-    2. get recording
-       a. if tutorial, download video
-       b. if task, upload video to s3, 
-  */
   const endRecordingSession = async (mediaBlobUrl: string, blob: Blob) => {
     props.onRecordingComplete(mediaBlobUrl, blob);
     if (blob) {
       console.log(TAG, "size of video recording:", blob.size);
-      //download video when in tutorial
       if (props.downloadRecording) {
         downloadRecording(mediaBlobUrl);
       }
@@ -275,14 +267,3 @@ export default function VideoRecorder(props: Props) {
     </Box>
   );
 }
-
-/**
- *
- * Mic & check
- * open webcam
- * check upload size
- * check audio value
- * show success video
- *
- *
- */

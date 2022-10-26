@@ -10,6 +10,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { useTaskHistory } from "../hooks/useTaskHistory";
+import TaskView from "../components/TaskView";
 
 function Task() {
   const { user } = useContext(UserContext);
@@ -172,7 +173,7 @@ function Task() {
           </Stack>
         </Stack>
       ) : (
-        <Webcam task={task} taskHistory={taskHistory[taskId]} />
+        <TaskView task={task} taskHistory={taskHistory[taskId]} />
       )}
     </Box>
   );

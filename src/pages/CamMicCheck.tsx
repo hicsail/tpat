@@ -42,17 +42,22 @@ function CamMicCheck() {
   };
 
   const onFinish = () => {
-    //record completion in memory
-    const credentials = { ...user, camMicCheckComplete: true };
+    if (checked) {
+      //record completion in memory
+      const credentials = { ...user, camMicCheckComplete: true };
 
-    setUser(credentials);
-    localStorage.setItem(STORAGE_KEYS.CREDENTIALS, JSON.stringify(credentials));
-    navigate(SCREENS.HOME);
+      setUser(credentials);
+      localStorage.setItem(
+        STORAGE_KEYS.CREDENTIALS,
+        JSON.stringify(credentials)
+      );
+      navigate(SCREENS.HOME);
+    }
   };
 
   return (
     <Container maxWidth="sm">
-      <Box>
+      <Box marginTop={10}>
         <VideoRecorder
           downloadRecording
           onRecordingComplete={onRecordingComplete}

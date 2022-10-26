@@ -26,7 +26,7 @@ function Layout() {
           "retrieved credentials from storage:",
           savedCredentials
         );
-        setUser(savedCredentials);
+        setUser({ ...savedCredentials, camMicCheckComplete: null });
       }
     }
     setAttemptedToRetrieveStoredCredentials(true);
