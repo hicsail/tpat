@@ -143,6 +143,7 @@ const renderTask = (task: any) => {
   );
 };
 
+// TODO delete. Webcam no used anymore
 export default function Webcam(props: Props) {
   const [mode, setMode] = useState<"recording" | "uploading" | "completed">(
     "recording"

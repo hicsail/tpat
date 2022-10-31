@@ -6,8 +6,13 @@ import {
   Button,
   Checkbox,
   Container,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  FormLabel,
+  Link,
+  Radio,
+  RadioGroup,
   Stack,
   Typography,
 } from "@mui/material";
@@ -15,6 +20,7 @@ import VideoRecorder from "../components/VideoRecorder";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { SCREENS } from "../constants/screens";
 import { CAM_MIC_CHECK_TIME_LIMIT } from "../config/config";
+import ResolvePermissionError from "../components/ResolvePermissionError";
 
 const TAG = "CamMicCheck.tsx ";
 
@@ -23,7 +29,9 @@ function CamMicCheck() {
   const navigate = useNavigate();
 
   const [passedAllCamMicChecks, setPassedAllCamMicChecks] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [micCheckResults, setmicCheckResults] = useState<"noIssues" | "issues">(
+    "noIssues"
+  );
   const [recordingComplete, setRecordingComplete] = useState(false);
 
   /**
@@ -42,7 +50,7 @@ function CamMicCheck() {
   };
 
   const onFinish = () => {
-    if (checked) {
+    if (micCheckResults) {
       //record completion in memory
       const credentials = { ...user, camMicCheckComplete: true };
 
@@ -65,30 +73,37 @@ function CamMicCheck() {
         />
       </Box>
 
-      {passedAllCamMicChecks && (
-        <Typography>
-          No issues detected: Your cam and mic are setup properly
-        </Typography>
-      )}
-
       {recordingComplete && (
         <Stack alignContent={"center"} spacing={5} marginY={5}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={checked}
-                  onChange={(_, checked) => {
-                    setChecked(checked);
-                  }}
-                />
-              }
-              label="I watched my downloaded video: There are no issues with my video and audio"
-            />
-          </FormGroup>
-          <Button variant="contained" onClick={onFinish}>
-            Finish
-          </Button>
+          <FormControl>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={micCheckResults}
+              onChange={(_, checked) => {
+                setmicCheckResults(checked as "noIssues" | "issues");
+              }}
+            >
+              <FormControlLabel
+                value={"noIssues"}
+                control={<Radio />}
+                label="I watched my downloaded video: There are no issues with my video and audio"
+              />
+              <FormControlLabel
+                value={"issues"}
+                control={<Radio />}
+                label=" There are issues with my video and audio"
+              />
+            </RadioGroup>
+          </FormControl>
+
+          {micCheckResults == "issues" ? (
+            <ResolvePermissionError />
+          ) : (
+            <Button variant="contained" onClick={onFinish}>
+              Finish
+            </Button>
+          )}
         </Stack>
       )}
     </Container>

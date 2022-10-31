@@ -1,12 +1,11 @@
 import "../components/styles.css";
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import CountDownTimer from "./Timer";
-import { useNavigate } from "react-router-dom";
 
-import { UserContext } from "../store/UserContext";
 import { Button, Chip, Container, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { ReactMediaRecorder } from "react-media-recorder";
+import ResolvePermissionError from "./ResolvePermissionError";
 
 // enum for where webcam is being used.
 export enum WEBCAM_CONTEXT {
@@ -25,7 +24,6 @@ export interface Props {
 }
 
 const TAG = "Webcam.tsx ";
-const successfulUploadMessage = "Your recording was uploaded successfully";
 const failedUploadMessage =
   "Your recording failed to upload. Please record again.";
 
@@ -103,7 +101,10 @@ const ErrorDisplay = ({ error }: { error: string }) => {
   return (
     <>
       {errorMessage && (
-        <Typography color={"red"}>{"Error:" + errorMessage}</Typography>
+        <Stack spacing={4}>
+          <Typography color={"red"}>{"Error: " + errorMessage}</Typography>
+          <ResolvePermissionError />
+        </Stack>
       )}
     </>
   );
@@ -114,8 +115,6 @@ export default function VideoRecorder(props: Props) {
     "recording"
   );
   const [uploadResultsMessage, setUploadResultsMessage] = useState("");
-  const { user } = useContext(UserContext);
-  const navigate = useNavigate();
   const timeLimit = props.recordingTimeLimit;
   const hoursMinSecs = {
     minutes: Math.floor(timeLimit / 60),
@@ -177,9 +176,6 @@ export default function VideoRecorder(props: Props) {
       <Container>
         <ReactMediaRecorder
           video
-          mediaRecorderOptions={{
-            mimeType: "video/x-matroska;codecs=avc1",
-          }}
           onStop={(mediaBlobUrl, blob) => {
             console.log(
               "On stop called. mediaBlobUrl",
@@ -233,7 +229,9 @@ export default function VideoRecorder(props: Props) {
                 <Button
                   ref={startButtonRef}
                   variant="contained"
-                  disabled={status === "recording" || status === "stopped"}
+                  disabled={
+                    status === "recording" || status === "stopped" || !!error
+                  }
                   onClick={startRecording}
                 >
                   Start Recording
