@@ -87,12 +87,12 @@ function CamMicCheck() {
               <FormControlLabel
                 value={"noIssues"}
                 control={<Radio />}
-                label="I watched my downloaded video: There are no issues with my video and audio"
+                label="By checking this box I confirm that I watched my downloaded video and there are no issues: my video captured my image and the audio. "
               />
               <FormControlLabel
                 value={"issues"}
                 control={<Radio />}
-                label=" There are issues with my video and audio"
+                label="There were issues with my video and/or audio that I could not solve."
               />
             </RadioGroup>
           </FormControl>

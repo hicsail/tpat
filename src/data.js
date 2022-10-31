@@ -6,7 +6,7 @@ export const camMicCheckTask = {
   category: "",
   title: "Camera and Mic Check",
   preview:
-    "Record a 5 sec video and confirm that your camera and mic are working properly.",
+    "Click start to check that your camera and microphone are working properly, by recording a five second video. This is essential to successful engagement with the tasks and for accurate data collection.",
   previewImage: TutorialPreviewImage,
 
   time: "5s",

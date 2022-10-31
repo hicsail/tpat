@@ -34,7 +34,11 @@ function ResolvePermissionError() {
         </Link>
       </Stack>
       <Typography>
-        Please email teachsimlab@gmail.com if you still need help.
+        Please email{" "}
+        <Typography fontWeight={800} style={{ display: "inline-block" }}>
+          teachsimlab@gmail.com
+        </Typography>{" "}
+        if you still need help.
       </Typography>
     </Stack>
   );

@@ -36,7 +36,7 @@ function TryItYourself() {
         <Typography variant="body1" textAlign="center" mt={2}>
           For videos to save correctly, you must use your desktop and we
           recommend the Google Chrome browser. Using a mobile device or other
-          browsers may cause errors or data loss
+          browsers may cause errors or data loss.
         </Typography>
       </Container>
       <hr

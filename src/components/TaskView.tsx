@@ -130,6 +130,8 @@ export default function TaskView(props: Props) {
     if (blob) {
       if (props.context != WEBCAM_CONTEXT.TUTORIAL) {
         await uploadTask(blob);
+      } else {
+        setUploadResultsMessage("Video was downloaded.");
       }
       setMode("completed");
     } else {
@@ -179,11 +181,13 @@ export default function TaskView(props: Props) {
                 spacing={5}
               >
                 <Typography variant="h4">
-                  Video uploaded successfully
+                  Video uploaded successfully.
                 </Typography>
 
                 <Typography variant="h6">
-                  Make sure to complete all tasks
+                  Click the back button to return to the list of tasks. Note:
+                  You must track your own completion, as the task list does not
+                  show whether or not you have completed each task.
                 </Typography>
               </Stack>
             )}
