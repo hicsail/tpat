@@ -129,6 +129,7 @@ export default function VideoRecorder(props: Props) {
     startButtonRef.current?.click();
 
     recordingTimer = setTimeout(() => {
+      console.log(TAG, "time up baby");
       stopButtonRef.current?.click();
     }, timeLimit * 1000);
 
@@ -143,7 +144,6 @@ export default function VideoRecorder(props: Props) {
   const downloadRecording = (mediaBlobUrl: string) => {
     const pathName = "teachertaskTutorial.webm";
     try {
-      // TODO test in safari
       // for Chrome
       const link = document.createElement("a");
       link.href = mediaBlobUrl;
@@ -151,7 +151,6 @@ export default function VideoRecorder(props: Props) {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      //   }
     } catch (err) {
       console.error(err);
     }
@@ -233,6 +232,13 @@ export default function VideoRecorder(props: Props) {
                     status === "recording" || status === "stopped" || !!error
                   }
                   onClick={startRecording}
+                  //   onClick={async () => {
+                  //     recordingTimer = setTimeout(() => {
+                  //       console.log(TAG, "time up baby");
+                  //       stopButtonRef.current?.click();
+                  //     }, timeLimit * 1000);
+                  //     // startRecording();
+                  //   }}
                 >
                   Start Recording
                 </Button>

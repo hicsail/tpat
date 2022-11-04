@@ -5,11 +5,10 @@ import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../store/UserContext";
 import { SCREENS } from "../constants/screens";
-import Webcam, { TaskHistory } from "../components/Webcam";
+import { TaskHistory } from "../components/Webcam";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
 import { STORAGE_KEYS } from "../constants/storageKeys";
-import { useTaskHistory } from "../hooks/useTaskHistory";
 import TaskView from "../components/TaskView";
 
 function Task() {
@@ -27,7 +26,6 @@ function Task() {
 
   const [mode, setMode] = useState<"preparing" | "recording">("preparing");
   const [taskHistory, setTaskHistory] = useState<TaskHistory>({});
-  // const [taskHistory, setTaskHistory] = useTaskHistory(-1);
 
   const TAG = "Task.tsx ";
   // localStorage.removeItem(STORAGE_KEYS.TASK_ATTEMPT_HISTORY);
@@ -103,6 +101,7 @@ function Task() {
   }
 
   const task = data[taskIndex];
+  console.log("taskIndex", taskIndex);
 
   return (
     <Box margin={5}>
@@ -134,7 +133,9 @@ function Task() {
             <Stack>
               <Typography variant="button">{task.category}</Typography>
               <Typography variant="h3">{task.title}</Typography>
-              <Typography variant="body1">{task.description}</Typography>
+              <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
+                {task.description}
+              </Typography>
             </Stack>
             <Stack>
               <Typography variant="h6">

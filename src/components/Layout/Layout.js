@@ -16,7 +16,6 @@ function Layout() {
   ] = useState(false);
 
   useEffect(() => {
-    // localStorage.removeItem(STORAGE_KEYS.CREDENTIALS);
     const credentialsObject = localStorage.getItem(STORAGE_KEYS.CREDENTIALS);
     if (credentialsObject) {
       const savedCredentials = JSON.parse(credentialsObject);
@@ -26,7 +25,8 @@ function Layout() {
           "retrieved credentials from storage:",
           savedCredentials
         );
-        setUser({ ...savedCredentials, camMicCheckComplete: null });
+        setUser(savedCredentials);
+        // setUser({ ...savedCredentials, camMicCheckComplete: null }); For testing
       }
     }
     setAttemptedToRetrieveStoredCredentials(true);

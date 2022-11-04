@@ -34,7 +34,15 @@ function ResolvePermissionError() {
         </Link>
       </Stack>
       <Typography>
-        Please email{" "}
+        Please{" "}
+        <Link
+          href="https://forms.gle/qBQMBzAC8nhPSWoTA"
+          target="_blank"
+          rel="noopener"
+        >
+          fill this form
+        </Link>{" "}
+        and email{" "}
         <Typography fontWeight={800} style={{ display: "inline-block" }}>
           teachsimlab@gmail.com
         </Typography>{" "}

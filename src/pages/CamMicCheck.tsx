@@ -4,17 +4,12 @@ import { UserContext } from "../store/UserContext";
 import {
   Box,
   Button,
-  Checkbox,
   Container,
   FormControl,
   FormControlLabel,
-  FormGroup,
-  FormLabel,
-  Link,
   Radio,
   RadioGroup,
   Stack,
-  Typography,
 } from "@mui/material";
 import VideoRecorder from "../components/VideoRecorder";
 import { STORAGE_KEYS } from "../constants/storageKeys";
@@ -28,7 +23,6 @@ function CamMicCheck() {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const [passedAllCamMicChecks, setPassedAllCamMicChecks] = useState(false);
   const [micCheckResults, setmicCheckResults] = useState<"noIssues" | "issues">(
     "noIssues"
   );

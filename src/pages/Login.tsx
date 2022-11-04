@@ -20,6 +20,7 @@ const enum UNIVERSITIES {
   UVA = "UVA",
   UD = "UD",
   JMU = "JMU",
+  OTHER = "Other",
 }
 
 function Login() {
@@ -103,6 +104,7 @@ function Login() {
               label="University"
               onChange={(e) => setUniversity(e.target.value as UNIVERSITIES)}
             >
+              <MenuItem value={UNIVERSITIES.OTHER}>Other</MenuItem>
               <MenuItem value={UNIVERSITIES.UVA}>UVA</MenuItem>
               <MenuItem value={UNIVERSITIES.UD}>UD</MenuItem>
               <MenuItem value={UNIVERSITIES.JMU}>JMU</MenuItem>

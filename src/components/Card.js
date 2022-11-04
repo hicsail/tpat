@@ -69,7 +69,6 @@ const Card = (props) => {
             >
               {props.time}
             </p>
-            {/* go to mic/check if id == -1 */}
             <Link
               to={destination}
               style={buttonStyle}
@@ -79,34 +78,6 @@ const Card = (props) => {
             >
               Start
             </Link>
-            {/* {props.id === "0" ? (
-              <Link
-                to={destination}
-                style={buttonStyle}
-                id={props.id}
-                target={"_blank"}
-                name="Start"
-              >
-                Start
-              </Link>
-            ) : (
-              <Link
-                style={{
-                  border: "2px solid #e26c40",
-                  padding: "1%",
-                  color: "#e26c40",
-                  borderRadius: "5px ",
-                  textDecoration: "none",
-                  marginBottom: "2%",
-                }}
-                id={props.id}
-                name="Start"
-                target={"_blank"}
-                to={`/task/${props.id}`}
-              >
-                Start
-              </Link>
-            )} */}
           </div>
         </div>
       </div>
