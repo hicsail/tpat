@@ -4,7 +4,7 @@ import CountDownTimer from "./Timer";
 
 import { Button, Chip, Container, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import { ReactMediaRecorder } from "react-media-recorder";
+import { useReactMediaRecorder } from "react-media-recorder";
 import ResolvePermissionError from "./ResolvePermissionError";
 
 // enum for where webcam is being used.
@@ -37,14 +37,6 @@ const LiveVideoView = ({
   audioStream: any;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  if (audioStream) {
-    const audioTrack = audioStream.getAudioTracks();
-    console.log(" audioTrack track", audioTrack);
-    if (audioTrack.readyState == "live") {
-      console.log("Recording audio");
-    }
-  }
 
   useEffect(() => {
     if (videoRef.current && stream) {
@@ -123,21 +115,43 @@ export default function VideoRecorder(props: Props) {
   const startButtonRef = useRef<HTMLButtonElement | null>(null);
   const stopButtonRef = useRef<HTMLButtonElement | null>(null);
   var recordingTimer: NodeJS.Timeout;
+  const {
+    status,
+    startRecording,
+    stopRecording,
+    mediaBlobUrl,
+    previewStream,
+    previewAudioStream,
+    error,
+  } = useReactMediaRecorder({
+    video: true,
+    stopStreamsOnStop: true,
+    onStop: (mediaBlobUrl, blob) => {
+      console.log("On stop called. mediaBlobUrl", mediaBlobUrl, "blob", blob);
+      setMode("uploading");
+      endRecordingSession(mediaBlobUrl, blob);
+    },
+  });
+
+  useEffect(() => {
+    if (status == "recording") {
+      console.log("status", status);
+      recordingTimer = setTimeout(() => {
+        console.log(TAG, "time up baby");
+        stopButtonRef.current?.click();
+      }, timeLimit * 1000);
+
+      //stop camera and clear timeout when component unmounts
+      return () => {
+        recordingTimer && clearTimeout(recordingTimer);
+        stopButtonRef.current?.click();
+      };
+    }
+  }, [status]);
 
   useEffect(() => {
     //opens camera and shows camera view
     startButtonRef.current?.click();
-
-    recordingTimer = setTimeout(() => {
-      console.log(TAG, "time up baby");
-      stopButtonRef.current?.click();
-    }, timeLimit * 1000);
-
-    //stop camera and clear timeout when component unmounts
-    return () => {
-      recordingTimer && clearTimeout(recordingTimer);
-      stopButtonRef.current?.click();
-    };
   }, []);
 
   //TODO download as webm
@@ -173,100 +187,70 @@ export default function VideoRecorder(props: Props) {
   return (
     <Box>
       <Container>
-        <ReactMediaRecorder
-          video
-          onStop={(mediaBlobUrl, blob) => {
-            console.log(
-              "On stop called. mediaBlobUrl",
-              mediaBlobUrl,
-              "blob",
-              blob
-            );
-            setMode("uploading");
-            endRecordingSession(mediaBlobUrl, blob);
-          }}
-          render={({
-            status,
-            startRecording,
-            stopRecording,
-            mediaBlobUrl,
-            previewStream,
-            previewAudioStream,
-            error,
-          }) => (
-            <div>
-              <Stack
-                direction={"row"}
-                alignItems="center"
-                justifyContent={"space-between"}
-                mb={3}
-              >
-                <Stack direction={"row"} alignItems="center">
-                  <Typography variant="body1" marginRight={2}>
-                    Camera status:
-                  </Typography>
-                  <Chip
-                    label={status}
-                    color={status === "recording" ? "success" : "default"}
-                  />
-                </Stack>
-                {status === "recording" && (
-                  <Stack direction={"row"} alignItems="center">
-                    <Typography variant="body1" marginRight={2}>
-                      Time left:
-                    </Typography>
-                    <CountDownTimer hoursMinSecs={hoursMinSecs} />
-                  </Stack>
-                )}
+        <div>
+          <Stack
+            direction={"row"}
+            alignItems="center"
+            justifyContent={"space-between"}
+            mb={3}
+          >
+            <Stack direction={"row"} alignItems="center">
+              <Typography variant="body1" marginRight={2}>
+                Camera status:
+              </Typography>
+              <Chip
+                label={status}
+                color={status === "recording" ? "success" : "default"}
+              />
+            </Stack>
+            {status === "recording" && (
+              <Stack direction={"row"} alignItems="center">
+                <Typography variant="body1" marginRight={2}>
+                  Time left:
+                </Typography>
+                <CountDownTimer hoursMinSecs={hoursMinSecs} />
               </Stack>
-              <Stack
-                direction={"row"}
-                alignItems="center"
-                justifyContent={"space-between"}
-                mb={3}
-              >
-                <Button
-                  ref={startButtonRef}
-                  variant="contained"
-                  disabled={
-                    status === "recording" || status === "stopped" || !!error
-                  }
-                  onClick={startRecording}
-                  //   onClick={async () => {
-                  //     recordingTimer = setTimeout(() => {
-                  //       console.log(TAG, "time up baby");
-                  //       stopButtonRef.current?.click();
-                  //     }, timeLimit * 1000);
-                  //     // startRecording();
-                  //   }}
-                >
-                  Start Recording
-                </Button>
-                <Button
-                  ref={stopButtonRef}
-                  variant="contained"
-                  disabled={status !== "recording"}
-                  onClick={() => {
-                    stopRecording();
-                    recordingTimer && clearTimeout(recordingTimer);
-                  }}
-                >
-                  Submit recording
-                </Button>
-              </Stack>
+            )}
+          </Stack>
+          <Stack
+            direction={"row"}
+            alignItems="center"
+            justifyContent={"space-between"}
+            mb={3}
+          >
+            <Button
+              ref={startButtonRef}
+              variant="contained"
+              disabled={
+                status === "recording" || status === "stopped" || !!error
+              }
+              onClick={startRecording}
+            >
+              Start Recording
+            </Button>
+            <Button
+              ref={stopButtonRef}
+              variant="contained"
+              disabled={status !== "recording"}
+              onClick={() => {
+                stopRecording();
+                recordingTimer && clearTimeout(recordingTimer);
+              }}
+            >
+              Submit recording
+            </Button>
+          </Stack>
 
-              {mode == "recording" ? (
-                <LiveVideoView
-                  stream={previewStream}
-                  audioStream={previewAudioStream}
-                />
-              ) : (
-                <VideoReplayView mediaBlobUrl={mediaBlobUrl} />
-              )}
-              <ErrorDisplay error={error} />
-            </div>
+          {mode == "recording" ? (
+            <LiveVideoView
+              stream={previewStream}
+              audioStream={previewAudioStream}
+            />
+          ) : (
+            <VideoReplayView mediaBlobUrl={mediaBlobUrl} />
           )}
-        />
+          <ErrorDisplay error={error} />
+        </div>
       </Container>
     </Box>
   );
