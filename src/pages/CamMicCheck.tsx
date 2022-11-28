@@ -10,6 +10,7 @@ import {
   Radio,
   RadioGroup,
   Stack,
+  Typography,
 } from "@mui/material";
 import VideoRecorder from "../components/VideoRecorder";
 import { STORAGE_KEYS } from "../constants/storageKeys";
@@ -66,7 +67,12 @@ function CamMicCheck() {
           recordingTimeLimit={CAM_MIC_CHECK_TIME_LIMIT}
         />
       </Box>
-
+      <Typography variant="caption" marginTop={5}>
+        Please do not use wireless headphones in the recording of these tasks,
+        as they cause audio delays. If you experience audio delays for other
+        reasons, but are still able to complete the tasks, we will accept those
+        videos.
+      </Typography>
       {recordingComplete && (
         <Stack alignContent={"center"} spacing={5} marginY={5}>
           <FormControl>

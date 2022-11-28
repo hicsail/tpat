@@ -13,7 +13,7 @@ function ResolvePermissionError() {
       </Button>
       <Typography>
         Check out the following resources to resolve permission issues you may
-        be having;
+        be having;{" "}
       </Typography>
       <Stack spacing={1}>
         <Link
@@ -33,14 +33,20 @@ function ResolvePermissionError() {
           Enable camera permissions in Safari
         </Link>
       </Stack>
+      <Typography variant="caption">
+        If you are experiencing any audio delays, please check if you are using
+        any form or wireless headphones during the recording process. If you are
+        not using any wireless headphones and are experiencing only audio
+        delays, please continue as these videos will still be accepted.
+      </Typography>
       <Typography>
-        Please{" "}
+        Please fill{" "}
         <Link
-          href="https://forms.gle/qBQMBzAC8nhPSWoTA"
+          href="https://docs.google.com/forms/d/1Mnu0o_Cr_U6k-ABraaq2lso6AK7bYcQAAISFHDeeTso"
           target="_blank"
           rel="noopener"
         >
-          fill this form
+          this form
         </Link>{" "}
         and email{" "}
         <Typography fontWeight={800} style={{ display: "inline-block" }}>

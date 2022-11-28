@@ -6,6 +6,8 @@ import { Button, Chip, Container, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useReactMediaRecorder } from "react-media-recorder";
 import ResolvePermissionError from "./ResolvePermissionError";
+import MicOffIcon from "@mui/icons-material/MicOff";
+import { isDevMode } from "../config/config";
 
 // enum for where webcam is being used.
 export enum WEBCAM_CONTEXT {
@@ -31,10 +33,10 @@ const videoStyle = { width: "100%", height: "100%", transform: "scale(-1, 1)" };
 
 const LiveVideoView = ({
   stream,
-  audioStream,
+  isAudioMuted,
 }: {
   stream: MediaStream | null;
-  audioStream: any;
+  isAudioMuted: boolean;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -51,6 +53,7 @@ const LiveVideoView = ({
   return (
     <Stack style={videoStyle}>
       <video ref={videoRef} autoPlay controls={false} />
+      {/* <MicOffIcon color={isAudioMuted ? "error" : "success"} /> */}
     </Stack>
   );
 };
@@ -123,9 +126,16 @@ export default function VideoRecorder(props: Props) {
     previewStream,
     previewAudioStream,
     error,
+    isAudioMuted,
   } = useReactMediaRecorder({
+    // video: { width: 1920, height: 1080, aspectRatio: 1.777777778 },
     video: true,
     stopStreamsOnStop: true,
+    // mediaRecorderOptions: {
+    //   audioBitsPerSecond: 128000,
+    //   videoBitsPerSecond: 2500000,
+    //   mimeType: "video/mp4",
+    // },
     onStop: (mediaBlobUrl, blob) => {
       console.log("On stop called. mediaBlobUrl", mediaBlobUrl, "blob", blob);
       setMode("uploading");
@@ -147,6 +157,9 @@ export default function VideoRecorder(props: Props) {
         stopButtonRef.current?.click();
       };
     }
+    // MediaDevices.getSupportedConstraints();
+    // const supported = navigator.mediaDevices.getSupportedConstraints();
+    // console.log("supported", supported);
   }, [status]);
 
   useEffect(() => {
@@ -175,7 +188,7 @@ export default function VideoRecorder(props: Props) {
     props.onRecordingComplete(mediaBlobUrl, blob);
     if (blob) {
       console.log(TAG, "size of video recording:", blob.size);
-      if (props.downloadRecording) {
+      if (props.downloadRecording && !isDevMode) {
         downloadRecording(mediaBlobUrl);
       }
     } else {
@@ -242,10 +255,7 @@ export default function VideoRecorder(props: Props) {
           </Stack>
 
           {mode == "recording" ? (
-            <LiveVideoView
-              stream={previewStream}
-              audioStream={previewAudioStream}
-            />
+            <LiveVideoView stream={previewStream} isAudioMuted={isAudioMuted} />
           ) : (
             <VideoReplayView mediaBlobUrl={mediaBlobUrl} />
           )}
