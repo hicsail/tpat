@@ -107,7 +107,6 @@ export default function TaskView(props: Props) {
     const netPrepTimeInMilliseconds =
       new Date().getTime() - new Date(props.taskHistory.firstViewed).getTime();
     const netPrepTimeInHours = netPrepTimeInMilliseconds / 3600000;
-    console.log("netPrepTimeInHours", netPrepTimeInHours);
 
     const metadata = {
       firstName: user.firstName,
@@ -180,9 +179,7 @@ export default function TaskView(props: Props) {
                 justifyContent={"center"}
                 spacing={5}
               >
-                <Typography variant="h4">
-                  Video uploaded successfully.
-                </Typography>
+                <Typography variant="h4">{uploadResultsMessage}</Typography>
 
                 <Typography variant="h6">
                   Click the back button to return to the list of tasks. Note:

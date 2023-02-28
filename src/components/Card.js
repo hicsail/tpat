@@ -11,6 +11,7 @@ const Card = (props) => {
     marginBottom: "2%",
   };
 
+  console.log("CARD: id ", props.id);
   var destination = "/" + SCREENS.TASK;
   switch (props.id) {
     case "-1":

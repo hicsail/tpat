@@ -17,7 +17,6 @@ function Task() {
   // Get ID from URL
   const { id } = useParams();
   const taskId = id ? id : "0";
-  const taskIndex = parseInt(taskId);
   const hoursMinSecs = {
     minutes: Math.floor(PREP_TIME_LIMIT / 60),
     seconds: PREP_TIME_LIMIT % 60,
@@ -100,9 +99,11 @@ function Task() {
     return null;
   }
 
-  const task = data[taskIndex];
-  console.log("taskIndex", taskIndex);
+  const task = data.find((t) => t.id == taskId);
 
+  if (task == undefined) {
+    return <Typography variant="h6">Task not found</Typography>;
+  }
   return (
     <Box margin={5}>
       {mode == "preparing" ? (
