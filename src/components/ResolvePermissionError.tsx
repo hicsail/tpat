@@ -1,4 +1,5 @@
 import { Stack, Button, Typography, Link } from "@mui/material";
+import { GOOGLE_FORM_URL } from "../config/config";
 
 function ResolvePermissionError() {
   return (
@@ -41,11 +42,7 @@ function ResolvePermissionError() {
       </Typography>
       <Typography>
         Please fill{" "}
-        <Link
-          href="https://docs.google.com/forms/d/1Mnu0o_Cr_U6k-ABraaq2lso6AK7bYcQAAISFHDeeTso"
-          target="_blank"
-          rel="noopener"
-        >
+        <Link href={GOOGLE_FORM_URL} target="_blank" rel="noopener">
           this form
         </Link>{" "}
         and email{" "}

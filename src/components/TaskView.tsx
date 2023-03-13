@@ -5,8 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
-import { Container, Grid, Stack, Typography } from "@mui/material";
-import { PREP_TIME_LIMIT, RECORDING_TIME_LIMIT } from "../config/config";
+import {
+  Button,
+  Container,
+  Grid,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
+import {
+  GOOGLE_FORM_URL,
+  PREP_TIME_LIMIT,
+  RECORDING_TIME_LIMIT,
+} from "../config/config";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@mui/material/Box";
 import PositionedSnackbar from "./PositionedSnackbar";
@@ -140,7 +151,6 @@ export default function TaskView(props: Props) {
   };
 
   const onDismissSnackbar = () => {
-    console.log(TAG, "navigating back");
     navigate("/");
   };
 
@@ -167,8 +177,16 @@ export default function TaskView(props: Props) {
                 spacing={5}
               >
                 <CircularProgress />
-                <Typography variant="h6" marginRight={2}>
+                <Typography variant="h5" marginRight={2}>
                   Uploading...
+                </Typography>
+                <Typography variant="h6" marginRight={2}>
+                  This can take several minutes, however, if you see this screen
+                  for an extended period of time, please click{" "}
+                  <Link href={GOOGLE_FORM_URL} target="_blank" rel="noopener">
+                    this form
+                  </Link>{" "}
+                  to report this issue to our team.
                 </Typography>
               </Stack>
             )}
@@ -182,10 +200,19 @@ export default function TaskView(props: Props) {
                 <Typography variant="h4">{uploadResultsMessage}</Typography>
 
                 <Typography variant="h6">
-                  Click the back button to return to the list of tasks. Note:
-                  You must track your own completion, as the task list does not
-                  show whether or not you have completed each task.
+                  Note: You must track your own completion, as the task list
+                  does not show whether or not you have completed each task.
                 </Typography>
+                <Button
+                  variant="text"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  <Typography variant="h6">
+                    Go back to the list of performance tasks
+                  </Typography>
+                </Button>
               </Stack>
             )}
           </>
