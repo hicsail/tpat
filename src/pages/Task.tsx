@@ -163,8 +163,10 @@ function Task() {
               <Typography variant="h6" mt={2} fontWeight={800}>
                 Remember to:
               </Typography>
-              {task.prompts.map((t) => (
-                <Typography variant="body1">{" >    " + t}</Typography>
+              {task.prompts.map((t, index) => (
+                <Typography key={index.toString()} variant="body1">
+                  {" >    " + t}
+                </Typography>
               ))}
             </Stack>
           </Stack>

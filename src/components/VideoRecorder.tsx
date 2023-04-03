@@ -128,14 +128,8 @@ export default function VideoRecorder(props: Props) {
     error,
     isAudioMuted,
   } = useReactMediaRecorder({
-    // video: { width: 1920, height: 1080, aspectRatio: 1.777777778 },
     video: true,
     stopStreamsOnStop: true,
-    // mediaRecorderOptions: {
-    //   audioBitsPerSecond: 128000,
-    //   videoBitsPerSecond: 2500000,
-    //   mimeType: "video/mp4",
-    // },
     onStop: (mediaBlobUrl, blob) => {
       console.log("On stop called. mediaBlobUrl", mediaBlobUrl, "blob", blob);
       setMode("uploading");
@@ -157,9 +151,6 @@ export default function VideoRecorder(props: Props) {
         stopButtonRef.current?.click();
       };
     }
-    // MediaDevices.getSupportedConstraints();
-    // const supported = navigator.mediaDevices.getSupportedConstraints();
-    // console.log("supported", supported);
   }, [status]);
 
   useEffect(() => {

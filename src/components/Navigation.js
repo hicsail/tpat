@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { idText } from "typescript";
 import { SCREENS } from "../constants/screens";
 import "./styles.css";
 
@@ -20,11 +19,9 @@ function Navigation() {
     <div>
       <div className="header">
         <ul className="navLinks">
-          <a className="siteName">
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link  className="siteName" to="/" style={{ textDecoration: "none" }}>
               Teacher Tasks
             </Link>
-          </a>
           {!disableLinks && (
             <>
               <li>

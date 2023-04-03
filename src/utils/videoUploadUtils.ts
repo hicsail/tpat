@@ -2,9 +2,7 @@ import {
   S3Client,
   PutObjectCommand,
   PutObjectCommandInput,
-  CreateMultipartUploadCommand,
 } from "@aws-sdk/client-s3";
-// import { Blob } from "buffer";
 import { Upload } from "@aws-sdk/lib-storage";
 
 const TPAT_VIDEOS_BUCKET = "tpat"; //tpat

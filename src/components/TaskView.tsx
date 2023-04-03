@@ -75,8 +75,10 @@ const renderTask = (task: any) => {
           <Typography variant="h6" mt={2} fontWeight={800}>
             Remember to:
           </Typography>
-          {task.prompts.map((t: any) => (
-            <Typography variant="body1">{" >    " + t}</Typography>
+          {task.prompts.map((t: string, index: number) => (
+            <Typography key={index.toString()} variant="body1">
+              {" >    " + t}
+            </Typography>
           ))}
         </Stack>
       </Stack>
@@ -163,7 +165,7 @@ export default function TaskView(props: Props) {
   return (
     <Box>
       <Grid container spacing={3} flex={1}>
-        <Grid container xs={12} md={6} key="1">
+        <Grid item container xs={12} md={6} key="1">
           <Container>
             <VideoRecorder
               downloadRecording={props.context == WEBCAM_CONTEXT.TUTORIAL}
