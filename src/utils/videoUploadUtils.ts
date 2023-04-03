@@ -2,8 +2,10 @@ import {
   S3Client,
   PutObjectCommand,
   PutObjectCommandInput,
+  CreateMultipartUploadCommand,
 } from "@aws-sdk/client-s3";
-import { Blob } from "buffer";
+// import { Blob } from "buffer";
+import { Upload } from "@aws-sdk/lib-storage";
 
 const TPAT_VIDEOS_BUCKET = "tpat"; //tpat
 
@@ -75,6 +77,58 @@ async function uploadTos3(
   }
 }
 
+async function uploadInParts(
+  videoBlob: Blob,
+  metadata: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    taskId: string;
+    university: string;
+    attempts: string;
+    firstViewed: string;
+    netPrepTimeInHours: string;
+    userAgent: string;
+  },
+  onProgress: (progressPercentage: number) => void, // function to call on each progress update
+  onUploadComplete: () => void
+) {
+  try {
+    const s3Client = gets3Client();
+    const uploadParams = {
+      Bucket: TPAT_VIDEOS_BUCKET,
+      Body: videoBlob,
+      Key: getFileName(metadata),
+      Metadata: metadata,
+    };
+    const parallelUploads3 = new Upload({
+      client: s3Client,
+      params: uploadParams,
+      queueSize: 4, // concurrency configuration, 4 parts at a time
+      partSize: 1024 * 1024 * 5, // size of each part, 5MB
+      leavePartsOnError: false,
+    });
+
+    parallelUploads3.on("httpUploadProgress", (progress) => {
+      console.log("multi-upload progress", progress);
+      if (progress) {
+        if (progress.loaded && progress.total) {
+          if (progress.loaded == progress.total) {
+            console.log("Upload succeeded");
+            onUploadComplete();
+          } else {
+            onProgress((progress.loaded / progress.total) * 100);
+          }
+        }
+      }
+    });
+
+    await parallelUploads3.done();
+  } catch (e) {
+    console.log("An error occured during upload. Error", e);
+  }
+}
+
 function gets3Client() {
   const client = new S3Client({
     region: "us-east-1",
@@ -87,4 +141,4 @@ function gets3Client() {
   return client;
 }
 
-export { uploadTos3, getFileName };
+export { uploadTos3, getFileName, uploadInParts };
