@@ -9,7 +9,6 @@ import {
   AudioVisualizerEvents,
 } from "react-audio-visualizers-core";
 
-import { uploadTos3 } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
 import {
   Button,
@@ -44,7 +43,7 @@ export interface Props {
   recordingTimeLimit: number;
 }
 
-const TAG = "Webcam.tsx ";
+const TAG = "VideoRecorderExperimental.tsx ";
 const successfulUploadMessage = "Your recording was uploaded successfully";
 const failedUploadMessage =
   "Your recording failed to upload. Please record again.";

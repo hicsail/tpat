@@ -25,7 +25,7 @@ export interface Props {
   recordingTimeLimit: number;
 }
 
-const TAG = "Webcam.tsx ";
+const TAG = "VideoRecorder.tsx ";
 const failedUploadMessage =
   "Your recording failed to upload. Please record again.";
 

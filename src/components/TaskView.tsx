@@ -3,7 +3,7 @@ import { useState, useContext, useRef, useEffect } from "react";
 import { data } from "../data";
 import { useNavigate } from "react-router-dom";
 
-import { uploadInParts, uploadTos3 } from "../utils/videoUploadUtils";
+import { uploadInParts } from "../utils/videoUploadUtils";
 import { UserContext } from "../store/UserContext";
 import {
   Button,
@@ -132,11 +132,15 @@ export default function TaskView(props: Props) {
       netPrepTimeInHours: netPrepTimeInHours.toString(),
       userAgent: window.navigator.userAgent,
     };
+
     await uploadInParts(
       videoBlob,
       metadata,
       (progressPercentage) => {
-        setUploadResultsMessage(progressPercentage + " % uploaded");
+        setUploadResultsMessage(progressPercentage.toFixed(0) + "% uploaded");
+      },
+      () => {
+        setUploadResultsMessage(failedUploadMessage);
       },
       () => {
         setUploadResultsMessage(successfulUploadMessage);

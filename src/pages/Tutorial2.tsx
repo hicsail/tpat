@@ -1,6 +1,6 @@
 import React from "react";
 
-import Webcam, { WEBCAM_CONTEXT } from "../components/Webcam";
+import  { WEBCAM_CONTEXT } from "../components/VideoRecorder";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";

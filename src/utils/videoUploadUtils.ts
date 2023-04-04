@@ -1,7 +1,5 @@
 import {
   S3Client,
-  PutObjectCommand,
-  PutObjectCommandInput,
 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
@@ -33,48 +31,15 @@ function getFileName(metadata: {
     ".mp4"
   );
 }
+
+
 /**
+ * uploads video to s3 in part
  * @param videoBlob
  * @param metadata
- * @returns
+ * @param onProgress  function to call on each progress update
+ * @param onUploadComplete function to call when upload is completed successfully
  */
-async function uploadTos3(
-  videoBlob: Blob,
-  metadata: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    taskId: string;
-    university: string;
-    attempts: string;
-    firstViewed: string;
-    netPrepTimeInHours: string;
-    userAgent: string;
-  }
-) {
-  const s3Client = gets3Client();
-  try {
-    const uploadParams = {
-      Bucket: TPAT_VIDEOS_BUCKET,
-      Body: videoBlob,
-      Key: getFileName(metadata),
-      Metadata: metadata,
-    };
-    const data = await s3Client.send(
-      new PutObjectCommand(uploadParams as PutObjectCommandInput)
-    );
-    console.log("Upload succeeded", data);
-    //if video is less than 10 bytes, assume upload failed
-    if (videoBlob.size < 10) {
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.log("An error occured during upload. Error", err);
-    return false;
-  }
-}
-
 async function uploadInParts(
   videoBlob: Blob,
   metadata: {
@@ -88,7 +53,8 @@ async function uploadInParts(
     netPrepTimeInHours: string;
     userAgent: string;
   },
-  onProgress: (progressPercentage: number) => void, // function to call on each progress update
+  onProgress: (progressPercentage: number) => void,
+  onUploadFail: () => void,
   onUploadComplete: () => void
 ) {
   try {
@@ -124,6 +90,7 @@ async function uploadInParts(
     await parallelUploads3.done();
   } catch (e) {
     console.log("An error occured during upload. Error", e);
+    onUploadFail();
   }
 }
 
@@ -139,4 +106,4 @@ function gets3Client() {
   return client;
 }
 
-export { uploadTos3, getFileName, uploadInParts };
+export { getFileName, uploadInParts };

@@ -5,7 +5,7 @@ import CountDownTimer from "../components/Timer";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../store/UserContext";
 import { SCREENS } from "../constants/screens";
-import { TaskHistory } from "../components/Webcam";
+import { TaskHistory } from "../components/VideoRecorder";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { PREP_TIME_LIMIT } from "../config/config";
 import { STORAGE_KEYS } from "../constants/storageKeys";
