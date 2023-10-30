@@ -126,7 +126,6 @@ export default function TaskView(props: Props) {
       lastName: user.lastName,
       email: user.email,
       taskId: task.id.toString(),
-      university: user.university,
       attempts: props.taskHistory.attempts.toString(),
       firstViewed: props.taskHistory.firstViewed,
       netPrepTimeInHours: netPrepTimeInHours.toString(),
@@ -213,7 +212,7 @@ export default function TaskView(props: Props) {
 
                 <Typography variant="h6">
                   Note: You must track your own completion, as the task list
-                  does not show whether or not you have completed each task.
+                  does not show whether or not you have completed each task. Please refer back to your emailed instructions to know which task to move onto or what to do next. Remember, you have been assigned four out of the 6 tasks to complete.
                 </Typography>
                 <Button
                   variant="text"

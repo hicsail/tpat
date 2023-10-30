@@ -10,16 +10,13 @@ function getFileName(metadata: {
   lastName: string;
   email: string;
   taskId: string;
-  university: string;
 }) {
   //name format :
-  //Timestamp_Unviersity_Email_FirstLast_Task 1-1.mp4 ---> 1662564392732_UVA_lhmclean_LindseyMcLean_Task 1-1
+  //Timestamp_Email_FirstLast_Task 1-1.mp4 ---> 1662564392732_lhmclean_LindseyMcLean_Task 1-1
   return (
-    metadata.university + // university folder
+    "math" + // folder for all math tasks
     "/" +
     Date.now() +
-    "_" +
-    metadata.university +
     "_" +
     metadata.email.split("@")[0] +
     "_" + //get first part of email
@@ -47,7 +44,6 @@ async function uploadInParts(
     lastName: string;
     email: string;
     taskId: string;
-    university: string;
     attempts: string;
     firstViewed: string;
     netPrepTimeInHours: string;

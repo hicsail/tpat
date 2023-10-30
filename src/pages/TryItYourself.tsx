@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Link, Typography } from "@mui/material";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,9 @@ import { camMicCheckTask, data } from "../data";
 import { UserContext } from "../store/UserContext";
 
 const subtitle = "Demonstrate your skills through the assigned tasks below.";
-
+const linkToTips =
+  "https://bushare-my.sharepoint.com/:b:/g/personal/mannysa_bu_edu/ESsXAOn9L2ZGrjwX3wMtq80BUqPlOsk28hq1D2rPZPyWIg?e=ytksks";
+const lindseyEmail = "lhmclean@bu.edu";
 const TAG = "TryItYourself.tsx ";
 
 function TryItYourself() {
@@ -25,6 +27,35 @@ function TryItYourself() {
   return (
     <div>
       <Container maxWidth="md">
+        <Typography
+          variant="body1"
+          textAlign="center"
+          color={"blue"}
+          fontWeight={600}
+          mt={2}
+        >
+          Thank you for supporting our research by completing these tasks!
+          Please refer to your emailed instructions to ensure you know which
+          four tasks from the list below are required. You will not complete all
+          of the tasks on this page. You also may not be completing the tasks in
+          numerical order.
+        </Typography>
+        <Typography variant="body1" textAlign="center" color={"blue"} mt={2}>
+          Failure to complete assigned tasks could result in delayed
+          compensation and additional work required. If you have any questions,
+          reach out to
+          <Link href={"mailto:" + lindseyEmail} target="_blank">
+            {" "}
+            Lindsey McLean
+          </Link>{" "}
+          Don't forget to use{" "}
+          <Link href={linkToTips} target="_blank">
+            {" "}
+            this tip sheet
+          </Link>{" "}
+          to support your tasks. Review this before you enter the tasks as the
+          timer will begin immediately.
+        </Typography>
         <Typography variant="h6" textAlign="center" mt={10} fontWeight={800}>
           {subtitle}
         </Typography>
