@@ -22,6 +22,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@mui/material/Box";
 import PositionedSnackbar from "./PositionedSnackbar";
 import VideoRecorder from "./VideoRecorder";
+import { useLocalStorage } from 'usehooks-ts'
 
 // enum for where webcam is being used.
 export enum WEBCAM_CONTEXT {
@@ -92,6 +93,8 @@ export default function TaskView(props: Props) {
   );
   const [uploadResultsMessage, setUploadResultsMessage] = useState("");
   const { user } = useContext(UserContext);
+  const [isCompleted, setIsCompleted] = useLocalStorage( props.task.id, false)
+
   const navigate = useNavigate();
 
   const task = props.task;
@@ -155,6 +158,8 @@ export default function TaskView(props: Props) {
         setUploadResultsMessage("Video was downloaded.");
       }
       setMode("completed");
+      // mark task as completed in local storage
+      setIsCompleted(true)
     } else {
       console.log("could not get recording. Blob:", blob);
       setUploadResultsMessage(failedUploadMessage);

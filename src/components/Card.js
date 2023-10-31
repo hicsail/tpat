@@ -1,14 +1,19 @@
+import { Checkbox } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useLocalStorage } from "usehooks-ts";
 import { SCREENS } from "../constants/screens";
 
 const Card = (props) => {
+  const [isCompleted, setIsCompleted] = useLocalStorage(props.id, false);
+  console.log("isCompleted", isCompleted);
+
   const buttonStyle = {
     border: "2px solid #e26c40",
     padding: "1%",
     color: "#e26c40",
     borderRadius: "5px",
     textDecoration: "none",
-    marginBottom: "2%",
+    // marginBottom: "2%",
   };
 
   console.log("CARD: id ", props.id);
@@ -54,7 +59,7 @@ const Card = (props) => {
           >
             {props.preview}
           </p>
-          <div></div>
+
           <div className="time-container">
             <img
               src={require("../images/Clock.png")}
@@ -70,14 +75,31 @@ const Card = (props) => {
             >
               {props.time}
             </p>
+
             <Link
               to={destination}
               style={buttonStyle}
               id={props.id}
               name="Start"
             >
-              Start
+              {isCompleted ? "Retake" : "Start"}
             </Link>
+          </div>
+          <div>
+            {isCompleted ? (
+              <>
+                <Checkbox
+                  defaultChecked
+                  color="success"
+                  style={{ paddingLeft: 0 }}
+                />
+                Completed
+              </>
+            ) : (
+              <>
+                <Checkbox disabled style={{ paddingLeft: 0 }} /> Not completed
+              </>
+            )}
           </div>
         </div>
       </div>

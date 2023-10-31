@@ -27,7 +27,6 @@ function Task() {
   const [taskHistory, setTaskHistory] = useState<TaskHistory>({});
 
   const TAG = "Task.tsx ";
-  // localStorage.removeItem(STORAGE_KEYS.TASK_ATTEMPT_HISTORY);
   //go to login page if user hasn't entered credentials yet
   useEffect(() => {
     if (!user) {

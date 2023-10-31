@@ -84,6 +84,7 @@ function TryItYourself() {
                 previewImage={taskDetail.previewImage}
                 time={taskDetail.time}
                 id={taskDetail.id}
+                
               />
             );
           })}

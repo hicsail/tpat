@@ -6,7 +6,6 @@ const TAG = "useTaskHistory.tsx ";
 const useTaskHistory = (taskId = -1) => {
   const [taskHistory, setTaskHistory] = useState<TaskHistory>({});
 
-  //  record firstViewed (in  attempt history ). TODO extract into a hook
   useEffect(() => {
     const taskHistoryString = localStorage.getItem(
       STORAGE_KEYS.TASK_ATTEMPT_HISTORY
