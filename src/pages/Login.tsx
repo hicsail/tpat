@@ -1,29 +1,48 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../store/UserContext";
-import {
-  Button,
-  TextField,
-  Container,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, TextField, Container, Stack, Typography } from "@mui/material";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { useNavigate } from "react-router-dom";
 import { SCREENS } from "../constants/screens";
 const TAG = "Login.tsx ";
 
-
 function Login() {
   const { user, setUser } = useContext(UserContext);
-  console.log(TAG, "user", user);
 
   const [email, setEmail] = useState(user ? user.email : "");
   const [firstName, setFirstName] = useState(user ? user.firstName : "");
   const [lastName, setLastName] = useState(user ? user.lastName : "");
-
+  const [inputErrors, setInputErrors] = useState({
+    email: false,
+    firstName: false,
+    lastName: false,
+  });
   const navigate = useNavigate();
 
+  const validateInput = () => {
+    const newErrorState = { email: false, firstName: false, lastName: false };
+    if (!firstName || firstName.length < 2) {
+      newErrorState.firstName = true;
+    }
+
+    if (!lastName || lastName.length < 2) {
+      newErrorState.lastName = true;
+    }
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!email || !email.match(emailRegex)) {
+      newErrorState.email = true;
+    }
+
+    setInputErrors(newErrorState);
+    //retrun true if all error states are false
+    return Object.values(newErrorState).every((v) => v == false);
+  };
+
   const handleSubmit = () => {
+    if (!validateInput()) {
+      return;
+    }
     const credentials = {
       ...user,
       firstName: firstName,
@@ -59,6 +78,11 @@ function Login() {
             id="Name"
             label="First name"
             variant="outlined"
+            error={inputErrors.firstName}
+            helperText={
+              inputErrors.firstName ? "A valid first name is required." : ""
+            }
+            required
             onChange={(e) => {
               setFirstName(e.target.value);
             }}
@@ -67,15 +91,24 @@ function Login() {
             value={lastName}
             id="LastName"
             label="Last name"
+            required
             variant="outlined"
+            error={inputErrors.lastName}
+            helperText={
+              inputErrors.lastName ? "A valid last name is required." : ""
+            }
             onChange={(e) => {
               setLastName(e.target.value);
             }}
           />
           <TextField
             value={email}
+            type={"email"}
             id="Email"
             label="University email"
+            error={inputErrors.email}
+            helperText={inputErrors.email ? "A valid email is required." : ""}
+            required
             variant="outlined"
             onChange={(e) => {
               setEmail(e.target.value);
