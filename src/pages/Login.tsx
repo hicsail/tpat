@@ -60,17 +60,9 @@ function Login() {
         <Typography variant="h3" textAlign={"center"}>
           Welcome to the Performance Task Site!
         </Typography>
-        <Typography variant="body1" mt={3}>
-          The performance task assignment is expected to take 30 minutes, with
-          an additional brief tutorial included. Please note that you will only
-          be able to access and complete the tasks a single time.
-          <Typography fontWeight={800}>
-            Do not log into the site until you are ready to begin your three
-            performance tasks.
-          </Typography>
-        </Typography>
-        <Typography variant="body1" mt={2}>
-          When you are ready to begin, enter your university credentials below:
+
+        <Typography variant="body1" mt={2} textAlign={"center"}>
+          When you are ready to begin, enter your credentials below:
         </Typography>
         <Stack spacing={4} mt={10} mb={10}>
           <TextField
