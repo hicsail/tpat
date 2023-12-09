@@ -22,7 +22,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@mui/material/Box";
 import PositionedSnackbar from "./PositionedSnackbar";
 import VideoRecorder from "./VideoRecorder";
-import { useLocalStorage } from 'usehooks-ts'
+import { useLocalStorage } from "usehooks-ts";
 
 // enum for where webcam is being used.
 export enum WEBCAM_CONTEXT {
@@ -35,7 +35,7 @@ export interface TaskHistory {
 }
 
 export interface Props {
-  task: typeof data[0]; //TODO define task interface
+  task: (typeof data)[0]; //TODO define task interface
   taskHistory: { attempts: number; firstViewed: string };
   context?: WEBCAM_CONTEXT; // where webcam is being used. Video upload procedure of this component depends on the context (tutorial or task).
 }
@@ -65,6 +65,29 @@ const renderTask = (task: any) => {
               />
             </div>
           )}
+          <br></br>
+          {task.passageTitle && (
+            <Typography variant="h6">Read-aloud text:</Typography>
+          )}
+
+          {task.passageTitle && (
+            <Box
+              sx={{
+                border: "1px solid #000", // adds a black border
+                backgroundColor: "#e0e0e0", // sets a grey background
+                padding: "16px", // adds some spacing inside the border
+                borderRadius: "4px", // optional, to round the corners
+                textAlign: "center", // centers everything inside the Box, including the title
+              }}
+            >
+              <Typography variant="h5" component="h2" gutterBottom>
+                {task.passageTitle}
+              </Typography>
+              <Typography variant="body1" sx={{ textAlign: "left" }}>
+                {task.passage}
+              </Typography>
+            </Box>
+          )}
         </Stack>
         <Stack>
           <Typography variant="h6">
@@ -93,7 +116,7 @@ export default function TaskView(props: Props) {
   );
   const [uploadResultsMessage, setUploadResultsMessage] = useState("");
   const { user } = useContext(UserContext);
-  const [isCompleted, setIsCompleted] = useLocalStorage( props.task.id, false)
+  const [isCompleted, setIsCompleted] = useLocalStorage(props.task.id, false);
 
   const navigate = useNavigate();
 
@@ -159,7 +182,7 @@ export default function TaskView(props: Props) {
       }
       setMode("completed");
       // mark task as completed in local storage
-      setIsCompleted(true)
+      setIsCompleted(true);
     } else {
       console.log("could not get recording. Blob:", blob);
       setUploadResultsMessage(failedUploadMessage);
@@ -216,8 +239,20 @@ export default function TaskView(props: Props) {
                 <Typography variant="h4">{uploadResultsMessage}</Typography>
 
                 <Typography variant="h6">
+                  Part 3: Provide a Rationale for Your Teaching
+                </Typography>
+                <Typography variant="h6">
+                  <Link target="_blank" href={task.rationaleLink}>
+                    {task.rationale}
+                  </Link>
+                </Typography>
+
+                <Typography variant="h6">
                   Note: You must track your own completion, as the task list
-                  does not show whether or not you have completed each task. Please refer back to your emailed instructions to know which task to move onto or what to do next. Remember, you have been assigned four out of the 6 tasks to complete.
+                  does not show whether or not you have completed each task.
+                  Please refer back to your emailed instructions to know which
+                  task to move onto or what to do next. Remember, you have been
+                  assigned four out of the 6 tasks to complete.
                 </Typography>
                 <Button
                   variant="text"
