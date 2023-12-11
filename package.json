@@ -38,6 +38,7 @@
     "react-record-webcam": "^0.0.14",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-tabs": "^6.0.2",
     "react-video-recorder": "^3.19.3",
     "react-watermark-component": "^2.2.1",
     "reactjs-popup": "^2.0.5",

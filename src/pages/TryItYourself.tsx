@@ -2,7 +2,8 @@ import { Container, Link, Typography } from "@mui/material";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "./TryItYourself.css";
 import Card from "../components/Card";
 import { SCREENS } from "../constants/screens";
 import { camMicCheckTask, data } from "../data";
@@ -73,7 +74,74 @@ function TryItYourself() {
       <hr
         style={{ marginRight: "5%", marginLeft: "5%", marginBottom: "1.5%" }}
       ></hr>
-      {user && user.camMicCheckComplete ? (
+
+      <Tabs>
+        <TabList>
+          <Tab>Literacy Task</Tab>
+          <Tab>Math Task</Tab>
+        </TabList>
+
+        <TabPanel>
+          {user && user.camMicCheckComplete ? (
+            <div>
+              {data.map((taskDetail, _) => {
+                if (parseInt(taskDetail.id) >= 7 || parseInt(taskDetail.id) === 0  ) {
+                  return (
+                    <Card
+                      key={taskDetail.id}
+                      title={taskDetail.title}
+                      preview={taskDetail.preview}
+                      previewImage={taskDetail.previewImage}
+                      time={taskDetail.time}
+                      id={taskDetail.id}
+                    />
+                  );
+                }
+              })}
+            </div>
+          ) : (
+            <Card
+              key={camMicCheckTask.id}
+              title={camMicCheckTask.title}
+              preview={camMicCheckTask.preview}
+              previewImage={camMicCheckTask.previewImage}
+              time={camMicCheckTask.time}
+              id={camMicCheckTask.id}
+            />
+          )}
+        </TabPanel>
+        <TabPanel>
+          {user && user.camMicCheckComplete ? (
+            <div>
+              {data.map((taskDetail, _) => {
+                if (parseInt(taskDetail.id) <= 6) {
+                  return (
+                    <Card
+                      key={taskDetail.id}
+                      title={taskDetail.title}
+                      preview={taskDetail.preview}
+                      previewImage={taskDetail.previewImage}
+                      time={taskDetail.time}
+                      id={taskDetail.id}
+                    />
+                  );
+                }
+              })}
+            </div>
+          ) : (
+            <Card
+              key={camMicCheckTask.id}
+              title={camMicCheckTask.title}
+              preview={camMicCheckTask.preview}
+              previewImage={camMicCheckTask.previewImage}
+              time={camMicCheckTask.time}
+              id={camMicCheckTask.id}
+            />
+          )}
+        </TabPanel>
+      </Tabs>
+
+      {/* {user && user.camMicCheckComplete ? (
         <div>
           {data.map((taskDetail, _) => {
             return (
@@ -84,7 +152,6 @@ function TryItYourself() {
                 previewImage={taskDetail.previewImage}
                 time={taskDetail.time}
                 id={taskDetail.id}
-                
               />
             );
           })}
@@ -98,7 +165,7 @@ function TryItYourself() {
           time={camMicCheckTask.time}
           id={camMicCheckTask.id}
         />
-      )}
+      )} */}
     </div>
   );
 }

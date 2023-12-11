@@ -141,6 +141,7 @@ function Task() {
               <Typography variant="h6">
                 The problem you have chosen is:
               </Typography>
+
               <Typography variant="body1">{task.problem}</Typography>
               {task.imgURL && (
                 <div className="img-container">
@@ -152,6 +153,29 @@ function Task() {
                 </div>
               )}
             </Stack>
+            {task.passageTitle && (
+              <Typography variant="h5">Read-aloud text:</Typography>
+            )}
+
+            {task.passageTitle && (
+              <Box
+                sx={{
+                  border: "1px solid #000", // adds a black border
+                  backgroundColor: "#e0e0e0", // sets a grey background
+                  padding: "16px", // adds some spacing inside the border
+                  borderRadius: "4px", // optional, to round the corners
+                  textAlign: "center", // centers everything inside the Box, including the title
+                }}
+              >
+                <Typography variant="h5" component="h2" gutterBottom>
+                  {task.passageTitle}
+                </Typography>
+                <Typography variant="body1" sx={{ textAlign: "left" }}>
+                  {task.passage}
+                </Typography>
+              </Box>
+            )}
+
             <Stack>
               <Typography variant="h6">
                 Your task is to do the following:
@@ -159,6 +183,7 @@ function Task() {
               <Typography variant="body1" fontWeight={800}>
                 {task.task}
               </Typography>
+
               <Typography variant="h6" mt={2} fontWeight={800}>
                 Remember to:
               </Typography>
