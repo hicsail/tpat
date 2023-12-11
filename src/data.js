@@ -313,4 +313,39 @@ export const data = [
     passage:
       "One day Emilio came home from the library and yelled, “Abuelo, look at this!” He opened a book about butterflies. “Remember our butterflies? They’re called red admirals, and listen to this. They’re attracted to bright white surfaces. They like to sun on them. That’s why they’re always on the garage, Abuelo, because it’s white. They’re hibernating now, but they’ll be back in the spring and we can watch them again.” Emilio saw Abuelo’s eyes glisten as he stared at the pictures of the red admirals.",
   },
+  {
+    id: "10",
+    category: "Literacy",
+    title: "Task 1.4: Phonemic Awareness",
+    preview:
+      'Click "start" to begin a brief, lesson about phonemic awarenesss.',
+    previewImage: TaskPreviewImage,
+    description: [
+      "You are re-teaching a phonemic awareness lesson to a small group of five students in",
+      " your kindergarten class who did not experience success when the lesson was introduced earlier",
+      " the same day.",
+    ],
+    problem: [
+      "Your objective is to teach your students to segment and blend the phonemes in three-phoneme",
+      " words. Students have previously had success segmenting and blending the sounds in two-",
+      " phoneme words and onset-rime. You have NOT previously taught your students the names of",
+      " most of these letters or the sounds of the letters in the word.",
+    ],
+    task: [
+      "Teach your students how to segment three-phoneme words. Your goal is for your students to be able to accurately segment the phonemes in each word when orally presented with the word.",
+      " Teach your students how to blend three-phoneme words. Your goal is for your students to be able to accurately blend the phonemes in each word when orally presented with the phonemes in isolation.",
+      " Assume students respond correctly to most items, but that some students make errors on some items.",
+    ],
+    prompts:[
+      "Orally produce single-syllable words by blending sounds (phonemes), including consonant blends.",
+      " Isolate and pronounce initial, medial vowel, and final sounds (phonemes) in spoken single-syllable words.",
+      " Segment spoken single-syllable words into their complete sequence of individual sounds (phonemes).",
+    ],
+    time: "5 mins",
+    imgURL: "",
+    video: "#",
+    rationale:
+      "Explain why you taught content the way you did in Part 2. Use this Qualtrics survey to share your thinking.",
+    rationaleLink: "https://bostonu.qualtrics.com/jfe/form/SV_1TXaRxM9Km9eAGW",
+  },
 ];
