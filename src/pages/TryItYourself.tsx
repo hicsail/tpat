@@ -75,17 +75,17 @@ function TryItYourself() {
         style={{ marginRight: "5%", marginLeft: "5%", marginBottom: "1.5%" }}
       ></hr>
 
-      <Tabs>
-        <TabList>
-          <Tab>Literacy Task</Tab>
-          <Tab>Math Task</Tab>
-        </TabList>
+      {user && user.camMicCheckComplete ? (
+        <Tabs>
+          <TabList>
+            <Tab>Literacy Tasks</Tab>
+            <Tab>Math Tasks</Tab>
+          </TabList>
 
-        <TabPanel>
-          {user && user.camMicCheckComplete ? (
+          <TabPanel>
             <div>
               {data.map((taskDetail, _) => {
-                if (parseInt(taskDetail.id) >= 7 || parseInt(taskDetail.id) === 0  ) {
+                if (parseInt(taskDetail.id) >= 7) {
                   return (
                     <Card
                       key={taskDetail.id}
@@ -99,19 +99,8 @@ function TryItYourself() {
                 }
               })}
             </div>
-          ) : (
-            <Card
-              key={camMicCheckTask.id}
-              title={camMicCheckTask.title}
-              preview={camMicCheckTask.preview}
-              previewImage={camMicCheckTask.previewImage}
-              time={camMicCheckTask.time}
-              id={camMicCheckTask.id}
-            />
-          )}
-        </TabPanel>
-        <TabPanel>
-          {user && user.camMicCheckComplete ? (
+          </TabPanel>
+          <TabPanel>
             <div>
               {data.map((taskDetail, _) => {
                 if (parseInt(taskDetail.id) <= 6) {
@@ -128,18 +117,18 @@ function TryItYourself() {
                 }
               })}
             </div>
-          ) : (
-            <Card
-              key={camMicCheckTask.id}
-              title={camMicCheckTask.title}
-              preview={camMicCheckTask.preview}
-              previewImage={camMicCheckTask.previewImage}
-              time={camMicCheckTask.time}
-              id={camMicCheckTask.id}
-            />
-          )}
-        </TabPanel>
-      </Tabs>
+          </TabPanel>
+        </Tabs>
+      ) : (
+        <Card
+          key={camMicCheckTask.id}
+          title={camMicCheckTask.title}
+          preview={camMicCheckTask.preview}
+          previewImage={camMicCheckTask.previewImage}
+          time={camMicCheckTask.time}
+          id={camMicCheckTask.id}
+        />
+      )}
 
       {/* {user && user.camMicCheckComplete ? (
         <div>
