@@ -257,6 +257,7 @@ export default function TaskView(props: Props) {
                 <Button
                   variant="text"
                   onClick={() => {
+                    console.log(task.id);
                     if (parseInt(task.id) >= 7) {
                       navigate("/literacy");
                     } else {

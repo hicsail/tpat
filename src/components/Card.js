@@ -29,6 +29,10 @@ const Card = (props) => {
       destination = "/" + SCREENS.TUTORIAL;
       break;
 
+    case "7":
+      destination = "/tutorialLiteracy";
+      break;
+
     default:
       destination = "/" + SCREENS.TASK + "/" + props.id;
       break;

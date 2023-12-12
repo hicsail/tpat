@@ -227,9 +227,32 @@ export const data = [
     imgURL: Table3,
     video: "#",
   },
-
   {
     id: "7",
+    category: "",
+    title: "Practice Task: Model Fractions",
+    preview:
+      'Click "start" to begin a brief, required tutorial about this site.',
+    previewImage: TutorialPreviewImage,
+    description: [
+      "You are introducing models of fractions for your 3rd grade class. You have modeled one-half, now you are moving to fourths.",
+      "You are going to model one-fourth with a rectangle",
+    ],
+    problem: ["You are going to model one-fourth with a rectangle"],
+    task: [
+      "Model how to represent one-fourth with this rectangular shape.",
+      " Use concise and precise mathematical language.",
+    ],
+    prompts: [
+      "Model how to represent one-fourth with a rectangle.",
+      "Use concise and precise mathematical language.",
+    ],
+    time: "5 mins",
+    imgURL: "",
+    video: "#",
+  },
+  {
+    id: "8",
     category: "Literacy",
     title: "Task 1.1: Phonics",
     preview: 'Click "start" to begin a brief, lesson about phonics.',
@@ -259,7 +282,7 @@ export const data = [
     rationaleLink: "https://bostonu.qualtrics.com/jfe/form/SV_1TXaRxM9Km9eAGW",
   },
   {
-    id: "8",
+    id: "9",
     category: "Literacy",
     title: "Task 1.2: Comprehension",
     preview: 'Click "start" to begin a brief, lesson about comprehension.',
@@ -294,7 +317,7 @@ export const data = [
       "The little elephant came to a clearing and stopped in her tracks. Something was moving in the bushes right next to her. Then she heard an awful roar. What could it be? Out stepped a huge lion. As soon as the little elephant saw the lion, she knew it was a friendly one because this lion was smiling and waving at her with his long, swishy tail. Again, the little elephant wished she could wave back, but she had nothing to wave with, so she just smiled and kept on walking, deeper and deeper into the jungle.",
   },
   {
-    id: "9",
+    id: "10",
     category: "Literacy",
     title: "Task 1.3: Vocabulary",
     preview: 'Click "start" to begin a brief, lesson about vocabulary.',
@@ -327,7 +350,7 @@ export const data = [
       "One day Emilio came home from the library and yelled, “Abuelo, look at this!” He opened a book about butterflies. “Remember our butterflies? They’re called red admirals, and listen to this. They’re attracted to bright white surfaces. They like to sun on them. That’s why they’re always on the garage, Abuelo, because it’s white. They’re hibernating now, but they’ll be back in the spring and we can watch them again.” Emilio saw Abuelo’s eyes glisten as he stared at the pictures of the red admirals.",
   },
   {
-    id: "10",
+    id: "11",
     category: "Literacy",
     title: "Task 1.4: Phonemic Awareness",
     preview:

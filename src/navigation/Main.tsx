@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import LiteracyPage from "../pages/Literacy";
 import LoginLiteracy from "../pages/LoginLiteracy";
 import CamMicCheckLiteracy from "../pages/CamMicCheckLiteracy";
+import Tutorial2Literacy from "../pages/Tutorial2Literacy";
+import TutorialLiteracy from "../pages/tutorialLiteracy";
 
 export const Main = () => {
   return (
@@ -24,8 +26,13 @@ export const Main = () => {
         <Route path={"/" + SCREENS.LOGIN} element={<Login />} />
         <Route path={"/loginLiteracy"} element={<LoginLiteracy />} />
 
+        <Route path="/tutorialLiteracy" element={<TutorialLiteracy />} />
         <Route path="/tutorial" element={<Tutorial />} />
+
         <Route path="/tutorial2" element={<Tutorial2 />} />
+
+        <Route path="/tutorial2Literacy" element={<Tutorial2Literacy />} />
+        <Route path="/tutorial2Literacy" element={<Tutorial2Literacy />} />
 
         <Route path={SCREENS.CAM_MIC_CHECK} element={<CamMicCheck />} />
 

@@ -14,7 +14,7 @@ import { RECORDING_TIME_LIMIT } from "../config/config";
 import InfoIcon from "@mui/icons-material/Info";
 import { data } from "../data";
 
-function Tutorial() {
+function TutorialLiteracy() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -30,7 +30,7 @@ function Tutorial() {
     seconds: RECORDING_TIME_LIMIT % 60,
   };
 
-  const task = data[0];
+  const task = data[7];
 
   return (
     <>
@@ -261,4 +261,4 @@ function Tutorial() {
   );
 }
 
-export default Tutorial;
+export default TutorialLiteracy;

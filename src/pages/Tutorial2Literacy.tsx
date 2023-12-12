@@ -10,8 +10,8 @@ import { Box, Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import TaskView from "../components/TaskView";
 
-function Tutorial2() {
-  const task = data[0];
+function Tutorial2Literacy() {
+  const task = data[7];
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   let location = useLocation();
   console.log("location", location);
@@ -89,4 +89,4 @@ function Tutorial2() {
   );
 }
 
-export default Tutorial2;
+export default Tutorial2Literacy;

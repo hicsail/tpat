@@ -1,6 +1,4 @@
-import {
-  S3Client,
-} from "@aws-sdk/client-s3";
+import { S3Client } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
 const TPAT_VIDEOS_BUCKET = "tpat"; //tpat
@@ -13,22 +11,39 @@ function getFileName(metadata: {
 }) {
   //name format :
   //Timestamp_Email_FirstLast_Task 1-1.mp4 ---> 1662564392732_lhmclean_LindseyMcLean_Task 1-1
-  return (
-    "math" + // folder for all math tasks
-    "/" +
-    Date.now() +
-    "_" +
-    metadata.email.split("@")[0] +
-    "_" + //get first part of email
-    metadata.firstName.replace(/\s/g, "") +
-    metadata.lastName.replace(/\s/g, "") +
-    "_" + //remove whitespace from name
-    "Task" +
-    metadata.taskId +
-    ".mp4"
-  );
-}
 
+  if (parseInt(metadata.taskId) >= 8) {
+    return (
+      "literacy" + // folder for all math tasks
+      "/" +
+      Date.now() +
+      "_" +
+      metadata.email.split("@")[0] +
+      "_" + //get first part of email
+      metadata.firstName.replace(/\s/g, "") +
+      metadata.lastName.replace(/\s/g, "") +
+      "_" + //remove whitespace from name
+      "Task" +
+      metadata.taskId +
+      ".mp4"
+    );
+  } else {
+    return (
+      "math" + // folder for all math tasks
+      "/" +
+      Date.now() +
+      "_" +
+      metadata.email.split("@")[0] +
+      "_" + //get first part of email
+      metadata.firstName.replace(/\s/g, "") +
+      metadata.lastName.replace(/\s/g, "") +
+      "_" + //remove whitespace from name
+      "Task" +
+      metadata.taskId +
+      ".mp4"
+    );
+  }
+}
 
 /**
  * uploads video to s3 in part

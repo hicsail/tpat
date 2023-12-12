@@ -78,7 +78,7 @@ function LiteracyPage() {
       {user && user.camMicCheckComplete ? (
         <div>
           {data.map((taskDetail, _) => {
-            if (parseInt(taskDetail.id) >= 7) {
+            if (parseInt(taskDetail.id) >= 7 ) {
               return (
                 <Card
                   key={taskDetail.id}
