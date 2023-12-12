@@ -15,6 +15,19 @@ export const camMicCheckTask = {
   imgURL: "",
   video: "#",
 };
+
+export const camMicCheckTaskLitercy = {
+  id: "-2",
+  category: "",
+  title: "Camera and Mic Check",
+  preview:
+    "Click start to check that your camera and microphone are working properly, by recording a five second video. This is essential to successful engagement with the tasks and for accurate data collection.",
+  previewImage: TutorialPreviewImage,
+
+  time: "5s",
+  imgURL: "",
+  video: "#",
+};
 export const data = [
   {
     id: "0",
@@ -336,7 +349,7 @@ export const data = [
       " Teach your students how to blend three-phoneme words. Your goal is for your students to be able to accurately blend the phonemes in each word when orally presented with the phonemes in isolation.",
       " Assume students respond correctly to most items, but that some students make errors on some items.",
     ],
-    prompts:[
+    prompts: [
       "Orally produce single-syllable words by blending sounds (phonemes), including consonant blends.",
       " Isolate and pronounce initial, medial vowel, and final sounds (phonemes) in spoken single-syllable words.",
       " Segment spoken single-syllable words into their complete sequence of individual sounds (phonemes).",

@@ -19,6 +19,9 @@ const Card = (props) => {
   console.log("CARD: id ", props.id);
   var destination = "/" + SCREENS.TASK;
   switch (props.id) {
+    case "-2":
+      destination = "/cam-mic-check-literacy";
+      break;
     case "-1":
       destination = "/" + SCREENS.CAM_MIC_CHECK;
       break;

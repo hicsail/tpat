@@ -6,22 +6,22 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./TryItYourself.css";
 import Card from "../components/Card";
 import { SCREENS } from "../constants/screens";
-import { camMicCheckTask, data } from "../data";
+import { camMicCheckTask, data, camMicCheckTaskLitercy } from "../data";
 import { UserContext } from "../store/UserContext";
 
 const subtitle = "Demonstrate your skills through the assigned tasks below.";
 const linkToTips =
   "https://bushare-my.sharepoint.com/:b:/g/personal/mannysa_bu_edu/ESsXAOn9L2ZGrjwX3wMtq80BUqPlOsk28hq1D2rPZPyWIg?e=ytksks";
 const lindseyEmail = "lhmclean@bu.edu";
-const TAG = "TryItYourself.tsx ";
+const TAG = "Literacy.tsx ";
 
-function TryItYourself() {
+function LiteracyPage() {
   const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
 
   useEffect(() => {
     if (!user) {
-      navigate("/" + SCREENS.LOGIN);
+      navigate("/loginLiteracy");
     }
   }, [user]);
 
@@ -78,7 +78,7 @@ function TryItYourself() {
       {user && user.camMicCheckComplete ? (
         <div>
           {data.map((taskDetail, _) => {
-            if (parseInt(taskDetail.id) <= 6) {
+            if (parseInt(taskDetail.id) >= 7) {
               return (
                 <Card
                   key={taskDetail.id}
@@ -94,16 +94,16 @@ function TryItYourself() {
         </div>
       ) : (
         <Card
-          key={camMicCheckTask.id}
-          title={camMicCheckTask.title}
-          preview={camMicCheckTask.preview}
-          previewImage={camMicCheckTask.previewImage}
-          time={camMicCheckTask.time}
-          id={camMicCheckTask.id}
+          key={camMicCheckTaskLitercy.id}
+          title={camMicCheckTaskLitercy.title}
+          preview={camMicCheckTaskLitercy.preview}
+          previewImage={camMicCheckTaskLitercy.previewImage}
+          time={camMicCheckTaskLitercy.time}
+          id={camMicCheckTaskLitercy.id}
         />
       )}
     </div>
   );
 }
 
-export default TryItYourself;
+export default LiteracyPage;
