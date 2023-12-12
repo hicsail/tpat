@@ -257,7 +257,11 @@ export default function TaskView(props: Props) {
                 <Button
                   variant="text"
                   onClick={() => {
-                    navigate("/");
+                    if (parseInt(task.id) >= 7) {
+                      navigate("/literacy");
+                    } else {
+                      navigate("/");
+                    }
                   }}
                 >
                   <Typography variant="h6">
